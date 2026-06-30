@@ -59,6 +59,7 @@ img{ display:block; max-width:100%; }
 .logo .tm{ font-size:.4em; align-self:flex-start; color:var(--text-muted); margin-left:.1em; }
 .logo--dark .tm{ color:var(--on-dark-muted); }
 .logo--sm{ font-size:18px; } .logo--md{ font-size:22px; } .logo--lg{ font-size:30px; }
+.logo__w{ display:inline-flex; align-items:flex-start; }
 
 /* buttons */
 .btn{ display:inline-flex; align-items:center; justify-content:center; gap:.5em; font-family:var(--font-heading); font-weight:700; letter-spacing:-.01em; border:1.5px solid transparent; border-radius:var(--r-md); cursor:pointer; transition:transform .12s var(--ease), box-shadow .2s var(--ease), background .2s var(--ease), filter .2s var(--ease); white-space:nowrap; }
@@ -209,7 +210,7 @@ img{ display:block; max-width:100%; }
 <!-- NAV -->
 <header class="nav">
   <div class="wrap nav__in">
-    <a class="logo logo--sm" href="#"><img src="assets/logo-mark.png" alt="">PR<span class="i">I</span>SM<span class="tm">™</span></a>
+    <a class="logo logo--sm" href="#"><img src="assets/logo-mark.png" alt=""><span class="logo__w">PR<span class="i">I</span>SM<span class="tm">™</span></span></a>
     <nav class="nav__links">
       <a href="#features">Product</a><a href="#features">Features</a><a href="#pricing">Pricing</a><a href="#flow">Crews</a>
     </nav>
@@ -240,7 +241,7 @@ img{ display:block; max-width:100%; }
     </div>
     <div class="peek">
       <div class="peek__bar">
-        <span class="logo logo--sm logo--dark"><img src="assets/logo-mark.png" alt="">PR<span class="i">I</span>SM</span>
+        <span class="logo logo--sm logo--dark"><img src="assets/logo-mark.png" alt=""><span class="logo__w">PR<span class="i">I</span>SM</span></span>
         <span class="peek__d"></span><span class="peek__d"></span><span class="peek__d"></span>
       </div>
       <div class="peek__body">
@@ -381,7 +382,7 @@ img{ display:block; max-width:100%; }
 <footer class="foot">
   <div class="wrap foot__grid">
     <div class="foot__brand">
-      <span class="logo logo--md logo--dark"><img src="assets/logo-mark.png" alt="">PR<span class="i">I</span>SM<span class="tm">™</span></span>
+      <span class="logo logo--md logo--dark"><img src="assets/logo-mark.png" alt=""><span class="logo__w">PR<span class="i">I</span>SM<span class="tm">™</span></span></span>
       <p>Run the whole job from one app.</p>
     </div>
     <div class="foot__col"><h4>Product</h4><a href="#">Scheduling</a><a href="#">Dispatch</a><a href="#">Invoicing</a><a href="#">Payments</a><a href="#">Marketing</a></div>
