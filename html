@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prism — launching soon</title>
+<meta name="description" content="Prism reimagines the home-service business — quoting, scheduling, dispatch, and invoicing in one AI-native system. Request early access before launch.">
+
+<!-- Social preview. Points at getprismpro.com — the image only renders once the site is live there. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Prism">
+<meta property="og:title" content="Prism — the home-service business, reimagined.">
+<meta property="og:description" content="Quoting, scheduling, dispatch, and invoicing rebuilt around the way the work actually happens. Launching soon.">
+<meta property="og:url" content="https://getprismpro.com/">
+<meta property="og:image" content="https://getprismpro.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Prism — the home-service business, reimagined.">
+<meta name="twitter:description" content="Quoting, scheduling, dispatch, and invoicing rebuilt around the way the work actually happens. Launching soon.">
+<meta name="twitter:image" content="https://getprismpro.com/og-image.png">
+<link rel="canonical" href="https://getprismpro.com/">
+<meta name="theme-color" content="#0B0C18">
+<link rel="icon" href="favicon.png" type="image/png" sizes="256x256">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+<!-- ============================================================
+     Fully wired. Signups email to micah@getprismpro.com via Web3Forms.
+     The only thing you'd normally change is LAUNCH, the countdown
+     target, near the top of the script block at the bottom.
+     ============================================================ -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:        #0B0C18;
+    --bg-lift:   #10121F;
+    --panel:     #0E0F1B;
+    --field:     #080910;
+    --line:      rgba(255,255,255,.09);
+    --line-soft: rgba(255,255,255,.05);
+    --ink:       #F2F4F9;
+    --ink-mid:   #A0A6B8;
+    --ink-dim:   #6C7285;
+
+    /* pulled straight from the mark */
+    --pink:      #E44B87;
+    --pink-soft: #EB7DB6;
+    --blue:      #4998EF;
+    --blue-soft: #99CAF7;
+    --navy:      #265BA4;
+
+    /* refraction ramp — the only color in the page */
+    --r1:#E44B87; --r2:#EB7DB6; --r3:#4998EF; --r4:#99CAF7; --r5:#265BA4;
+
+    --sans: "Archivo", "Helvetica Neue", Arial, system-ui, sans-serif;
+  }
+
+  *{box-sizing:border-box}
+
+  html,body{margin:0;padding:0}
+  body{
+    min-height:100vh;
+    background:
+      radial-gradient(900px 520px at 50% -8%, #191A2E 0%, rgba(25,26,46,0) 70%),
+      radial-gradient(700px 420px at 88% 108%, #13203A 0%, rgba(19,32,58,0) 72%),
+      var(--bg);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-weight:400;
+    -webkit-font-smoothing:antialiased;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:clamp(16px,4vw,56px);
+  }
+
+  .frame{
+    width:100%;
+    max-width:900px;
+    background:linear-gradient(180deg, rgba(255,255,255,.022), rgba(255,255,255,0) 42%), var(--panel);
+    border:1px solid var(--line);
+    border-radius:22px;
+    padding:clamp(28px,5vw,72px) clamp(20px,5vw,64px) clamp(30px,4vw,56px);
+    box-shadow:0 1px 0 rgba(255,255,255,.04) inset, 0 40px 120px -40px rgba(0,0,0,.9);
+  }
+
+  /* ---------- hero ---------- */
+
+  .eyebrow{
+    margin:0 0 clamp(18px,3vw,28px);
+    text-align:center;
+    font-size:12.5px;
+    font-weight:500;
+    letter-spacing:.02em;
+    color:var(--ink-dim);
+  }
+  .eyebrow b{
+    font-weight:600;
+    color:var(--ink-mid);
+  }
+
+  .mark{
+    display:block;
+    width:auto;
+    height:clamp(76px,13vw,116px);
+    margin:0 auto clamp(20px,3.5vw,34px);
+    opacity:0;
+    animation:mark-in .7s cubic-bezier(.2,.7,.3,1) .05s forwards;
+  }
+  @keyframes mark-in{from{opacity:0;transform:translateY(10px) scale(.97)}to{opacity:1;transform:none}}
+
+  .hero{
+    position:relative;
+    display:grid;
+    place-items:center;
+    padding:clamp(6px,2vw,18px) 0 clamp(14px,3vw,26px);
+  }
+
+  /* light entering left, spectrum leaving right */
+  .beam{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    overflow:visible;
+  }
+  .beam .in{opacity:0;animation:beam-in .9s ease-out .15s forwards}
+  .beam .out g{opacity:0;animation:fan .8s ease-out forwards}
+  .beam .out g:nth-child(1){animation-delay:.85s}
+  .beam .out g:nth-child(2){animation-delay:.92s}
+  .beam .out g:nth-child(3){animation-delay:.99s}
+  .beam .out g:nth-child(4){animation-delay:1.06s}
+  .beam .out g:nth-child(5){animation-delay:1.13s}
+  @keyframes beam-in{from{opacity:0;transform:translateX(-24px)}to{opacity:1;transform:none}}
+  @keyframes fan{from{opacity:0;transform:translateX(-18px)}to{opacity:.85;transform:none}}
+
+  .wordmark{
+    position:relative;
+    margin:0;
+    font-size:clamp(52px,13.5vw,148px);
+    font-weight:800;
+    font-stretch:125%;
+    line-height:.86;
+    letter-spacing:-.035em;
+    text-align:center;
+    background:linear-gradient(96deg,
+      #FFFFFF 0%, #FFFFFF 30%,
+      #F6CFE0 44%,
+      var(--pink) 58%,
+      var(--blue) 80%,
+      var(--blue-soft) 98%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    -webkit-text-fill-color:transparent;
+  }
+
+  .tagline{
+    max-width:34ch;
+    margin:clamp(16px,3vw,26px) auto 0;
+    text-align:center;
+    font-size:clamp(17px,2.4vw,21px);
+    font-weight:500;
+    line-height:1.35;
+    letter-spacing:-.01em;
+    color:var(--ink);
+  }
+  .subline{
+    max-width:52ch;
+    margin:12px auto 0;
+    text-align:center;
+    font-size:15px;
+    line-height:1.55;
+    color:var(--ink-mid);
+  }
+
+  /* ---------- countdown ---------- */
+
+  .countdown{
+    margin:clamp(34px,6vw,56px) 0 0;
+  }
+  .blocks{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:clamp(8px,1.4vw,14px);
+  }
+  .block{
+    background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,0));
+    background-color:var(--bg-lift);
+    border:1px solid var(--line-soft);
+    border-radius:14px;
+    padding:clamp(16px,2.6vw,26px) 8px clamp(12px,2vw,18px);
+    text-align:center;
+  }
+  .num{
+    display:block;
+    font-size:clamp(30px,6.2vw,58px);
+    font-weight:700;
+    font-stretch:105%;
+    line-height:1;
+    letter-spacing:-.03em;
+    font-variant-numeric:tabular-nums;
+    color:var(--ink);
+  }
+  .unit{
+    display:block;
+    margin-top:9px;
+    font-size:12.5px;
+    font-weight:500;
+    color:var(--ink-dim);
+  }
+  .until{
+    margin:14px 0 0;
+    text-align:center;
+    font-size:12.5px;
+    color:var(--ink-dim);
+  }
+
+  /* ---------- form ---------- */
+
+  .signup{
+    margin:clamp(36px,6vw,58px) auto 0;
+    max-width:520px;
+  }
+  .signup h2{
+    margin:0 0 18px;
+    text-align:center;
+    font-size:17px;
+    font-weight:500;
+    letter-spacing:-.01em;
+    color:var(--ink);
+  }
+  .sr{
+    position:absolute;
+    width:1px;height:1px;
+    padding:0;margin:-1px;
+    overflow:hidden;
+    clip:rect(0 0 0 0);
+    white-space:nowrap;border:0;
+  }
+  .field{
+    width:100%;
+    background:var(--field);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:15px 17px;
+    margin-bottom:10px;
+    color:var(--ink);
+    font-family:inherit;
+    font-size:15.5px;
+    line-height:1.45;
+    transition:border-color .18s ease, box-shadow .18s ease;
+  }
+  .field::placeholder{color:#5A616C}
+  .field:focus{
+    outline:none;
+    border-color:rgba(73,152,239,.6);
+    box-shadow:0 0 0 3px rgba(73,152,239,.15);
+  }
+  textarea.field{min-height:104px;resize:vertical}
+
+  .cta{
+    width:100%;
+    margin-top:8px;
+    padding:17px 22px;
+    border:0;
+    border-radius:999px;
+    background:#FFFFFF;
+    color:#08090C;
+    font-family:inherit;
+    font-size:15.5px;
+    font-weight:700;
+    letter-spacing:-.005em;
+    cursor:pointer;
+    transition:transform .14s ease, box-shadow .2s ease, opacity .2s ease;
+  }
+  .cta:hover{
+    box-shadow:0 0 0 1px rgba(255,255,255,.5), 0 14px 46px -14px rgba(228,75,135,.45), 0 14px 46px -18px rgba(73,152,239,.45);
+  }
+  .cta:active{transform:translateY(1px)}
+  .cta:disabled{opacity:.6;cursor:default;box-shadow:none}
+  .cta:focus-visible, .field:focus-visible{outline:2px solid #4998EF;outline-offset:2px}
+
+  .note{
+    margin:14px 0 0;
+    text-align:center;
+    font-size:13px;
+    line-height:1.5;
+    color:var(--ink-dim);
+    min-height:20px;
+  }
+  .note.err{color:#FF8A9B}
+  .note.ok{color:var(--blue-soft)}
+
+  .switch{
+    margin:20px 0 0;
+    text-align:center;
+    font-size:13.5px;
+    line-height:1.5;
+    color:var(--ink-dim);
+  }
+  .link{
+    padding:0;
+    border:0;
+    background:none;
+    font-family:inherit;
+    font-size:inherit;
+    font-weight:500;
+    color:var(--ink-mid);
+    cursor:pointer;
+    text-decoration:underline;
+    text-decoration-color:rgba(228,75,135,.5);
+    text-decoration-thickness:1px;
+    text-underline-offset:4px;
+    transition:color .16s ease, text-decoration-color .16s ease;
+  }
+  .link:hover{
+    color:var(--ink);
+    text-decoration-color:rgba(228,75,135,.95);
+  }
+  .link:focus-visible{outline:2px solid #4998EF;outline-offset:3px;border-radius:3px}
+
+  .done{
+    text-align:center;
+    padding:26px 0 6px;
+  }
+  .done p{margin:0;font-size:16.5px;font-weight:500;color:var(--ink)}
+  .done span{display:block;margin-top:8px;font-size:14px;font-weight:400;color:var(--ink-mid)}
+
+  .foot{
+    margin:clamp(34px,5vw,52px) 0 0;
+    padding-top:20px;
+    border-top:1px solid var(--line-soft);
+    text-align:center;
+    font-size:12.5px;
+    color:#565D68;
+  }
+
+  [hidden]{display:none !important}
+
+  @media (max-width:560px){
+    .blocks{grid-template-columns:repeat(2,1fr)}
+    .wordmark{letter-spacing:-.03em}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    .beam .in, .beam .out g{animation:none;opacity:.85}
+    .mark{animation:none;opacity:1}
+    .cta, .field{transition:none}
+  }
+</style>
+</head>
+<body>
+
+<main class="frame">
+
+  <p class="eyebrow"><b>Private beta</b> &nbsp;·&nbsp; onboarding a handful of shops first</p>
+
+  <img class="mark" src="logo.png" width="444" height="560" alt="Prism" fetchpriority="high">
+
+  <div class="hero">
+    <svg class="beam" viewBox="0 0 1000 220" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <linearGradient id="pin" x1="0" x2="1">
+          <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+          <stop offset="1" stop-color="#fff" stop-opacity=".5"/>
+        </linearGradient>
+        <linearGradient id="p1" x1="0" x2="1"><stop offset="0" stop-color="var(--r1)" stop-opacity=".75"/><stop offset="1" stop-color="var(--r1)" stop-opacity="0"/></linearGradient>
+        <linearGradient id="p2" x1="0" x2="1"><stop offset="0" stop-color="var(--r2)" stop-opacity=".75"/><stop offset="1" stop-color="var(--r2)" stop-opacity="0"/></linearGradient>
+        <linearGradient id="p3" x1="0" x2="1"><stop offset="0" stop-color="var(--r3)" stop-opacity=".8"/><stop offset="1" stop-color="var(--r3)" stop-opacity="0"/></linearGradient>
+        <linearGradient id="p4" x1="0" x2="1"><stop offset="0" stop-color="var(--r4)" stop-opacity=".75"/><stop offset="1" stop-color="var(--r4)" stop-opacity="0"/></linearGradient>
+        <linearGradient id="p5" x1="0" x2="1"><stop offset="0" stop-color="var(--r5)" stop-opacity=".7"/><stop offset="1" stop-color="var(--r5)" stop-opacity="0"/></linearGradient>
+      </defs>
+
+      <!-- white light in -->
+      <g class="in">
+        <line x1="-40" y1="110" x2="255" y2="110" stroke="url(#pin)" stroke-width="1.5"/>
+      </g>
+
+      <!-- spectrum out -->
+      <g class="out">
+        <g><line x1="745" y1="110" x2="1050" y2="52"  stroke="url(#p1)" stroke-width="1.5"/></g>
+        <g><line x1="745" y1="110" x2="1050" y2="81"  stroke="url(#p2)" stroke-width="1.5"/></g>
+        <g><line x1="745" y1="110" x2="1050" y2="110" stroke="url(#p3)" stroke-width="1.5"/></g>
+        <g><line x1="745" y1="110" x2="1050" y2="139" stroke="url(#p4)" stroke-width="1.5"/></g>
+        <g><line x1="745" y1="110" x2="1050" y2="168" stroke="url(#p5)" stroke-width="1.5"/></g>
+      </g>
+    </svg>
+
+    <h1 class="wordmark">PRISM</h1>
+  </div>
+
+  <p class="tagline">The home-service business, reimagined.</p>
+  <p class="subline">Quoting, scheduling, dispatch, and invoicing rebuilt around the way the work actually happens. One system that runs the office so your crews stay on the truck.</p>
+
+  <section class="countdown" aria-label="Time until launch">
+    <div class="blocks">
+      <div class="block"><span class="num" id="d">—</span><span class="unit">days</span></div>
+      <div class="block"><span class="num" id="h">—</span><span class="unit">hours</span></div>
+      <div class="block"><span class="num" id="m">—</span><span class="unit">minutes</span></div>
+      <div class="block"><span class="num" id="s">—</span><span class="unit">seconds</span></div>
+    </div>
+    <p class="until" id="untilLabel">until launch</p>
+  </section>
+
+  <section class="signup">
+    <div id="formWrap">
+      <h2 id="formTitle">Get in before launch.</h2>
+
+      <label class="sr" for="name" id="nameLabel">Your name</label>
+      <input class="field" id="name" name="name" type="text" placeholder="Your name" autocomplete="name">
+
+      <label class="sr" for="email">Email</label>
+      <input class="field" id="email" name="email" type="email" placeholder="Email" autocomplete="email" required>
+
+      <input id="company" name="company" type="text" tabindex="-1" autocomplete="off" aria-hidden="true"
+             style="position:absolute;left:-9999px;opacity:0;height:0;width:0" />
+
+      <label class="sr" for="msg" id="msgLabel">What do you run?</label>
+      <textarea class="field" id="msg" name="message" placeholder="What kind of work do you run, and how big is the crew?"></textarea>
+
+      <button class="cta" id="submit" type="button">Request early access</button>
+      <p class="note" id="note" role="status" aria-live="polite"></p>
+
+      <p class="switch">
+        <span id="switchText">Investing in home service?</span>
+        <button class="link" id="modeToggle" type="button">Request the deck</button>
+      </p>
+    </div>
+
+    <div class="done" id="done" hidden>
+      <p id="doneTitle">You're on the list.</p>
+      <span id="doneBody">We'll email you before launch — and sooner if a beta seat opens up.</span>
+    </div>
+  </section>
+
+  <p class="foot">Prism · built by operators who ran the trucks</p>
+
+</main>
+
+<script>
+  /* ---- 1. LAUNCH DATE — change this ---- */
+  const LAUNCH = new Date("2027-01-17T12:00:00-06:00");
+
+  /* ---- 2. WHERE SIGNUPS GO ----
+     Web3Forms emails every submission to micah@getprismpro.com.
+     Get a key at web3forms.com — enter that address, they email you the key,
+     paste it between the quotes below. Nothing else to change.
+     Until the key is filled in, the form confirms but saves nothing. */
+  const WEB3FORMS_KEY = "8776234f-8f19-403d-a0c4-7a6221a32c7a";
+  const FORM_ENDPOINT = "https://api.web3forms.com/submit";
+
+  /* ---------- countdown ---------- */
+  const els = { d: document.getElementById('d'), h: document.getElementById('h'),
+                m: document.getElementById('m'), s: document.getElementById('s') };
+  const untilLabel = document.getElementById('untilLabel');
+  const pad = n => String(n).padStart(2, '0');
+
+  function tick(){
+    const diff = LAUNCH - Date.now();
+    if (isNaN(diff)) return;
+    if (diff <= 0){
+      els.d.textContent = els.h.textContent = els.m.textContent = els.s.textContent = '00';
+      untilLabel.textContent = 'Prism is live.';
+      clearInterval(timer);
+      return;
+    }
+    const s = Math.floor(diff / 1000);
+    els.d.textContent = pad(Math.floor(s / 86400));
+    els.h.textContent = pad(Math.floor(s % 86400 / 3600));
+    els.m.textContent = pad(Math.floor(s % 3600 / 60));
+    els.s.textContent = pad(s % 60);
+  }
+  tick();
+  const timer = setInterval(tick, 1000);
+
+  /* ---------- signup ---------- */
+  const btn   = document.getElementById('submit');
+  const note  = document.getElementById('note');
+  const email = document.getElementById('email');
+  const msg   = document.getElementById('msg');
+
+  /* two audiences, one form. 'source' tells you which one wrote in. */
+  const MODES = {
+    operator: {
+      title:       'Get in before launch.',
+      msgLabel:    'What do you run?',
+      msgHint:     'What kind of work do you run, and how big is the crew?',
+      cta:         'Request early access',
+      switchText:  'Investing in home service?',
+      switchCta:   'Request the deck',
+      source:      'prism-splash-operator',
+      doneTitle:   "You're on the list.",
+      doneBody:    "We'll email you before launch — and sooner if a beta seat opens up."
+    },
+    investor: {
+      title:       'Request the Prism deck.',
+      msgLabel:    'Your fund or firm',
+      msgHint:     'Fund or angel, check size, and what draws you to home service.',
+      cta:         'Request the deck',
+      switchText:  'Run a home-service business?',
+      switchCta:   'Request early access',
+      source:      'prism-splash-investor',
+      doneTitle:   'Deck request received.',
+      doneBody:    "Micah will send materials and find time to talk this week."
+    }
+  };
+
+  let mode = 'operator';
+
+  function applyMode(){
+    const c = MODES[mode];
+    document.getElementById('formTitle').textContent  = c.title;
+    document.getElementById('msgLabel').textContent   = c.msgLabel;
+    msg.placeholder                                   = c.msgHint;
+    btn.textContent                                   = c.cta;
+    document.getElementById('switchText').textContent = c.switchText;
+    document.getElementById('modeToggle').textContent = c.switchCta;
+    say('');
+  }
+
+  document.getElementById('modeToggle').addEventListener('click', () => {
+    mode = mode === 'operator' ? 'investor' : 'operator';
+    applyMode();
+    document.getElementById('formTitle').scrollIntoView({ block:'nearest', behavior:'smooth' });
+  });
+
+  /* deep link: prism.com/?investor sends investors straight to the deck form */
+  if (/investor/i.test(location.search) || /investor/i.test(location.hash)){
+    mode = 'investor';
+  }
+
+  function say(text, kind){
+    note.textContent = text;
+    note.className = 'note' + (kind ? ' ' + kind : '');
+  }
+
+  async function submit(){
+    if (document.getElementById('company').value){ finish(); return; }   // honeypot: bots fill this, people can't see it
+
+    const who = mode === 'investor' ? 'Investor' : 'Early access';
+    const payload = {
+      access_key:  WEB3FORMS_KEY,
+      subject:     who + ' — ' + (document.getElementById('name').value.trim() || email.value.trim()),
+      from_name:   'Prism splash page',
+      name:        document.getElementById('name').value.trim(),
+      email:       email.value.trim(),
+      message:     msg.value.trim(),
+      source:      MODES[mode].source
+    };
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(payload.email)){
+      say('That email address is missing something — check it and try again.', 'err');
+      email.focus();
+      return;
+    }
+
+    btn.disabled = true;
+    say('Sending…');
+
+    if (!WEB3FORMS_KEY){
+      console.warn('WEB3FORMS_KEY is empty — this signup went nowhere.', payload);
+      finish();
+      return;
+    }
+
+    try {
+      const res = await fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (!res.ok) throw new Error(res.status);
+      finish();
+    } catch (err) {
+      btn.disabled = false;
+      say('That didn\'t go through. Try again, or email hello@getprismpro.com.', 'err');
+    }
+  }
+
+  function finish(){
+    const c = MODES[mode];
+    document.getElementById('doneTitle').textContent = c.doneTitle;
+    document.getElementById('doneBody').textContent  = c.doneBody;
+    document.getElementById('formWrap').hidden = true;
+    document.getElementById('done').hidden = false;
+  }
+
+  applyMode();
+  btn.addEventListener('click', submit);
+  document.querySelectorAll('.field').forEach(f => {
+    f.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && f.tagName !== 'TEXTAREA'){ e.preventDefault(); submit(); }
+    });
+  });
+</script>
+</body>
+</html>
