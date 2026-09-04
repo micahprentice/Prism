@@ -3,443 +3,594 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PrismOS — Run the whole job from one app</title>
-<meta name="description" content="PrismOS is the operating system for service businesses. Marketing, scheduling, the work, the invoice, the money — one app, from the first call to the final payment.">
-<link rel="icon" type="image/png" href="assets/logo-mark.png">
-<meta property="og:title" content="PrismOS — Run the whole job from one app">
-<meta property="og:description" content="The operating system for service businesses. From the first call to the final payment.">
-<meta property="og:image" content="assets/logo-lockup.png">
+<title>Prism — launching soon</title>
+<meta name="description" content="Prism reimagines the home-service business — quoting, scheduling, dispatch, and invoicing in one AI-native system. Request early access before launch.">
+
+<!-- Social preview. Points at getprismpro.com — the image only renders once the site is live there. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Prism">
+<meta property="og:title" content="Prism — the home-service business, reimagined.">
+<meta property="og:description" content="Quoting, scheduling, dispatch, and invoicing rebuilt around the way the work actually happens. Launching soon.">
+<meta property="og:url" content="https://getprismpro.com/">
+<meta property="og:image" content="https://getprismpro.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Prism — the home-service business, reimagined.">
+<meta name="twitter:description" content="Quoting, scheduling, dispatch, and invoicing rebuilt around the way the work actually happens. Launching soon.">
+<meta name="twitter:image" content="https://getprismpro.com/og-image.png">
+<link rel="canonical" href="https://getprismpro.com/">
+<meta name="theme-color" content="#0B0C18">
+<link rel="icon" href="favicon.png" type="image/png" sizes="256x256">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+<!-- ============================================================
+     TWO THINGS TO SET (both are right here):
+       1. LAUNCH  — your launch date/time
+       2. FORM_ENDPOINT — where signups get sent. Until you set
+          this, the form validates and shows the thank-you state
+          but does NOT store anything.
+     ============================================================ -->
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Archivo+Expanded:wght@700;800;900&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900&display=swap" rel="stylesheet">
+
 <style>
-:root{
-  --pink-50:#fff0f7; --pink-200:#ffc6e0; --pink-300:#fa72b5; --pink-500:#f6378a; --pink-600:#d81e6e;
-  --sky-100:#e7f4fe; --sky-200:#bfe3fd; --sky-300:#8acdfc; --blue-400:#4daef6; --blue-500:#1898f3; --blue-600:#0160b2; --blue-700:#024a8a;
-  --navy-700:#02365f; --navy-800:#0a1a33; --navy-900:#0b1220; --ink:#0b0c19; --violet-500:#8b3fd4;
-  --white:#fff; --gray-50:#f6f8fb; --gray-100:#eef2f7; --gray-200:#dfe6ef; --gray-300:#c5d0de; --gray-400:#9aa8bd; --gray-500:#6b7a92; --gray-700:#33405a; --navy-strong:#0b1220;
-  --text-strong:#0b1220; --text-body:#33405a; --text-muted:#6b7a92; --text-faint:#9aa8bd;
-  --on-dark:#eaf1fb; --on-dark-muted:#93a4c0; --border:#dfe6ef; --border-dark:rgba(138,205,252,.16);
-  --success-500:#16a34a; --success-50:#e7f7ee; --warning-500:#f5a524; --danger-500:#e5484d;
-  --grad-spark:linear-gradient(118deg,#f6378a 0%,#1898f3 100%);
-  --grad-prism:linear-gradient(118deg,#f6378a 0%,#8b3fd4 48%,#1898f3 100%);
-  --grad-blue:linear-gradient(150deg,#4daef6 0%,#0160b2 100%);
-  --grad-ink:linear-gradient(160deg,#0b1220 0%,#0b0c19 100%);
-  --font-display:'Archivo Expanded','Archivo',system-ui,sans-serif;
-  --font-heading:'Archivo',system-ui,sans-serif;
-  --font-body:'Hanken Grotesk',system-ui,sans-serif;
-  --font-mono:'JetBrains Mono',ui-monospace,monospace;
-  --r-sm:8px; --r-md:12px; --r-lg:16px; --r-xl:22px; --r-2xl:32px; --r-pill:999px;
-  --shadow-sm:0 1px 3px rgba(11,18,32,.08),0 1px 2px rgba(11,18,32,.04);
-  --shadow-md:0 6px 16px -4px rgba(11,18,32,.12),0 2px 6px -2px rgba(11,18,32,.08);
-  --shadow-lg:0 18px 40px -12px rgba(11,18,32,.18),0 6px 14px -8px rgba(11,18,32,.10);
-  --shadow-xl:0 32px 64px -20px rgba(11,18,32,.28),0 10px 24px -12px rgba(11,18,32,.14);
-  --glow-blue:0 8px 28px -6px rgba(24,152,243,.45);
-  --glow-pink:0 8px 28px -6px rgba(246,55,138,.45);
-  --ease:cubic-bezier(.2,.8,.2,1); --spring:cubic-bezier(.34,1.56,.64,1);
-  --maxw:1180px;
-}
-*,*::before,*::after{ box-sizing:border-box; }
-html{ scroll-behavior:smooth; }
-body{ margin:0; font-family:var(--font-body); color:var(--text-body); background:var(--white); -webkit-font-smoothing:antialiased; }
-h1,h2,h3,h4{ margin:0; font-family:var(--font-heading); color:var(--text-strong); line-height:1.05; }
-p{ margin:0; }
-a{ text-decoration:none; color:inherit; }
-img{ display:block; max-width:100%; }
-::selection{ background:var(--pink-200); color:var(--navy-900); }
-.wrap{ max-width:var(--maxw); margin:0 auto; padding:0 32px; }
-.eyebrow{ font-family:var(--font-heading); font-weight:700; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--pink-500); }
-.grad-text{ background:var(--grad-prism); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  :root{
+    --bg:        #0B0C18;
+    --bg-lift:   #10121F;
+    --panel:     #0E0F1B;
+    --field:     #080910;
+    --line:      rgba(255,255,255,.09);
+    --line-soft: rgba(255,255,255,.05);
+    --ink:       #F2F4F9;
+    --ink-mid:   #A0A6B8;
+    --ink-dim:   #6C7285;
 
-/* logotype */
-.logo{ display:inline-flex; align-items:center; gap:.5em; font-family:var(--font-display); font-weight:800; text-transform:uppercase; letter-spacing:.02em; line-height:1; color:var(--text-strong); }
-.logo img{ width:1.45em; height:1.45em; object-fit:contain; }
-.logo .i{ color:var(--pink-500); }
-.logo--dark{ color:#fff; }
-.logo .tm{ font-size:.4em; align-self:flex-start; color:var(--text-muted); margin-left:.1em; }
-.logo--dark .tm{ color:var(--on-dark-muted); }
-.logo--sm{ font-size:18px; } .logo--md{ font-size:22px; } .logo--lg{ font-size:30px; }
-.logo__w{ display:inline-flex; align-items:flex-start; }
+    /* pulled straight from the mark */
+    --pink:      #E44B87;
+    --pink-soft: #EB7DB6;
+    --blue:      #4998EF;
+    --blue-soft: #99CAF7;
+    --navy:      #265BA4;
 
-/* buttons */
-.btn{ display:inline-flex; align-items:center; justify-content:center; gap:.5em; font-family:var(--font-heading); font-weight:700; letter-spacing:-.01em; border:1.5px solid transparent; border-radius:var(--r-md); cursor:pointer; transition:transform .12s var(--ease), box-shadow .2s var(--ease), background .2s var(--ease), filter .2s var(--ease); white-space:nowrap; }
-.btn:active{ transform:translateY(1px) scale(.99); }
-.btn svg{ width:1.15em; height:1.15em; }
-.btn--sm{ font-size:14px; padding:.55rem .95rem; }
-.btn--md{ font-size:16px; padding:.7rem 1.15rem; }
-.btn--lg{ font-size:18px; padding:.95rem 1.6rem; border-radius:var(--r-lg); }
-.btn--grad{ background:var(--grad-spark); color:#fff; box-shadow:var(--shadow-sm); }
-.btn--grad:hover{ filter:brightness(1.06); box-shadow:var(--glow-pink); }
-.btn--accent{ background:var(--pink-500); color:#fff; box-shadow:var(--shadow-sm); }
-.btn--accent:hover{ background:var(--pink-600); box-shadow:var(--glow-pink); }
-.btn--primary{ background:var(--blue-500); color:#fff; box-shadow:var(--shadow-sm); }
-.btn--primary:hover{ background:var(--blue-600); box-shadow:var(--glow-blue); }
-.btn--dark{ background:var(--ink); color:var(--on-dark); box-shadow:var(--shadow-md); }
-.btn--dark:hover{ background:var(--navy-800); }
-.btn--ghost{ background:transparent; color:var(--text-body); }
-.btn--ghost:hover{ background:var(--gray-100); color:var(--text-strong); }
-.btn--outline{ background:#fff; color:var(--text-strong); border-color:var(--gray-300); }
-.btn--outline:hover{ border-color:var(--blue-500); color:var(--blue-500); }
-.btn--on-dark{ background:transparent; color:#fff; border-color:rgba(255,255,255,.3); }
-.btn--on-dark:hover{ background:rgba(255,255,255,.1); border-color:#fff; }
+    /* refraction ramp — the only color in the page */
+    --r1:#E44B87; --r2:#EB7DB6; --r3:#4998EF; --r4:#99CAF7; --r5:#265BA4;
 
-/* badges */
-.badge{ display:inline-flex; align-items:center; gap:.35em; font-family:var(--font-heading); font-weight:700; font-size:12px; letter-spacing:-.01em; padding:.3em .7em; border-radius:var(--r-pill); }
-.badge .dot{ width:.5em; height:.5em; border-radius:50%; background:currentColor; }
-.badge--blue{ background:var(--sky-100); color:var(--blue-700); }
-.badge--pink{ background:var(--pink-50); color:var(--pink-600); }
-.badge--green{ background:var(--success-50); color:#0f7a37; }
+    --sans: "Archivo", "Helvetica Neue", Arial, system-ui, sans-serif;
+  }
 
-/* NAV */
-.nav{ position:sticky; top:0; z-index:30; background:rgba(255,255,255,.86); backdrop-filter:blur(12px); border-bottom:1px solid var(--border); }
-.nav__in{ display:flex; align-items:center; justify-content:space-between; height:68px; }
-.nav__links{ display:flex; gap:30px; }
-.nav__links a{ font-family:var(--font-heading); font-weight:600; font-size:14px; color:var(--text-body); transition:color .2s; }
-.nav__links a:hover{ color:var(--blue-500); }
-.nav__act{ display:flex; align-items:center; gap:10px; }
-.nav__burger{ display:none; background:none; border:none; cursor:pointer; color:var(--text-strong); }
+  *{box-sizing:border-box}
 
-/* HERO */
-.hero{ position:relative; background:var(--grad-ink); color:var(--on-dark); overflow:hidden; }
-.hero__glow{ position:absolute; top:-160px; right:-120px; width:620px; height:620px; border-radius:50%; background:radial-gradient(circle,rgba(246,55,138,.34),rgba(24,152,243,.18) 45%,transparent 70%); filter:blur(20px); pointer-events:none; }
-.hero__grid{ position:relative; display:grid; grid-template-columns:1.05fr .95fr; gap:48px; align-items:center; padding:60px 0 44px; }
-.hero h1{ font-family:var(--font-display); font-weight:800; text-transform:uppercase; color:#fff; font-size:clamp(3rem,5.2vw,4.7rem); line-height:.96; letter-spacing:-.02em; margin:18px 0 22px; }
-.hero__sub{ font-size:18px; line-height:1.55; color:var(--on-dark-muted); max-width:480px; }
-.hero__cta{ display:flex; gap:14px; margin:30px 0 16px; flex-wrap:wrap; }
-.hero__trust{ font-family:var(--font-mono); font-size:12px; color:var(--on-dark-muted); }
+  html,body{margin:0;padding:0}
+  body{
+    min-height:100vh;
+    background:
+      radial-gradient(900px 520px at 50% -8%, #191A2E 0%, rgba(25,26,46,0) 70%),
+      radial-gradient(700px 420px at 88% 108%, #13203A 0%, rgba(19,32,58,0) 72%),
+      var(--bg);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-weight:400;
+    -webkit-font-smoothing:antialiased;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:clamp(16px,4vw,56px);
+  }
 
-/* app peek */
-.peek{ background:#0f1830; border:1px solid var(--border-dark); border-radius:var(--r-xl); box-shadow:0 40px 80px -30px rgba(0,0,0,.7),var(--glow-blue); overflow:hidden; }
-.peek__bar{ display:flex; align-items:center; gap:8px; padding:14px 16px; border-bottom:1px solid var(--border-dark); }
-.peek__bar .logo{ margin-right:auto; }
-.peek__d{ width:9px; height:9px; border-radius:50%; background:rgba(255,255,255,.18); }
-.peek__body{ padding:16px; display:flex; flex-direction:column; gap:12px; }
-.peek__stats{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-.peek__stat{ background:rgba(138,205,252,.07); border:1px solid var(--border-dark); border-radius:var(--r-md); padding:14px; }
-.peek__lbl{ font-family:var(--font-heading); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--on-dark-muted); }
-.peek__val{ font-family:var(--font-mono); font-weight:700; font-size:26px; color:#fff; line-height:1.2; }
-.peek__up{ font-size:11px; color:var(--sky-300); }
-.peek__job{ display:flex; align-items:center; gap:12px; background:rgba(255,255,255,.04); border:1px solid var(--border-dark); border-radius:var(--r-md); padding:12px 14px; }
-.peek__job .txt{ margin-right:auto; }
-.peek__ji{ width:38px; height:38px; flex:0 0 auto; border-radius:var(--r-sm); background:rgba(24,152,243,.18); color:var(--blue-400); display:flex; align-items:center; justify-content:center; }
-.peek__ji--pink{ background:rgba(246,55,138,.18); color:var(--pink-300); }
-.peek__ji svg{ width:18px; height:18px; }
-.peek__jn{ font-weight:600; font-size:14px; color:#fff; }
-.peek__jm{ font-size:12px; color:var(--on-dark-muted); }
+  .frame{
+    width:100%;
+    max-width:900px;
+    background:linear-gradient(180deg, rgba(255,255,255,.022), rgba(255,255,255,0) 42%), var(--panel);
+    border:1px solid var(--line);
+    border-radius:22px;
+    padding:clamp(28px,5vw,72px) clamp(20px,5vw,64px) clamp(30px,4vw,56px);
+    box-shadow:0 1px 0 rgba(255,255,255,.04) inset, 0 40px 120px -40px rgba(0,0,0,.9);
+  }
 
-/* strip */
-.strip{ position:relative; display:grid; grid-template-columns:repeat(4,1fr); gap:24px; padding:26px 32px; border-top:1px solid var(--border-dark); }
-.strip__n{ font-family:var(--font-display); font-weight:800; font-size:30px; color:#fff; letter-spacing:-.02em; }
-.strip__l{ font-size:13px; color:var(--on-dark-muted); }
+  /* ---------- hero ---------- */
 
-/* early adopter band */
-.ea{ background:var(--gray-50); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
-.ea__in{ display:flex; align-items:center; justify-content:space-between; gap:40px; padding:34px 32px; }
-.ea__t{ font-family:var(--font-heading); font-weight:800; font-size:24px; letter-spacing:-.02em; color:var(--text-strong); }
-.ea__p{ font-size:16px; color:var(--text-muted); margin-top:6px; max-width:58ch; }
-.ea__act{ display:flex; align-items:center; gap:14px; flex-shrink:0; }
-.ea__note{ font-size:13px; color:var(--text-faint); }
-@media (max-width:900px){ .ea__in{ flex-direction:column; align-items:flex-start; gap:22px; } }
+  .eyebrow{
+    margin:0 0 clamp(18px,3vw,28px);
+    text-align:center;
+    font-size:12.5px;
+    font-weight:500;
+    letter-spacing:.02em;
+    color:var(--ink-dim);
+  }
+  .eyebrow b{
+    font-weight:600;
+    color:var(--ink-mid);
+  }
 
-/* section heads */
-.sec{ padding:96px 0; }
-.sec-head{ text-align:center; max-width:680px; margin:0 auto 44px; }
-.sec-title{ font-family:var(--font-display); font-weight:800; text-transform:uppercase; font-size:clamp(1.9rem,3.4vw,2.7rem); line-height:1.02; letter-spacing:-.015em; margin-top:12px; }
+  .mark{
+    display:block;
+    width:auto;
+    height:clamp(76px,13vw,116px);
+    margin:0 auto clamp(20px,3.5vw,34px);
+    opacity:0;
+    animation:mark-in .7s cubic-bezier(.2,.7,.3,1) .05s forwards;
+  }
+  @keyframes mark-in{from{opacity:0;transform:translateY(10px) scale(.97)}to{opacity:1;transform:none}}
 
-/* features */
-.fgrid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
-.fcard{ background:#fff; border:1px solid var(--border); border-radius:var(--r-xl); padding:24px; box-shadow:var(--shadow-sm); transition:transform .2s var(--ease), box-shadow .2s var(--ease); }
-.fcard:hover{ transform:translateY(-3px); box-shadow:var(--shadow-lg); }
-.fcard__ic{ width:46px; height:46px; border-radius:var(--r-md); background:var(--sky-100); color:var(--blue-500); display:flex; align-items:center; justify-content:center; margin-bottom:14px; }
-.fcard__ic svg{ width:22px; height:22px; }
-.fcard__ic.pink{ background:var(--pink-50); color:var(--pink-500); }
-.fcard h3{ font-size:19px; font-weight:700; margin-bottom:8px; }
-.fcard p{ font-size:14.5px; line-height:1.55; color:var(--text-muted); }
+  .hero{
+    position:relative;
+    display:grid;
+    place-items:center;
+    padding:clamp(6px,2vw,18px) 0 clamp(14px,3vw,26px);
+  }
 
-/* flow */
-.flow{ background:var(--ink); color:#fff; text-align:center; }
-.flow h2{ font-family:var(--font-heading); font-weight:700; font-size:clamp(1.4rem,2.6vw,2rem); color:#fff; max-width:760px; margin:12px auto 40px; line-height:1.2; }
-.flow__track{ display:flex; align-items:center; justify-content:center; gap:6px; flex-wrap:wrap; }
-.flow__node{ display:flex; flex-direction:column; align-items:center; gap:10px; }
-.flow__ic{ width:60px; height:60px; border-radius:var(--r-lg); background:rgba(255,255,255,.05); border:1px solid var(--border-dark); color:var(--sky-300); display:flex; align-items:center; justify-content:center; }
-.flow__ic svg{ width:24px; height:24px; }
-.flow__node:last-child .flow__ic{ background:var(--grad-spark); color:#fff; border-color:transparent; }
-.flow__l{ font-family:var(--font-heading); font-weight:600; font-size:14px; }
-.flow__line{ width:46px; height:2px; background:linear-gradient(90deg,var(--blue-600),var(--pink-500)); border-radius:2px; }
+  /* light entering left, spectrum leaving right */
+  .beam{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    overflow:visible;
+  }
+  .beam .in{opacity:0;animation:beam-in .9s ease-out .15s forwards}
+  .beam .out g{opacity:0;animation:fan .8s ease-out forwards}
+  .beam .out g:nth-child(1){animation-delay:.85s}
+  .beam .out g:nth-child(2){animation-delay:.92s}
+  .beam .out g:nth-child(3){animation-delay:.99s}
+  .beam .out g:nth-child(4){animation-delay:1.06s}
+  .beam .out g:nth-child(5){animation-delay:1.13s}
+  @keyframes beam-in{from{opacity:0;transform:translateX(-24px)}to{opacity:1;transform:none}}
+  @keyframes fan{from{opacity:0;transform:translateX(-18px)}to{opacity:.85;transform:none}}
 
-/* pricing */
-.price{ background:var(--gray-50); }
-.toggle-row{ display:inline-flex; align-items:center; gap:14px; margin-top:22px; font-family:var(--font-heading); font-weight:600; font-size:14px; color:var(--text-muted); }
-.toggle-row .on{ color:var(--text-strong); }
-.toggle{ width:48px; height:27px; border-radius:999px; background:var(--gray-300); border:none; cursor:pointer; padding:3px; display:flex; transition:background .2s; }
-.toggle.on{ background:var(--blue-500); justify-content:flex-end; }
-.toggle span{ width:21px; height:21px; border-radius:50%; background:#fff; box-shadow:var(--shadow-sm); transition:all .2s var(--spring); }
-.pgrid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; align-items:start; }
-.plan{ position:relative; background:#fff; border:1px solid var(--border); border-radius:var(--r-xl); padding:28px 24px; box-shadow:var(--shadow-sm); }
-.plan.hot{ border:1.5px solid var(--blue-500); box-shadow:var(--shadow-lg); transform:translateY(-8px); }
-.plan__flag{ position:absolute; top:-12px; left:24px; background:var(--grad-spark); color:#fff; font-family:var(--font-heading); font-weight:700; font-size:11px; letter-spacing:.06em; text-transform:uppercase; padding:5px 12px; border-radius:999px; }
-.plan__name{ font-family:var(--font-display); font-weight:800; text-transform:uppercase; font-size:22px; color:var(--text-strong); }
-.plan__tag{ font-size:13px; color:var(--text-muted); margin-bottom:18px; }
-.plan__price{ display:flex; align-items:baseline; gap:4px; }
-.plan__amt{ font-family:var(--font-mono); font-weight:700; font-size:46px; color:var(--text-strong); letter-spacing:-.02em; }
-.plan__per{ font-size:16px; color:var(--text-muted); }
-.plan__bill{ font-size:12px; color:var(--text-faint); margin:2px 0 18px; }
-.plan__feats{ list-style:none; padding:0; margin:20px 0 0; display:flex; flex-direction:column; gap:11px; }
-.plan__feats li{ display:flex; align-items:center; gap:10px; font-size:14px; color:var(--text-body); }
-.plan__chk{ width:20px; height:20px; flex:0 0 auto; border-radius:50%; background:var(--success-50); color:#0f7a37; display:flex; align-items:center; justify-content:center; }
-.plan__chk svg{ width:13px; height:13px; }
+  .wordmark{
+    position:relative;
+    margin:0;
+    font-size:clamp(52px,13.5vw,148px);
+    font-weight:800;
+    font-stretch:125%;
+    line-height:.86;
+    letter-spacing:-.035em;
+    text-align:center;
+    background:linear-gradient(96deg,
+      #FFFFFF 0%, #FFFFFF 30%,
+      #F6CFE0 44%,
+      var(--pink) 58%,
+      var(--blue) 80%,
+      var(--blue-soft) 98%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    -webkit-text-fill-color:transparent;
+  }
 
-/* cta */
-.cta-box{ background:var(--grad-ink); border-radius:var(--r-2xl); padding:64px 40px; text-align:center; position:relative; overflow:hidden; box-shadow:var(--shadow-xl); }
-.cta-box::before{ content:""; position:absolute; inset:auto -10% -60% -10%; height:340px; background:radial-gradient(circle,rgba(246,55,138,.3),transparent 60%); }
-.cta-box h2{ position:relative; font-family:var(--font-display); font-weight:800; text-transform:uppercase; color:#fff; font-size:clamp(2rem,4vw,3.2rem); line-height:1; letter-spacing:-.02em; }
-.cta-box p{ position:relative; color:var(--on-dark-muted); font-size:17px; margin:18px 0 28px; }
-.cta-box .btns{ position:relative; display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+  .tagline{
+    max-width:34ch;
+    margin:clamp(16px,3vw,26px) auto 0;
+    text-align:center;
+    font-size:clamp(17px,2.4vw,21px);
+    font-weight:500;
+    line-height:1.35;
+    letter-spacing:-.01em;
+    color:var(--ink);
+  }
+  .subline{
+    max-width:52ch;
+    margin:12px auto 0;
+    text-align:center;
+    font-size:15px;
+    line-height:1.55;
+    color:var(--ink-mid);
+  }
 
-/* footer */
-.foot{ background:var(--ink); color:var(--on-dark-muted); padding:54px 0 30px; }
-.foot__grid{ display:grid; grid-template-columns:1.6fr 1fr 1fr 1fr; gap:32px; padding-bottom:34px; border-bottom:1px solid var(--border-dark); }
-.foot__brand p{ margin-top:14px; font-size:14px; max-width:230px; }
-.foot__col h4{ font-family:var(--font-heading); font-weight:700; font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:#fff; margin-bottom:14px; }
-.foot__col a{ display:block; font-size:14px; padding:5px 0; transition:color .2s; }
-.foot__col a:hover{ color:var(--sky-300); }
-.foot__base{ display:flex; justify-content:space-between; padding-top:22px; font-family:var(--font-mono); font-size:12px; }
+  /* ---------- countdown ---------- */
 
-@media (max-width:900px){
-  .hero__grid{ grid-template-columns:1fr; } .nav__links{ display:none; }
-  .fgrid,.pgrid{ grid-template-columns:1fr; } .strip{ grid-template-columns:1fr 1fr; }
-  .foot__grid{ grid-template-columns:1fr 1fr; } .plan.hot{ transform:none; } .nav__burger{ display:block; }
-  .nav__act .btn--ghost{ display:none; } .sec{ padding:64px 0; }
-}
-@media (max-width:560px){ .strip{ grid-template-columns:1fr; } .foot__grid{ grid-template-columns:1fr; } .foot__base{ flex-direction:column; gap:6px; } }
+  .countdown{
+    margin:clamp(34px,6vw,56px) 0 0;
+  }
+  .blocks{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:clamp(8px,1.4vw,14px);
+  }
+  .block{
+    background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,0));
+    background-color:var(--bg-lift);
+    border:1px solid var(--line-soft);
+    border-radius:14px;
+    padding:clamp(16px,2.6vw,26px) 8px clamp(12px,2vw,18px);
+    text-align:center;
+  }
+  .num{
+    display:block;
+    font-size:clamp(30px,6.2vw,58px);
+    font-weight:700;
+    font-stretch:105%;
+    line-height:1;
+    letter-spacing:-.03em;
+    font-variant-numeric:tabular-nums;
+    color:var(--ink);
+  }
+  .unit{
+    display:block;
+    margin-top:9px;
+    font-size:12.5px;
+    font-weight:500;
+    color:var(--ink-dim);
+  }
+  .until{
+    margin:14px 0 0;
+    text-align:center;
+    font-size:12.5px;
+    color:var(--ink-dim);
+  }
+
+  /* ---------- form ---------- */
+
+  .signup{
+    margin:clamp(36px,6vw,58px) auto 0;
+    max-width:520px;
+  }
+  .signup h2{
+    margin:0 0 18px;
+    text-align:center;
+    font-size:17px;
+    font-weight:500;
+    letter-spacing:-.01em;
+    color:var(--ink);
+  }
+  .sr{
+    position:absolute;
+    width:1px;height:1px;
+    padding:0;margin:-1px;
+    overflow:hidden;
+    clip:rect(0 0 0 0);
+    white-space:nowrap;border:0;
+  }
+  .field{
+    width:100%;
+    background:var(--field);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:15px 17px;
+    margin-bottom:10px;
+    color:var(--ink);
+    font-family:inherit;
+    font-size:15.5px;
+    line-height:1.45;
+    transition:border-color .18s ease, box-shadow .18s ease;
+  }
+  .field::placeholder{color:#5A616C}
+  .field:focus{
+    outline:none;
+    border-color:rgba(73,152,239,.6);
+    box-shadow:0 0 0 3px rgba(73,152,239,.15);
+  }
+  textarea.field{min-height:104px;resize:vertical}
+
+  .cta{
+    width:100%;
+    margin-top:8px;
+    padding:17px 22px;
+    border:0;
+    border-radius:999px;
+    background:#FFFFFF;
+    color:#08090C;
+    font-family:inherit;
+    font-size:15.5px;
+    font-weight:700;
+    letter-spacing:-.005em;
+    cursor:pointer;
+    transition:transform .14s ease, box-shadow .2s ease, opacity .2s ease;
+  }
+  .cta:hover{
+    box-shadow:0 0 0 1px rgba(255,255,255,.5), 0 14px 46px -14px rgba(228,75,135,.45), 0 14px 46px -18px rgba(73,152,239,.45);
+  }
+  .cta:active{transform:translateY(1px)}
+  .cta:disabled{opacity:.6;cursor:default;box-shadow:none}
+  .cta:focus-visible, .field:focus-visible{outline:2px solid #4998EF;outline-offset:2px}
+
+  .note{
+    margin:14px 0 0;
+    text-align:center;
+    font-size:13px;
+    line-height:1.5;
+    color:var(--ink-dim);
+    min-height:20px;
+  }
+  .note.err{color:#FF8A9B}
+  .note.ok{color:var(--blue-soft)}
+
+  .switch{
+    margin:20px 0 0;
+    text-align:center;
+    font-size:13.5px;
+    line-height:1.5;
+    color:var(--ink-dim);
+  }
+  .link{
+    padding:0;
+    border:0;
+    background:none;
+    font-family:inherit;
+    font-size:inherit;
+    font-weight:500;
+    color:var(--ink-mid);
+    cursor:pointer;
+    text-decoration:underline;
+    text-decoration-color:rgba(228,75,135,.5);
+    text-decoration-thickness:1px;
+    text-underline-offset:4px;
+    transition:color .16s ease, text-decoration-color .16s ease;
+  }
+  .link:hover{
+    color:var(--ink);
+    text-decoration-color:rgba(228,75,135,.95);
+  }
+  .link:focus-visible{outline:2px solid #4998EF;outline-offset:3px;border-radius:3px}
+
+  .done{
+    text-align:center;
+    padding:26px 0 6px;
+  }
+  .done p{margin:0;font-size:16.5px;font-weight:500;color:var(--ink)}
+  .done span{display:block;margin-top:8px;font-size:14px;font-weight:400;color:var(--ink-mid)}
+
+  .foot{
+    margin:clamp(34px,5vw,52px) 0 0;
+    padding-top:20px;
+    border-top:1px solid var(--line-soft);
+    text-align:center;
+    font-size:12.5px;
+    color:#565D68;
+  }
+
+  [hidden]{display:none !important}
+
+  @media (max-width:560px){
+    .blocks{grid-template-columns:repeat(2,1fr)}
+    .wordmark{letter-spacing:-.03em}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    .beam .in, .beam .out g{animation:none;opacity:.85}
+    .mark{animation:none;opacity:1}
+    .cta, .field{transition:none}
+  }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<header class="nav">
-  <div class="wrap nav__in">
-    <a class="logo logo--sm" href="#"><img src="assets/logo-mark.png" alt=""><span class="logo__w">PR<span class="i">I</span>SM<span class="tm">™</span></span></a>
-    <nav class="nav__links">
-      <a href="#features">Product</a><a href="#features">Features</a><a href="#pricing">Pricing</a><a href="#flow">Crews</a>
-    </nav>
-    <div class="nav__act">
-      <a class="btn btn--ghost btn--sm" href="#">Log in</a>
-      <a class="btn btn--grad btn--sm" href="#pricing">Start free trial
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      <button class="nav__burger" aria-label="Menu"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
-    </div>
-  </div>
-</header>
+<main class="frame">
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero__glow"></div>
-  <div class="wrap hero__grid">
-    <div>
-      <span class="eyebrow">From lead to paid</span>
-      <h1>Run the<br><span class="grad-text">whole job</span><br>from one app.</h1>
-      <p class="hero__sub">Marketing, scheduling, the work, the invoice, the money. Prism runs it end to end — so you can run the crew, not ten apps held together with hope and gaffer tape.</p>
-      <div class="hero__cta">
-        <a class="btn btn--grad btn--lg" href="#pricing">Start free trial
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        <a class="btn btn--dark btn--lg" href="#flow">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>Watch the 2-min tour</a>
-      </div>
-      <p class="hero__trust">No card to start · Set up in an afternoon · Cancel anytime</p>
-    </div>
-    <div class="peek">
-      <div class="peek__bar">
-        <span class="logo logo--sm logo--dark"><img src="assets/logo-mark.png" alt=""><span class="logo__w">PR<span class="i">I</span>SM</span></span>
-        <span class="peek__d"></span><span class="peek__d"></span><span class="peek__d"></span>
-      </div>
-      <div class="peek__body">
-        <div class="peek__stats">
-          <div class="peek__stat"><div class="peek__lbl">Collected</div><div class="peek__val">$12,480</div><div class="peek__up">▲ 12%</div></div>
-          <div class="peek__stat"><div class="peek__lbl">Jobs today</div><div class="peek__val">6</div><div class="peek__up">2 in progress</div></div>
-        </div>
-        <div class="peek__job">
-          <span class="peek__ji"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
-          <span class="txt"><div class="peek__jn">Water heater swap</div><div class="peek__jm">Dave's rolling · 2:30 PM</div></span>
-          <span class="badge badge--blue"><span class="dot"></span>On the way</span>
-        </div>
-        <div class="peek__job">
-          <span class="peek__ji peek__ji--pink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>
-          <span class="txt"><div class="peek__jn">Invoice #0096 · Reyes</div><div class="peek__jm">Sent 9:04 AM</div></span>
-          <span class="badge badge--green"><span class="dot"></span>Paid</span>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="wrap strip">
-    <div><div class="strip__n">24/7</div><div class="strip__l">every call answered</div></div>
-    <div><div class="strip__n">60 sec</div><div class="strip__l">voice in, invoice out</div></div>
-    <div><div class="strip__n">15%</div><div class="strip__l">referral credit on every job</div></div>
-    <div><div class="strip__n">1</div><div class="strip__l">app, not ten</div></div>
-  </div>
-</section>
+  <p class="eyebrow"><b>Private beta</b> &nbsp;·&nbsp; onboarding a handful of shops first</p>
 
-<!-- EARLY ADOPTER -->
-<section class="ea" id="early-access">
-  <div class="wrap ea__in">
-    <div>
-      <span class="eyebrow">Early adopter program</span>
-      <div class="ea__t" style="margin-top:8px">Small shop, big plans?</div>
-      <p class="ea__p">We're onboarding a limited group of service businesses that want to scale. You get founder pricing, direct input on the roadmap, and hands-on setup. If that sounds like you, apply.</p>
-    </div>
-    <div class="ea__act">
-      <a class="btn btn--grad btn--lg" href="#">Apply here
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </a>
-      <span class="ea__note">Limited spots</span>
-    </div>
-  </div>
-</section>
+  <img class="mark" src="logo.png" width="444" height="560" alt="Prism" fetchpriority="high">
 
-<!-- FEATURES -->
-<section class="sec" id="features">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow">The whole job, one box</span>
-      <h2 class="sec-title">Everything from the first call<br>to the final payment.</h2>
-    </div>
-    <div class="fgrid">
-      <div class="fcard"><div class="fcard__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg></div><h3>Marketing</h3><p>Reviews, texts, and "on my way" alerts that book the next job before you finish this one.</p></div>
-      <div class="fcard"><div class="fcard__ic pink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div><h3>Scheduling</h3><p>Drag jobs onto the board. The crew sees it on their phone. No more group-text chaos.</p></div>
-      <div class="fcard"><div class="fcard__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 17h4V5H2v12h3"/><path d="M20 17h2v-3.34a4 4 0 0 0-1.17-2.83L19 9h-5v8h1"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg></div><h3>Dispatch</h3><p>Know who's where, what truck, what's running late — all on one map.</p></div>
-      <div class="fcard"><div class="fcard__ic pink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div><h3>The job</h3><p>Photos, notes, parts, and the customer history, right in your hand on site.</p></div>
-      <div class="fcard"><div class="fcard__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></div><h3>Invoicing</h3><p>Build the invoice on the tailgate. Send it before you pull out of the driveway.</p></div>
-      <div class="fcard"><div class="fcard__ic pink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></div><h3>Payments</h3><p>Tap, card, or link. The money lands while the truck is still warm.</p></div>
-    </div>
-  </div>
-</section>
+  <div class="hero">
+    <svg class="beam" viewBox="0 0 1000 220" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <linearGradient id="pin" x1="0" x2="1">
+          <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+          <stop offset="1" stop-color="#fff" stop-opacity=".5"/>
+        </linearGradient>
+        <linearGradient id="p1" x1="0" x2="1"><stop offset="0" stop-color="var(--r1)" stop-opacity=".75"/><stop offset="1" stop-color="var(--r1)" stop-opacity="0"/></linearGradient>
+        <linearGradient id="p2" x1="0" x2="1"><stop offset="0" stop-color="var(--r2)" stop-opacity=".75"/><stop offset="1" stop-color="var(--r2)" stop-opacity="0"/></linearGradient>
+        <linearGradient id="p3" x1="0" x2="1"><stop offset="0" stop-color="var(--r3)" stop-opacity=".8"/><stop offset="1" stop-color="var(--r3)" stop-opacity="0"/></linearGradient>
+        <linearGradient id="p4" x1="0" x2="1"><stop offset="0" stop-color="var(--r4)" stop-opacity=".75"/><stop offset="1" stop-color="var(--r4)" stop-opacity="0"/></linearGradient>
+        <linearGradient id="p5" x1="0" x2="1"><stop offset="0" stop-color="var(--r5)" stop-opacity=".7"/><stop offset="1" stop-color="var(--r5)" stop-opacity="0"/></linearGradient>
+      </defs>
 
-<!-- FLOW -->
-<section class="sec flow" id="flow">
-  <div class="wrap">
-    <span class="eyebrow" style="color:var(--sky-300)">One unbroken line</span>
-    <h2>No handoffs. No re-typing. No "which app was that in?"</h2>
-    <div class="flow__track">
-      <div class="flow__node"><span class="flow__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span><span class="flow__l">Lead</span></div>
-      <span class="flow__line"></span>
-      <div class="flow__node"><span class="flow__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span><span class="flow__l">Schedule</span></div>
-      <span class="flow__line"></span>
-      <div class="flow__node"><span class="flow__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span><span class="flow__l">Do the work</span></div>
-      <span class="flow__line"></span>
-      <div class="flow__node"><span class="flow__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></span><span class="flow__l">Invoice</span></div>
-      <span class="flow__line"></span>
-      <div class="flow__node"><span class="flow__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span><span class="flow__l">Paid</span></div>
-    </div>
-  </div>
-</section>
+      <!-- white light in -->
+      <g class="in">
+        <line x1="-40" y1="110" x2="255" y2="110" stroke="url(#pin)" stroke-width="1.5"/>
+      </g>
 
-<!-- PRICING -->
-<section class="sec price" id="pricing">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow">Priced like a tool, not a tax</span>
-      <h2 class="sec-title">Pick your crew size. Pay one bill.</h2>
-      <div class="toggle-row">
-        <span id="lbl-m">Monthly</span>
-        <button class="toggle on" id="billToggle" aria-label="Toggle billing"><span></span></button>
-        <span id="lbl-a" class="on">Annual <span class="badge badge--pink">Save 20%</span></span>
-      </div>
-    </div>
-    <div class="pgrid">
-      <div class="plan">
-        <div class="plan__name">Solo</div><div class="plan__tag">Owner-operator</div>
-        <div class="plan__price"><span class="plan__amt" data-m="39" data-a="31">$31</span><span class="plan__per">/mo</span></div>
-        <div class="plan__bill js-bill">billed annually</div>
-        <a class="btn btn--outline btn--md" href="#" style="width:100%">Start free trial</a>
-        <ul class="plan__feats">
-          <li><span class="plan__chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>1 user</li>
-          <li><span class="plan__chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Scheduling + dispatch</li>
-          <li><span class="plan__chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Invoices &amp; payments</li>
-          <li><span class="plan__chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Customer texts</li>
-        </ul>
-      </div>
-      <div class="plan hot">
-        <span class="plan__flag">Most popular</span>
-        <div class="plan__name">Crew</div><div class="plan__tag">Most service businesses</div>
-        <div class="plan__price"><span class="plan__amt" data-m="117" data-a="94">$94</span><span class="plan__per">/mo</span></div>
-        <div class="plan__bill js-bill">billed annually</div>
-        <a class="btn btn--grad btn--md" href="#" style="width:100%">Start free trial</a>
-        <ul class="plan__feats">
-          <li><span class="plan__chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>5 to 10 users</li>
-          <li><span class="plan__chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Everything in Solo</li>
-          <li><span class="plan__chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Marketing &amp; reviews</li>
-          <li><span class="plan__chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Job photos &amp; parts</li>
-          <li><span class="plan__chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Priority support</li>
-        </ul>
-      </div>
-      <div class="plan">
-        <div class="plan__name">Shop</div><div class="plan__tag">Multi-crew</div>
-        <div class="plan__price"><span class="plan__amt" data-m="189" data-a="151">$151</span><span class="plan__per">/mo</span></div>
-        <div class="plan__bill js-bill">billed annually</div>
-        <a class="btn btn--outline btn--md" href="#" style="width:100%">Start free trial</a>
-        <ul class="plan__feats">
-          <li><span class="plan__chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>10 to 20 users</li>
-          <li><span class="plan__chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Everything in Crew</li>
-          <li><span class="plan__chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Multi-location dispatch</li>
-          <li><span class="plan__chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Custom reporting</li>
-          <li><span class="plan__chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Dedicated rep</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
+      <!-- spectrum out -->
+      <g class="out">
+        <g><line x1="745" y1="110" x2="1050" y2="52"  stroke="url(#p1)" stroke-width="1.5"/></g>
+        <g><line x1="745" y1="110" x2="1050" y2="81"  stroke="url(#p2)" stroke-width="1.5"/></g>
+        <g><line x1="745" y1="110" x2="1050" y2="110" stroke="url(#p3)" stroke-width="1.5"/></g>
+        <g><line x1="745" y1="110" x2="1050" y2="139" stroke="url(#p4)" stroke-width="1.5"/></g>
+        <g><line x1="745" y1="110" x2="1050" y2="168" stroke="url(#p5)" stroke-width="1.5"/></g>
+      </g>
+    </svg>
 
-<!-- CTA -->
-<section class="sec">
-  <div class="wrap">
-    <div class="cta-box">
-      <h2>Stop duct-taping ten<br>apps together.</h2>
-      <p>Move the whole shop onto Prism this week. We'll help you haul it over.</p>
-      <div class="btns">
-        <a class="btn btn--accent btn--lg" href="#pricing">Start free trial
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        <a class="btn btn--on-dark btn--lg" href="#">Talk to a human</a>
-      </div>
-    </div>
+    <h1 class="wordmark">PRISM</h1>
   </div>
-</section>
 
-<!-- FOOTER -->
-<footer class="foot">
-  <div class="wrap foot__grid">
-    <div class="foot__brand">
-      <span class="logo logo--md logo--dark"><img src="assets/logo-mark.png" alt=""><span class="logo__w">PR<span class="i">I</span>SM<span class="tm">™</span></span></span>
-      <p>Run the whole job from one app.</p>
+  <p class="tagline">The home-service business, reimagined.</p>
+  <p class="subline">Quoting, scheduling, dispatch, and invoicing rebuilt around the way the work actually happens. One system that runs the office so your crews stay on the truck.</p>
+
+  <section class="countdown" aria-label="Time until launch">
+    <div class="blocks">
+      <div class="block"><span class="num" id="d">—</span><span class="unit">days</span></div>
+      <div class="block"><span class="num" id="h">—</span><span class="unit">hours</span></div>
+      <div class="block"><span class="num" id="m">—</span><span class="unit">minutes</span></div>
+      <div class="block"><span class="num" id="s">—</span><span class="unit">seconds</span></div>
     </div>
-    <div class="foot__col"><h4>Product</h4><a href="#">Scheduling</a><a href="#">Dispatch</a><a href="#">Invoicing</a><a href="#">Payments</a><a href="#">Marketing</a></div>
-    <div class="foot__col"><h4>Crews</h4><a href="#">Plumbing</a><a href="#">HVAC</a><a href="#">Electrical</a><a href="#">Landscaping</a><a href="#">General</a></div>
-    <div class="foot__col"><h4>Company</h4><a href="#">About</a><a href="#">Careers</a><a href="#">Press</a><a href="#">Contact</a></div>
-  </div>
-  <div class="wrap foot__base">
-    <span>© 2026 PrismOS, Inc.</span>
-    <span>Built for people who work with their hands.</span>
-  </div>
-</footer>
+    <p class="until" id="untilLabel">until launch</p>
+  </section>
+
+  <section class="signup">
+    <div id="formWrap">
+      <h2 id="formTitle">Get in before launch.</h2>
+
+      <label class="sr" for="name" id="nameLabel">Your name</label>
+      <input class="field" id="name" name="name" type="text" placeholder="Your name" autocomplete="name">
+
+      <label class="sr" for="email">Email</label>
+      <input class="field" id="email" name="email" type="email" placeholder="Email" autocomplete="email" required>
+
+      <label class="sr" for="msg" id="msgLabel">What do you run?</label>
+      <textarea class="field" id="msg" name="message" placeholder="What kind of work do you run, and how big is the crew?"></textarea>
+
+      <button class="cta" id="submit" type="button">Request early access</button>
+      <p class="note" id="note" role="status" aria-live="polite"></p>
+
+      <p class="switch">
+        <span id="switchText">Investing in home service?</span>
+        <button class="link" id="modeToggle" type="button">Request the deck</button>
+      </p>
+    </div>
+
+    <div class="done" id="done" hidden>
+      <p id="doneTitle">You're on the list.</p>
+      <span id="doneBody">We'll email you before launch — and sooner if a beta seat opens up.</span>
+    </div>
+  </section>
+
+  <p class="foot">Prism · built by operators who ran the trucks</p>
+
+</main>
 
 <script>
-(function(){
-  var annual = true;
-  var toggle = document.getElementById('billToggle');
-  var lblM = document.getElementById('lbl-m'), lblA = document.getElementById('lbl-a');
-  function render(){
-    toggle.classList.toggle('on', annual);
-    lblA.classList.toggle('on', annual);
-    lblM.classList.toggle('on', !annual);
-    document.querySelectorAll('.plan__amt').forEach(function(el){
-      el.textContent = '$' + el.getAttribute(annual ? 'data-a' : 'data-m');
-    });
-    document.querySelectorAll('.js-bill').forEach(function(el){
-      el.textContent = annual ? 'billed annually' : 'billed monthly';
-    });
+  /* ---- 1. LAUNCH DATE — change this ---- */
+  const LAUNCH = new Date("2027-01-17T12:00:00-06:00");
+
+  /* ---- 2. WHERE SIGNUPS GO — paste your endpoint ----
+     Works with anything that accepts a JSON POST:
+     Formspree  → https://formspree.io/f/xxxxxxx
+     Zapier     → catch hook URL
+     Your API   → your own route
+     Leave empty and the form will still confirm, but nothing is saved. */
+  const FORM_ENDPOINT = "";
+
+  /* ---------- countdown ---------- */
+  const els = { d: document.getElementById('d'), h: document.getElementById('h'),
+                m: document.getElementById('m'), s: document.getElementById('s') };
+  const untilLabel = document.getElementById('untilLabel');
+  const pad = n => String(n).padStart(2, '0');
+
+  function tick(){
+    const diff = LAUNCH - Date.now();
+    if (isNaN(diff)) return;
+    if (diff <= 0){
+      els.d.textContent = els.h.textContent = els.m.textContent = els.s.textContent = '00';
+      untilLabel.textContent = 'Prism is live.';
+      clearInterval(timer);
+      return;
+    }
+    const s = Math.floor(diff / 1000);
+    els.d.textContent = pad(Math.floor(s / 86400));
+    els.h.textContent = pad(Math.floor(s % 86400 / 3600));
+    els.m.textContent = pad(Math.floor(s % 3600 / 60));
+    els.s.textContent = pad(s % 60);
   }
-  toggle.addEventListener('click', function(){ annual = !annual; render(); });
-  render();
-})();
+  tick();
+  const timer = setInterval(tick, 1000);
+
+  /* ---------- signup ---------- */
+  const btn   = document.getElementById('submit');
+  const note  = document.getElementById('note');
+  const email = document.getElementById('email');
+  const msg   = document.getElementById('msg');
+
+  /* two audiences, one form. 'source' tells you which one wrote in. */
+  const MODES = {
+    operator: {
+      title:       'Get in before launch.',
+      msgLabel:    'What do you run?',
+      msgHint:     'What kind of work do you run, and how big is the crew?',
+      cta:         'Request early access',
+      switchText:  'Investing in home service?',
+      switchCta:   'Request the deck',
+      source:      'prism-splash-operator',
+      doneTitle:   "You're on the list.",
+      doneBody:    "We'll email you before launch — and sooner if a beta seat opens up."
+    },
+    investor: {
+      title:       'Request the Prism deck.',
+      msgLabel:    'Your fund or firm',
+      msgHint:     'Fund or angel, check size, and what draws you to home service.',
+      cta:         'Request the deck',
+      switchText:  'Run a home-service business?',
+      switchCta:   'Request early access',
+      source:      'prism-splash-investor',
+      doneTitle:   'Deck request received.',
+      doneBody:    "Micah will send materials and find time to talk this week."
+    }
+  };
+
+  let mode = 'operator';
+
+  function applyMode(){
+    const c = MODES[mode];
+    document.getElementById('formTitle').textContent  = c.title;
+    document.getElementById('msgLabel').textContent   = c.msgLabel;
+    msg.placeholder                                   = c.msgHint;
+    btn.textContent                                   = c.cta;
+    document.getElementById('switchText').textContent = c.switchText;
+    document.getElementById('modeToggle').textContent = c.switchCta;
+    say('');
+  }
+
+  document.getElementById('modeToggle').addEventListener('click', () => {
+    mode = mode === 'operator' ? 'investor' : 'operator';
+    applyMode();
+    document.getElementById('formTitle').scrollIntoView({ block:'nearest', behavior:'smooth' });
+  });
+
+  /* deep link: prism.com/?investor sends investors straight to the deck form */
+  if (/investor/i.test(location.search) || /investor/i.test(location.hash)){
+    mode = 'investor';
+  }
+
+  function say(text, kind){
+    note.textContent = text;
+    note.className = 'note' + (kind ? ' ' + kind : '');
+  }
+
+  async function submit(){
+    const payload = {
+      name:    document.getElementById('name').value.trim(),
+      email:   email.value.trim(),
+      message: msg.value.trim(),
+      source:  MODES[mode].source
+    };
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(payload.email)){
+      say('That email address is missing something — check it and try again.', 'err');
+      email.focus();
+      return;
+    }
+
+    btn.disabled = true;
+    say('Sending…');
+
+    if (!FORM_ENDPOINT){
+      console.warn('FORM_ENDPOINT is empty — this signup was not saved anywhere.', payload);
+      finish();
+      return;
+    }
+
+    try {
+      const res = await fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (!res.ok) throw new Error(res.status);
+      finish();
+    } catch (err) {
+      btn.disabled = false;
+      say('That didn\'t go through. Try again, or email hello@getprismpro.com.', 'err');
+    }
+  }
+
+  function finish(){
+    const c = MODES[mode];
+    document.getElementById('doneTitle').textContent = c.doneTitle;
+    document.getElementById('doneBody').textContent  = c.doneBody;
+    document.getElementById('formWrap').hidden = true;
+    document.getElementById('done').hidden = false;
+  }
+
+  applyMode();
+  btn.addEventListener('click', submit);
+  document.querySelectorAll('.field').forEach(f => {
+    f.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && f.tagName !== 'TEXTAREA'){ e.preventDefault(); submit(); }
+    });
+  });
 </script>
 </body>
 </html>
