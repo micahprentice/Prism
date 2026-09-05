@@ -25,11 +25,9 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
 <!-- ============================================================
-     TWO THINGS TO SET (both are right here):
-       1. LAUNCH  — your launch date/time
-       2. FORM_ENDPOINT — where signups get sent. Until you set
-          this, the form validates and shows the thank-you state
-          but does NOT store anything.
+     Fully wired. Signups email to micah@getprismpro.com via Web3Forms.
+     The only thing you'd normally change is LAUNCH, the countdown
+     target, near the top of the script block at the bottom.
      ============================================================ -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -140,6 +138,25 @@
   .beam .out g:nth-child(5){animation-delay:1.13s}
   @keyframes beam-in{from{opacity:0;transform:translateX(-24px)}to{opacity:1;transform:none}}
   @keyframes fan{from{opacity:0;transform:translateX(-18px)}to{opacity:.85;transform:none}}
+
+  .lockup{
+    position:relative;
+    display:inline-block;
+  }
+
+  .pro{
+    display:flex;
+    justify-content:space-between;
+    width:100%;
+    margin-top:clamp(4px,.9vw,10px);
+    padding:0 .04em 0 .10em;
+    font-size:clamp(13px,2.4vw,27px);
+    font-weight:600;
+    font-stretch:112%;
+    line-height:1;
+    color:var(--blue-soft);
+    opacity:.92;
+  }
 
   .wordmark{
     position:relative;
@@ -394,7 +411,10 @@
       </g>
     </svg>
 
-    <h1 class="wordmark">PRISM</h1>
+    <div class="lockup">
+      <h1 class="wordmark">PRISM<span class="sr"> Pro</span></h1>
+      <div class="pro" aria-hidden="true"><span>P</span><span>R</span><span>O</span></div>
+    </div>
   </div>
 
   <p class="tagline">The home-service business, reimagined.</p>
@@ -419,6 +439,9 @@
 
       <label class="sr" for="email">Email</label>
       <input class="field" id="email" name="email" type="email" placeholder="Email" autocomplete="email" required>
+
+      <input id="company" name="company" type="text" tabindex="-1" autocomplete="off" aria-hidden="true"
+             style="position:absolute;left:-9999px;opacity:0;height:0;width:0" />
 
       <label class="sr" for="msg" id="msgLabel">What do you run?</label>
       <textarea class="field" id="msg" name="message" placeholder="What kind of work do you run, and how big is the crew?"></textarea>
@@ -446,13 +469,13 @@
   /* ---- 1. LAUNCH DATE — change this ---- */
   const LAUNCH = new Date("2027-01-17T12:00:00-06:00");
 
-  /* ---- 2. WHERE SIGNUPS GO — paste your endpoint ----
-     Works with anything that accepts a JSON POST:
-     Formspree  → https://formspree.io/f/xxxxxxx
-     Zapier     → catch hook URL
-     Your API   → your own route
-     Leave empty and the form will still confirm, but nothing is saved. */
-  const FORM_ENDPOINT = "";
+  /* ---- 2. WHERE SIGNUPS GO ----
+     Web3Forms emails every submission to micah@getprismpro.com.
+     Get a key at web3forms.com — enter that address, they email you the key,
+     paste it between the quotes below. Nothing else to change.
+     Until the key is filled in, the form confirms but saves nothing. */
+  const WEB3FORMS_KEY = "8776234f-8f19-403d-a0c4-7a6221a32c7a";
+  const FORM_ENDPOINT = "https://api.web3forms.com/submit";
 
   /* ---------- countdown ---------- */
   const els = { d: document.getElementById('d'), h: document.getElementById('h'),
@@ -540,11 +563,17 @@
   }
 
   async function submit(){
+    if (document.getElementById('company').value){ finish(); return; }   // honeypot: bots fill this, people can't see it
+
+    const who = mode === 'investor' ? 'Investor' : 'Early access';
     const payload = {
-      name:    document.getElementById('name').value.trim(),
-      email:   email.value.trim(),
-      message: msg.value.trim(),
-      source:  MODES[mode].source
+      access_key:  WEB3FORMS_KEY,
+      subject:     who + ' — ' + (document.getElementById('name').value.trim() || email.value.trim()),
+      from_name:   'Prism splash page',
+      name:        document.getElementById('name').value.trim(),
+      email:       email.value.trim(),
+      message:     msg.value.trim(),
+      source:      MODES[mode].source
     };
 
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(payload.email)){
@@ -556,8 +585,8 @@
     btn.disabled = true;
     say('Sending…');
 
-    if (!FORM_ENDPOINT){
-      console.warn('FORM_ENDPOINT is empty — this signup was not saved anywhere.', payload);
+    if (!WEB3FORMS_KEY){
+      console.warn('WEB3FORMS_KEY is empty — this signup went nowhere.', payload);
       finish();
       return;
     }
