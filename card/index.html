@@ -4,24 +4,24 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Micah Prentice | Prism</title>
-<meta name="description" content="Run the business you have. Grow the business you want.">
+<meta name="description" content="Run the business you have. Build the business you want.">
 <meta name="theme-color" content="#0B0C18">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Prism">
 <meta property="og:title" content="Micah Prentice | Prism">
-<meta property="og:description" content="Run the business you have. Grow the business you want.">
+<meta property="og:description" content="Run the business you have. Build the business you want.">
 <meta property="og:url" content="https://getprismpro.com/card/">
 <meta property="og:image" content="https://getprismpro.com/card/og.png">
 <meta property="og:image:secure_url" content="https://getprismpro.com/card/og.png">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Micah Prentice, Prism. Run the business you have. Grow the business you want.">
+<meta property="og:image:alt" content="Micah Prentice, Prism. Run the business you have. Build the business you want.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Micah Prentice | Prism">
-<meta name="twitter:description" content="Run the business you have. Grow the business you want.">
+<meta name="twitter:description" content="Run the business you have. Build the business you want.">
 <meta name="twitter:image" content="https://getprismpro.com/card/og.png">
-<meta name="twitter:image:alt" content="Micah Prentice, Prism. Run the business you have. Grow the business you want.">
+<meta name="twitter:image:alt" content="Micah Prentice, Prism. Run the business you have. Build the business you want.">
 <link rel="canonical" href="https://getprismpro.com/card/">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" href="prism-mark.png" type="image/png">
@@ -70,16 +70,22 @@
   }
   h1{
     position:relative;z-index:1;
-    margin:8px 22px 0;
-    max-width:12.2em;
-    font-size:clamp(32px,8.4vw,40px);
-    font-weight:800;font-stretch:118%;
-    line-height:1.02;letter-spacing:-.03em;
+    margin:10px 14px 0;
+    max-width:none;
+    font-size:clamp(17.5px,6.15vw,28px);
+    font-weight:800;font-stretch:96%;
+    line-height:1.05;letter-spacing:-.034em;
   }
-  h1 .grow{
-    display:block;margin-top:4px;font-style:normal;
+  h1 .run,
+  h1 .build{
+    display:block;
+    white-space:nowrap;
+  }
+  h1 .build{
+    margin-top:3px;font-style:normal;
     background:linear-gradient(90deg,#E44B87 0%,#EB7DB6 32%,#7E9FE0 68%,#4998EF 100%);
     -webkit-background-clip:text;background-clip:text;color:transparent;
+    -webkit-text-fill-color:transparent;
   }
   .who{padding:26px 6px 0}
   h2{
@@ -111,10 +117,10 @@
   .save svg{width:22px;height:22px}
   .save:hover{filter:brightness(1.03)}
   .save:active{transform:translateY(1px)}
-  .secondary{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+  .secondary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:10px}
   .secondary a{
     display:flex;align-items:center;justify-content:center;gap:8px;
-    min-height:48px;padding:10px 8px;border-radius:14px;
+    min-height:48px;min-width:0;padding:10px 6px;border-radius:14px;
     border:1px solid var(--line);background:rgba(255,255,255,.03);
     color:var(--ink);text-decoration:none;
     font-size:14px;font-weight:600;
@@ -131,7 +137,7 @@
     .stage{height:320px}
     .mark{left:48px;top:48px;height:156px}
     .wm{left:52px;top:218px;font-size:16px}
-    h1{margin:6px 52px 0;font-size:64px;max-width:11em}
+    h1{margin:8px 40px 0;font-size:clamp(34px,4.5vw,50px);font-stretch:106%;max-width:none}
     .after{
       display:grid;grid-template-columns:1.15fr .85fr;
       gap:36px;align-items:end;padding:8px 46px 0;
@@ -210,7 +216,7 @@
       <img class="mark" src="prism-mark.png" alt="Prism">
       <p class="wm">PRISM</p>
     </div>
-    <h1>Run the business you have.<span class="grow">Grow the business you want.</span></h1>
+    <h1><span class="run">Run the business you have.</span><span class="build">Build the business you want.</span></h1>
   </article>
 
   <div class="after">
