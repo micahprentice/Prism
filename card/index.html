@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Micah Prentice | Founder &amp; CEO, Prism</title>
+<meta name="description" content="Micah Prentice, Founder and CEO of Prism, the intelligent back office for the trades.">
+<meta name="theme-color" content="#0B0C18">
+<meta property="og:title" content="Micah Prentice | Prism">
+<meta property="og:description" content="The intelligent back office for the trades. From first call to paid invoice.">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" href="prism-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B0C18; --lift:#10121F; --panel:#0E0F1B; --line:rgba(255,255,255,.09);
+    --ink:#F2F4F9; --mid:#A0A6B8; --dim:#6C7285;
+    --pink:#E44B87; --pink-soft:#EB7DB6; --blue:#4998EF; --blue-soft:#99CAF7; --navy:#265BA4;
+    --spec:linear-gradient(90deg,#E44B87 0%,#EB7DB6 25%,#4998EF 55%,#99CAF7 75%,#265BA4 100%);
+    --sans:"Archivo","Helvetica Neue",Arial,system-ui,sans-serif;
+    --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    min-height:100vh; color:var(--ink); font-family:var(--sans); -webkit-font-smoothing:antialiased;
+    background:
+      radial-gradient(700px 460px at 50% -10%, #191A2E 0%, rgba(25,26,46,0) 70%),
+      radial-gradient(600px 420px at 100% 105%, #13203A 0%, rgba(19,32,58,0) 72%),
+      var(--bg);
+    display:flex; justify-content:center;
+    padding:max(18px,env(safe-area-inset-top)) 16px max(28px,env(safe-area-inset-bottom));
+  }
+  .wrap{width:100%;max-width:440px}
+  .card{
+    position:relative; overflow:hidden; border-radius:28px; border:1px solid var(--line);
+    background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,0) 40%),var(--panel);
+    box-shadow:0 30px 80px rgba(0,0,0,.45);
+  }
+  .hero{position:relative;height:230px;overflow:hidden;border-bottom:1px solid var(--line)}
+  .hero svg{position:absolute;inset:0;width:100%;height:100%}
+  .hero .mark{position:absolute;left:100px;top:46%;height:112px;transform:translate(-50%,-50%);
+    filter:drop-shadow(0 10px 30px rgba(73,152,239,.25))}
+  .hero .wm{position:absolute;left:24px;bottom:18px;font-weight:800;font-stretch:125%;letter-spacing:.34em;font-size:15px;color:var(--ink)}
+  .body{padding:26px 24px 8px}
+  h1{margin:0;font-size:34px;line-height:1.05;font-weight:700;font-stretch:112%;letter-spacing:-.02em}
+  .role{margin-top:10px;font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--pink-soft)}
+  .rule{margin:20px 0 18px;width:72px;height:3px;border-radius:2px;background:var(--spec)}
+  .promise{text-wrap:balance;margin:0;font-size:19px;line-height:1.3;font-weight:600;letter-spacing:-.01em}
+  .promise em{font-style:normal;background:linear-gradient(96deg,#E44B87,#C35FB0 45%,#4998EF);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{text-wrap:pretty;margin:8px 0 0;font-size:14.5px;line-height:1.5;color:var(--mid)}
+  .actions{padding:22px 24px 6px;display:grid;gap:10px}
+  .btn{display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--ink);
+    padding:15px 16px;border-radius:16px;border:1px solid var(--line);background:var(--lift);
+    font-size:16px;font-weight:600;transition:transform .12s ease,border-color .12s ease}
+  .btn:active{transform:scale(.985)}
+  .btn:hover{border-color:rgba(255,255,255,.18)}
+  .btn .ic{flex:0 0 38px;height:38px;border-radius:11px;display:grid;place-items:center;background:rgba(255,255,255,.05)}
+  .btn .ic svg{width:19px;height:19px}
+  .btn .tx{display:flex;flex-direction:column;min-width:0}
+  .btn .tx small{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:2px}
+  .btn .tx span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .btn .go{margin-left:auto;color:var(--dim)}
+  .btn.primary{border:0;color:#0B0C18;background:linear-gradient(100deg,#F5B8D3 0%,#FFFFFF 38%,#CFE5FB 100%);
+    box-shadow:0 10px 30px rgba(228,75,135,.22)}
+  .btn.primary .ic{background:#0B0C18;color:#fff}
+  .btn.primary .tx small{color:#565D68}
+  .btn.primary .go{color:#0B0C18}
+  .share{margin:18px 24px 24px;padding:18px;border-radius:20px;border:1px solid var(--line);background:var(--lift);
+    display:flex;align-items:center;gap:18px}
+  .qr{flex:0 0 112px;height:112px;background:#fff;border-radius:14px;padding:9px}
+  .share b{display:block;font-size:15px;font-weight:600;margin-bottom:4px}
+  .share p{margin:0;font-size:13px;line-height:1.45;color:var(--mid)}
+  footer{text-align:center;margin:18px 0 0;font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--dim)}
+  footer a{color:var(--dim);text-decoration:none}
+  @media (prefers-reduced-motion:no-preference){
+    .rays polygon{animation:fan 1.4s cubic-bezier(.2,.7,.2,1) both}
+    @keyframes fan{from{opacity:0}to{opacity:1}}
+  }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <article class="card">
+    <div class="hero" aria-hidden="true">
+      <svg viewBox="0 0 440 230" preserveAspectRatio="xMinYMid slice">
+        <defs>
+          <linearGradient id="beam" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff" stop-opacity=".8"/></linearGradient>
+          <linearGradient id="r1" x1="0" x2="1"><stop offset="0" stop-color="#E44B87" stop-opacity="0"/><stop offset="1" stop-color="#E44B87" stop-opacity=".85"/></linearGradient>
+          <linearGradient id="r2" x1="0" x2="1"><stop offset="0" stop-color="#EB7DB6" stop-opacity="0"/><stop offset="1" stop-color="#EB7DB6" stop-opacity=".8"/></linearGradient>
+          <linearGradient id="r3" x1="0" x2="1"><stop offset="0" stop-color="#4998EF" stop-opacity="0"/><stop offset="1" stop-color="#4998EF" stop-opacity=".85"/></linearGradient>
+          <linearGradient id="r4" x1="0" x2="1"><stop offset="0" stop-color="#99CAF7" stop-opacity="0"/><stop offset="1" stop-color="#99CAF7" stop-opacity=".75"/></linearGradient>
+          <linearGradient id="r5" x1="0" x2="1"><stop offset="0" stop-color="#265BA4" stop-opacity="0"/><stop offset="1" stop-color="#265BA4" stop-opacity=".9"/></linearGradient>
+        </defs>
+        <rect x="0" y="105" width="62" height="1.6" fill="url(#beam)"/>
+        <g class="rays">
+          <polygon points="142,106 440,8 440,52" fill="url(#r1)"/>
+          <polygon points="142,106 440,52 440,96" fill="url(#r2)"/>
+          <polygon points="142,106 440,96 440,140" fill="url(#r3)"/>
+          <polygon points="142,106 440,140 440,184" fill="url(#r4)"/>
+          <polygon points="142,106 440,184 440,228" fill="url(#r5)"/>
+        </g>
+      </svg>
+      <img class="mark" src="prism-mark.png" alt="">
+      <div class="wm">PRISM</div>
+    </div>
+
+    <div class="body">
+      <h1>Micah Prentice</h1>
+      <div class="role">Founder &amp; CEO, Prism</div>
+      <div class="rule"></div>
+      <p class="promise">The <em>intelligent</em> back office for the trades.</p>
+      <p class="sub">One system for home service contractors, from first call to paid invoice.</p>
+    </div>
+
+    <nav class="actions">
+      <a class="btn primary" href="micah-prentice-prism.vcf" download="Micah-Prentice-Prism.vcf">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg></span>
+        <span class="tx"><small>Add to phone</small><span>Save contact</span></span>
+        <span class="go"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg></span>
+      </a>
+      <a class="btn" href="mailto:micah@getprismpro.com">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#EB7DB6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></span>
+        <span class="tx"><small>Email</small><span>micah@getprismpro.com</span></span>
+        <span class="go">&#8599;</span>
+      </a>
+      <a class="btn" href="https://getprismpro.com" target="_blank" rel="noopener">
+        <span class="ic"><img src="prism-mark.png" alt="" style="height:20px"></span>
+        <span class="tx"><small>Website</small><span>getprismpro.com</span></span>
+        <span class="go">&#8599;</span>
+      </a>
+      <a class="btn" href="https://www.linkedin.com/in/micah-prentice-63a001b0/" target="_blank" rel="noopener">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="#99CAF7"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></span>
+        <span class="tx"><small>LinkedIn</small><span>Micah Prentice</span></span>
+        <span class="go">&#8599;</span>
+      </a>
+      <!-- Booking button intentionally omitted: no confirmed booking link yet.
+           When one exists, add:
+      <a class="btn" href="BOOKING_LINK" target="_blank" rel="noopener">
+        <span class="ic">...</span><span class="tx"><small>Calendar</small><span>Book 20 min</span></span><span class="go">&#8599;</span>
+      </a> -->
+    </nav>
+
+    <section class="share">
+      <div class="qr" role="img" aria-label="QR code that saves Micah Prentice's contact"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 45 45" shape-rendering="crispEdges" width="100%" height="100%"><path fill="#0B0C18" d="M0 0h7v1h-7zM9 0h1v1h-1zM12 0h3v1h-3zM16 0h1v1h-1zM20 0h2v1h-2zM23 0h1v1h-1zM25 0h4v1h-4zM30 0h1v1h-1zM32 0h2v1h-2zM36 0h1v1h-1zM38 0h7v1h-7zM0 1h1v1h-1zM6 1h1v1h-1zM10 1h2v1h-2zM14 1h2v1h-2zM17 1h3v1h-3zM22 1h1v1h-1zM24 1h1v1h-1zM28 1h1v1h-1zM31 1h1v1h-1zM33 1h1v1h-1zM35 1h1v1h-1zM38 1h1v1h-1zM44 1h1v1h-1zM0 2h1v1h-1zM2 2h3v1h-3zM6 2h1v1h-1zM9 2h1v1h-1zM14 2h1v1h-1zM17 2h2v1h-2zM20 2h2v1h-2zM24 2h2v1h-2zM32 2h2v1h-2zM35 2h1v1h-1zM38 2h1v1h-1zM40 2h3v1h-3zM44 2h1v1h-1zM0 3h1v1h-1zM2 3h3v1h-3zM6 3h1v1h-1zM8 3h2v1h-2zM12 3h3v1h-3zM16 3h1v1h-1zM18 3h1v1h-1zM25 3h9v1h-9zM35 3h2v1h-2zM38 3h1v1h-1zM40 3h3v1h-3zM44 3h1v1h-1zM0 4h1v1h-1zM2 4h3v1h-3zM6 4h1v1h-1zM8 4h1v1h-1zM10 4h1v1h-1zM12 4h2v1h-2zM15 4h1v1h-1zM18 4h8v1h-8zM27 4h4v1h-4zM32 4h1v1h-1zM34 4h3v1h-3zM38 4h1v1h-1zM40 4h3v1h-3zM44 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM11 5h1v1h-1zM13 5h3v1h-3zM18 5h1v1h-1zM20 5h1v1h-1zM24 5h2v1h-2zM28 5h2v1h-2zM38 5h1v1h-1zM44 5h1v1h-1zM0 6h7v1h-7zM8 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM14 6h1v1h-1zM16 6h1v1h-1zM18 6h1v1h-1zM20 6h1v1h-1zM22 6h1v1h-1zM24 6h1v1h-1zM26 6h1v1h-1zM28 6h1v1h-1zM30 6h1v1h-1zM32 6h1v1h-1zM34 6h1v1h-1zM36 6h1v1h-1zM38 6h7v1h-7zM9 7h4v1h-4zM14 7h4v1h-4zM19 7h2v1h-2zM24 7h1v1h-1zM26 7h1v1h-1zM28 7h2v1h-2zM32 7h4v1h-4zM0 8h2v1h-2zM5 8h3v1h-3zM11 8h1v1h-1zM13 8h1v1h-1zM15 8h1v1h-1zM17 8h8v1h-8zM26 8h1v1h-1zM31 8h1v1h-1zM33 8h2v1h-2zM36 8h1v1h-1zM40 8h2v1h-2zM2 9h1v1h-1zM5 9h1v1h-1zM11 9h2v1h-2zM14 9h3v1h-3zM20 9h1v1h-1zM22 9h2v1h-2zM25 9h6v1h-6zM34 9h3v1h-3zM38 9h1v1h-1zM40 9h3v1h-3zM44 9h1v1h-1zM1 10h2v1h-2zM6 10h1v1h-1zM8 10h1v1h-1zM13 10h1v1h-1zM15 10h2v1h-2zM20 10h2v1h-2zM24 10h1v1h-1zM27 10h1v1h-1zM29 10h1v1h-1zM34 10h2v1h-2zM41 10h3v1h-3zM2 11h1v1h-1zM5 11h1v1h-1zM7 11h3v1h-3zM16 11h1v1h-1zM19 11h1v1h-1zM21 11h1v1h-1zM23 11h1v1h-1zM30 11h3v1h-3zM34 11h2v1h-2zM38 11h1v1h-1zM41 11h4v1h-4zM1 12h1v1h-1zM3 12h2v1h-2zM6 12h4v1h-4zM11 12h1v1h-1zM14 12h2v1h-2zM18 12h2v1h-2zM22 12h4v1h-4zM27 12h2v1h-2zM32 12h1v1h-1zM34 12h2v1h-2zM37 12h1v1h-1zM39 12h2v1h-2zM44 12h1v1h-1zM1 13h3v1h-3zM5 13h1v1h-1zM11 13h1v1h-1zM15 13h1v1h-1zM18 13h1v1h-1zM21 13h2v1h-2zM25 13h1v1h-1zM27 13h1v1h-1zM29 13h2v1h-2zM33 13h1v1h-1zM35 13h3v1h-3zM39 13h2v1h-2zM44 13h1v1h-1zM0 14h1v1h-1zM3 14h4v1h-4zM8 14h6v1h-6zM16 14h2v1h-2zM20 14h1v1h-1zM22 14h3v1h-3zM28 14h1v1h-1zM33 14h2v1h-2zM40 14h4v1h-4zM0 15h2v1h-2zM3 15h1v1h-1zM5 15h1v1h-1zM7 15h2v1h-2zM10 15h2v1h-2zM14 15h1v1h-1zM16 15h5v1h-5zM22 15h5v1h-5zM29 15h3v1h-3zM40 15h3v1h-3zM44 15h1v1h-1zM2 16h5v1h-5zM9 16h3v1h-3zM15 16h1v1h-1zM17 16h3v1h-3zM21 16h2v1h-2zM24 16h1v1h-1zM26 16h1v1h-1zM30 16h2v1h-2zM33 16h2v1h-2zM36 16h1v1h-1zM38 16h1v1h-1zM42 16h2v1h-2zM0 17h1v1h-1zM2 17h1v1h-1zM8 17h1v1h-1zM10 17h2v1h-2zM13 17h2v1h-2zM17 17h1v1h-1zM20 17h1v1h-1zM23 17h1v1h-1zM25 17h1v1h-1zM27 17h4v1h-4zM35 17h3v1h-3zM40 17h1v1h-1zM42 17h1v1h-1zM1 18h2v1h-2zM6 18h1v1h-1zM10 18h4v1h-4zM16 18h1v1h-1zM21 18h2v1h-2zM24 18h6v1h-6zM31 18h2v1h-2zM36 18h1v1h-1zM38 18h4v1h-4zM44 18h1v1h-1zM2 19h1v1h-1zM4 19h1v1h-1zM10 19h1v1h-1zM12 19h2v1h-2zM15 19h3v1h-3zM19 19h1v1h-1zM21 19h1v1h-1zM24 19h3v1h-3zM28 19h2v1h-2zM31 19h2v1h-2zM37 19h1v1h-1zM42 19h2v1h-2zM1 20h1v1h-1zM4 20h7v1h-7zM13 20h1v1h-1zM16 20h3v1h-3zM20 20h5v1h-5zM29 20h3v1h-3zM34 20h7v1h-7zM43 20h1v1h-1zM1 21h1v1h-1zM4 21h1v1h-1zM8 21h2v1h-2zM12 21h7v1h-7zM20 21h1v1h-1zM24 21h1v1h-1zM26 21h2v1h-2zM29 21h2v1h-2zM32 21h5v1h-5zM40 21h2v1h-2zM1 22h2v1h-2zM4 22h1v1h-1zM6 22h1v1h-1zM8 22h2v1h-2zM11 22h2v1h-2zM14 22h1v1h-1zM18 22h1v1h-1zM20 22h1v1h-1zM22 22h1v1h-1zM24 22h3v1h-3zM28 22h2v1h-2zM31 22h1v1h-1zM33 22h2v1h-2zM36 22h1v1h-1zM38 22h1v1h-1zM40 22h1v1h-1zM43 22h1v1h-1zM1 23h4v1h-4zM8 23h2v1h-2zM12 23h1v1h-1zM14 23h1v1h-1zM16 23h1v1h-1zM18 23h1v1h-1zM20 23h1v1h-1zM24 23h3v1h-3zM28 23h1v1h-1zM31 23h1v1h-1zM36 23h1v1h-1zM40 23h1v1h-1zM42 23h1v1h-1zM44 23h1v1h-1zM0 24h1v1h-1zM4 24h9v1h-9zM14 24h2v1h-2zM18 24h8v1h-8zM28 24h1v1h-1zM30 24h1v1h-1zM32 24h1v1h-1zM35 24h6v1h-6zM0 25h3v1h-3zM8 25h1v1h-1zM10 25h1v1h-1zM12 25h2v1h-2zM15 25h1v1h-1zM17 25h1v1h-1zM19 25h4v1h-4zM24 25h1v1h-1zM27 25h1v1h-1zM29 25h2v1h-2zM32 25h1v1h-1zM37 25h1v1h-1zM39 25h1v1h-1zM42 25h1v1h-1zM4 26h1v1h-1zM6 26h1v1h-1zM12 26h2v1h-2zM16 26h1v1h-1zM18 26h1v1h-1zM22 26h1v1h-1zM25 26h4v1h-4zM32 26h6v1h-6zM42 26h2v1h-2zM2 27h3v1h-3zM7 27h6v1h-6zM14 27h2v1h-2zM21 27h1v1h-1zM23 27h2v1h-2zM30 27h2v1h-2zM34 27h1v1h-1zM38 27h3v1h-3zM42 27h1v1h-1zM1 28h1v1h-1zM5 28h5v1h-5zM13 28h1v1h-1zM15 28h4v1h-4zM20 28h1v1h-1zM23 28h1v1h-1zM26 28h1v1h-1zM30 28h2v1h-2zM37 28h1v1h-1zM0 29h1v1h-1zM4 29h1v1h-1zM7 29h2v1h-2zM11 29h2v1h-2zM15 29h1v1h-1zM18 29h3v1h-3zM22 29h1v1h-1zM24 29h2v1h-2zM27 29h5v1h-5zM33 29h1v1h-1zM35 29h2v1h-2zM38 29h2v1h-2zM44 29h1v1h-1zM0 30h1v1h-1zM4 30h1v1h-1zM6 30h1v1h-1zM10 30h2v1h-2zM14 30h2v1h-2zM17 30h6v1h-6zM25 30h1v1h-1zM27 30h2v1h-2zM32 30h2v1h-2zM35 30h2v1h-2zM38 30h1v1h-1zM40 30h2v1h-2zM44 30h1v1h-1zM2 31h1v1h-1zM4 31h2v1h-2zM7 31h1v1h-1zM9 31h4v1h-4zM14 31h1v1h-1zM20 31h1v1h-1zM22 31h3v1h-3zM26 31h1v1h-1zM28 31h1v1h-1zM30 31h5v1h-5zM41 31h3v1h-3zM2 32h2v1h-2zM6 32h1v1h-1zM8 32h2v1h-2zM12 32h2v1h-2zM15 32h4v1h-4zM20 32h1v1h-1zM24 32h1v1h-1zM26 32h1v1h-1zM29 32h1v1h-1zM33 32h2v1h-2zM37 32h3v1h-3zM41 32h3v1h-3zM0 33h1v1h-1zM3 33h2v1h-2zM8 33h1v1h-1zM10 33h3v1h-3zM14 33h3v1h-3zM19 33h1v1h-1zM23 33h8v1h-8zM34 33h1v1h-1zM36 33h7v1h-7zM44 33h1v1h-1zM4 34h1v1h-1zM6 34h1v1h-1zM8 34h2v1h-2zM13 34h2v1h-2zM16 34h3v1h-3zM28 34h1v1h-1zM31 34h2v1h-2zM34 34h2v1h-2zM37 34h1v1h-1zM40 34h1v1h-1zM43 34h1v1h-1zM1 35h4v1h-4zM8 35h3v1h-3zM12 35h1v1h-1zM17 35h1v1h-1zM19 35h6v1h-6zM26 35h1v1h-1zM28 35h1v1h-1zM30 35h1v1h-1zM32 35h1v1h-1zM34 35h1v1h-1zM42 35h1v1h-1zM44 35h1v1h-1zM0 36h1v1h-1zM3 36h2v1h-2zM6 36h4v1h-4zM11 36h2v1h-2zM14 36h1v1h-1zM17 36h2v1h-2zM20 36h7v1h-7zM28 36h2v1h-2zM32 36h10v1h-10zM43 36h1v1h-1zM8 37h1v1h-1zM10 37h3v1h-3zM15 37h1v1h-1zM17 37h1v1h-1zM19 37h2v1h-2zM24 37h2v1h-2zM28 37h6v1h-6zM36 37h1v1h-1zM40 37h5v1h-5zM0 38h7v1h-7zM8 38h1v1h-1zM15 38h1v1h-1zM17 38h1v1h-1zM19 38h2v1h-2zM22 38h1v1h-1zM24 38h3v1h-3zM28 38h1v1h-1zM31 38h1v1h-1zM33 38h1v1h-1zM35 38h2v1h-2zM38 38h1v1h-1zM40 38h1v1h-1zM43 38h1v1h-1zM0 39h1v1h-1zM6 39h1v1h-1zM8 39h1v1h-1zM13 39h1v1h-1zM16 39h2v1h-2zM19 39h2v1h-2zM24 39h2v1h-2zM28 39h3v1h-3zM32 39h1v1h-1zM34 39h1v1h-1zM36 39h1v1h-1zM40 39h4v1h-4zM0 40h1v1h-1zM2 40h3v1h-3zM6 40h1v1h-1zM11 40h3v1h-3zM15 40h2v1h-2zM18 40h1v1h-1zM20 40h6v1h-6zM29 40h3v1h-3zM33 40h1v1h-1zM36 40h5v1h-5zM42 40h3v1h-3zM0 41h1v1h-1zM2 41h3v1h-3zM6 41h1v1h-1zM10 41h3v1h-3zM15 41h1v1h-1zM19 41h1v1h-1zM21 41h1v1h-1zM23 41h3v1h-3zM27 41h2v1h-2zM30 41h1v1h-1zM32 41h1v1h-1zM36 41h2v1h-2zM42 41h2v1h-2zM0 42h1v1h-1zM2 42h3v1h-3zM6 42h1v1h-1zM9 42h1v1h-1zM12 42h1v1h-1zM14 42h2v1h-2zM17 42h1v1h-1zM20 42h2v1h-2zM23 42h1v1h-1zM25 42h1v1h-1zM27 42h1v1h-1zM31 42h1v1h-1zM33 42h2v1h-2zM36 42h1v1h-1zM38 42h1v1h-1zM40 42h4v1h-4zM0 43h1v1h-1zM6 43h1v1h-1zM8 43h1v1h-1zM12 43h2v1h-2zM15 43h2v1h-2zM20 43h2v1h-2zM23 43h1v1h-1zM25 43h1v1h-1zM28 43h2v1h-2zM32 43h1v1h-1zM35 43h3v1h-3zM39 43h4v1h-4zM0 44h7v1h-7zM8 44h2v1h-2zM11 44h1v1h-1zM17 44h3v1h-3zM23 44h2v1h-2zM27 44h1v1h-1zM29 44h1v1h-1zM31 44h1v1h-1zM33 44h1v1h-1zM36 44h2v1h-2zM39 44h1v1h-1zM42 44h2v1h-2z"/></svg></div>
+      <div><b>Scan to save my contact</b><p>Point a phone camera here. Works offline, no app needed.</p></div>
+    </section>
+  </article>
+  <footer><a href="https://getprismpro.com">GETPRISMPRO.COM</a></footer>
+</main>
+</body>
+</html>
