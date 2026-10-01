@@ -1,2 +1,5 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Contact file must keep CRLF line endings for phone Add Contact.
+card/*.vcf -text
