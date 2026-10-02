@@ -3,22 +3,24 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Prism — launching soon</title>
-<meta name="description" content="Prism reimagines the home-service business — quoting, scheduling, dispatch, and invoicing in one AI-native system. Request early access before launch.">
+<title>Prism — Run the business you have. Build the business you want.</title>
+<meta name="description" content="Run the business you have. Build the business you want. Quoting, scheduling, dispatch, and invoicing in one system, so today's jobs stay on track. Request early access.">
 
 <!-- Social preview. Points at getprismpro.com — the image only renders once the site is live there. -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Prism">
-<meta property="og:title" content="Prism — the home-service business, reimagined.">
-<meta property="og:description" content="Quoting, scheduling, dispatch, and invoicing rebuilt around the way the work actually happens. Launching soon.">
+<meta property="og:title" content="Run the business you have. Build the business you want.">
+<meta property="og:description" content="Prism helps owners run the business they have and build the one they want. Quoting, scheduling, dispatch, and invoicing in one system. Launching soon.">
 <meta property="og:url" content="https://getprismpro.com/">
 <meta property="og:image" content="https://getprismpro.com/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Prism. Run the business you have. Build the business you want.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Prism — the home-service business, reimagined.">
-<meta name="twitter:description" content="Quoting, scheduling, dispatch, and invoicing rebuilt around the way the work actually happens. Launching soon.">
+<meta name="twitter:title" content="Run the business you have. Build the business you want.">
+<meta name="twitter:description" content="Prism helps owners run the business they have and build the one they want. Quoting, scheduling, dispatch, and invoicing in one system. Launching soon.">
 <meta name="twitter:image" content="https://getprismpro.com/og-image.png">
+<meta name="twitter:image:alt" content="Prism. Run the business you have. Build the business you want.">
 <link rel="canonical" href="https://getprismpro.com/">
 <meta name="theme-color" content="#0B0C18">
 <link rel="icon" href="favicon.png" type="image/png" sizes="256x256">
@@ -106,8 +108,8 @@
   .mark{
     display:block;
     width:auto;
-    height:clamp(76px,13vw,116px);
-    margin:0 auto clamp(20px,3.5vw,34px);
+    height:clamp(56px,10vw,88px);
+    margin:0 auto clamp(6px,1.4vw,12px);
     opacity:0;
     animation:mark-in .7s cubic-bezier(.2,.7,.3,1) .05s forwards;
   }
@@ -117,7 +119,8 @@
     position:relative;
     display:grid;
     place-items:center;
-    padding:clamp(6px,2vw,18px) 0 clamp(14px,3vw,26px);
+    min-height:clamp(78px,12vw,128px);
+    padding:clamp(2px,1vw,8px) 0 clamp(4px,1vw,10px);
   }
 
   /* light entering left, spectrum leaving right */
@@ -142,7 +145,7 @@
   .wordmark{
     position:relative;
     margin:0;
-    font-size:clamp(52px,13.5vw,148px);
+    font-size:clamp(16px,2.8vw,36px);
     font-weight:800;
     font-stretch:125%;
     line-height:.86;
@@ -160,21 +163,34 @@
     -webkit-text-fill-color:transparent;
   }
 
-  .tagline{
-    max-width:34ch;
-    margin:clamp(16px,3vw,26px) auto 0;
+  .headline{
+    margin:clamp(16px,2.6vw,26px) auto 0;
     text-align:center;
-    font-size:clamp(17px,2.4vw,21px);
-    font-weight:500;
-    line-height:1.35;
-    letter-spacing:-.01em;
+    font-size:clamp(18.5px,5.7vw,48px);
+    font-weight:800;
+    font-stretch:100%;
+    line-height:1.06;
+    letter-spacing:-.034em;
     color:var(--ink);
   }
+  .headline .run,
+  .headline .build{
+    display:block;
+    white-space:nowrap;
+  }
+  .headline .build{
+    margin-top:.06em;
+    background:linear-gradient(90deg,#E44B87 0%,#EB7DB6 32%,#7E9FE0 68%,#4998EF 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    -webkit-text-fill-color:transparent;
+  }
   .subline{
-    max-width:52ch;
-    margin:12px auto 0;
+    max-width:44ch;
+    margin:14px auto 0;
     text-align:center;
-    font-size:15px;
+    font-size:15.5px;
     line-height:1.55;
     color:var(--ink-mid);
   }
@@ -346,6 +362,11 @@
   @media (max-width:560px){
     .blocks{grid-template-columns:repeat(2,1fr)}
     .wordmark{letter-spacing:-.03em}
+    body{padding:12px 10px}
+    .frame{padding:22px 12px 26px}
+  }
+  @media (min-width:900px){
+    .headline{font-stretch:108%}
   }
 
   @media (prefers-reduced-motion:reduce){
@@ -392,11 +413,14 @@
       </g>
     </svg>
 
-    <h1 class="wordmark">PRISM</h1>
+    <p class="wordmark">PRISM</p>
   </div>
 
-  <p class="tagline">The home-service business, reimagined.</p>
-  <p class="subline">Quoting, scheduling, dispatch, and invoicing rebuilt around the way the work actually happens. One system that runs the office so your crews stay on the truck.</p>
+  <h1 class="headline">
+    <span class="run">Run the business you have.</span>
+    <span class="build">Build the business you want.</span>
+  </h1>
+  <p class="subline">Quoting, scheduling, dispatch, and invoicing in one system. Today's jobs stay on track, so you can build what's next.</p>
 
   <section class="countdown" aria-label="Time until launch">
     <div class="blocks">
