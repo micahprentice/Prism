@@ -148,6 +148,9 @@
   }
 
   .pro{
+    --slot:1.28em;
+    display:grid;
+    justify-items:center;
     margin-top:clamp(3px,.6vw,6px);
     text-align:center;
     font-size:clamp(10px,1.3vw,14px);
@@ -157,6 +160,82 @@
     letter-spacing:.08em;
     color:var(--blue-soft);
     opacity:.94;
+  }
+  .pro-sizers,
+  .pro-viewport{grid-area:1 / 1}
+  .pro-sizers{display:grid;visibility:hidden}
+  .pro-sizers span{
+    grid-area:1 / 1;
+    height:var(--slot);
+    white-space:nowrap;
+  }
+  .pro-viewport{
+    position:relative;
+    width:100%;
+    height:var(--slot);
+    overflow:hidden;
+    -webkit-mask-image:linear-gradient(to bottom, transparent 0%, #000 14%, #000 86%, transparent 100%);
+    mask-image:linear-gradient(to bottom, transparent 0%, #000 14%, #000 86%, transparent 100%);
+  }
+  .pro-word{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    white-space:nowrap;
+  }
+  .pro-word:nth-child(1){--i:0}
+  .pro-word:nth-child(2){--i:1}
+  .pro-word:nth-child(3){--i:2}
+  .pro-word:nth-child(4){--i:3}
+  .pro-word:nth-child(5){--i:4}
+  .pro-word:nth-child(6){--i:5}
+  .pro-word:not(:last-child){visibility:hidden}
+
+  /* one pass: 1.5s per trade, then PRO stays */
+  @media (prefers-reduced-motion:no-preference){
+    .pro-word:nth-child(n){visibility:visible}
+    .pro-word:first-child{
+      animation:pro-first 1.5s linear forwards;
+    }
+    .pro-word:not(:first-child):not(:last-child){
+      animation:pro-mid 1.92s linear both;
+      animation-delay:calc(var(--i) * 1.5s - .42s);
+    }
+    .pro-word:last-child{
+      animation:pro-last .42s linear both;
+      animation-delay:8.58s;
+    }
+  }
+  @keyframes pro-first{
+    0%, 72%{
+      transform:translate3d(0,0,0);
+      animation-timing-function:cubic-bezier(.4,.12,.18,1);
+    }
+    100%{transform:translate3d(0,-100%,0)}
+  }
+  @keyframes pro-mid{
+    0%{
+      transform:translate3d(0,100%,0);
+      animation-timing-function:cubic-bezier(.4,.12,.18,1);
+    }
+    21.875%{
+      transform:translate3d(0,0,0);
+      animation-timing-function:linear;
+    }
+    78.125%{
+      transform:translate3d(0,0,0);
+      animation-timing-function:cubic-bezier(.4,.12,.18,1);
+    }
+    100%{transform:translate3d(0,-100%,0)}
+  }
+  @keyframes pro-last{
+    0%{
+      transform:translate3d(0,100%,0);
+      animation-timing-function:cubic-bezier(.4,.12,.18,1);
+    }
+    100%{transform:translate3d(0,0,0)}
   }
 
   .wordmark{
@@ -168,6 +247,8 @@
     line-height:.86;
     letter-spacing:-.035em;
     text-align:center;
+  }
+  .wordmark-name{
     background:linear-gradient(96deg,
       #FFFFFF 0%, #FFFFFF 30%,
       #F6CFE0 44%,
@@ -203,6 +284,7 @@
     color:transparent;
     -webkit-text-fill-color:transparent;
   }
+
   .subline{
     max-width:44ch;
     margin:14px auto 0;
@@ -390,6 +472,8 @@
     .beam .in, .beam .out g{animation:none;opacity:.85}
     .mark{animation:none;opacity:1}
     .cta, .field{transition:none}
+    .pro-viewport{-webkit-mask-image:none;mask-image:none}
+    .pro-word{animation:none;transform:none}
   }
 </style>
 </head>
@@ -431,8 +515,27 @@
     </svg>
 
     <div class="lockup">
-      <p class="wordmark">PRISM<span class="sr"> Pro</span></p>
-      <div class="pro" aria-hidden="true">PRO</div>
+      <p class="wordmark"><span class="sr">Prism Pro: software for Power Wash, Lighting, Junk Removal, Handyman, Plumbing, and Window Cleaning businesses</span><span class="wordmark-name" aria-hidden="true">PRISM</span></p>
+      <div class="pro" aria-hidden="true">
+        <span class="pro-sizers">
+          <span>POWER WASH</span>
+          <span>LIGHTING</span>
+          <span>JUNK REMOVAL</span>
+          <span>HANDYMAN</span>
+          <span>PLUMBING</span>
+          <span>WINDOW CLEANING</span>
+          <span>PRO</span>
+        </span>
+        <span class="pro-viewport">
+          <span class="pro-word">POWER WASH</span>
+          <span class="pro-word">LIGHTING</span>
+          <span class="pro-word">JUNK REMOVAL</span>
+          <span class="pro-word">HANDYMAN</span>
+          <span class="pro-word">PLUMBING</span>
+          <span class="pro-word">WINDOW CLEANING</span>
+          <span class="pro-word">PRO</span>
+        </span>
+      </div>
     </div>
   </div>
 
