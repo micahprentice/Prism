@@ -88,6 +88,7 @@
     border-radius:22px;
     padding:clamp(28px,5vw,72px) clamp(20px,5vw,64px) clamp(30px,4vw,56px);
     box-shadow:0 1px 0 rgba(255,255,255,.04) inset, 0 40px 120px -40px rgba(0,0,0,.9);
+    container-type:inline-size;
   }
 
   /* ---------- hero ---------- */
@@ -181,7 +182,7 @@
   }
 
   .headline{
-    margin:clamp(16px,2.6vw,26px) auto 0;
+    margin:clamp(12px,1.8vw,18px) auto 0;
     text-align:center;
     font-size:clamp(18.5px,5.7vw,48px);
     font-weight:800;
@@ -203,6 +204,102 @@
     color:transparent;
     -webkit-text-fill-color:transparent;
   }
+
+  /* trade wheel: one slot tall, widest word sets the width so the line never jumps */
+  .trades{
+    --slot:1.5em;
+    margin:clamp(18px,2.8vw,28px) auto 0;
+    text-align:center;
+    font-size:clamp(21px,6.6vw,50px);
+    font-size:clamp(21px,8cqi,50px);
+    font-weight:800;
+    font-stretch:100%;
+    line-height:1;
+    letter-spacing:-.034em;
+    color:var(--ink);
+  }
+  .trades-row{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:.25em;
+    width:100%;
+    white-space:nowrap;
+  }
+  .trades-label{flex:0 0 auto}
+  .trades-wheel{
+    display:inline-grid;
+    flex:0 0 auto;
+    vertical-align:middle;
+  }
+  .trades-sizers,
+  .trades-viewport{grid-area:1 / 1}
+  .trades-sizers{
+    display:grid;
+    visibility:hidden;
+  }
+  .trades-sizers span{
+    grid-area:1 / 1;
+    height:var(--slot);
+    white-space:nowrap;
+  }
+  .trades-viewport{
+    position:relative;
+    height:var(--slot);
+    overflow:hidden;
+    -webkit-mask-image:linear-gradient(to bottom, transparent 0%, #000 12%, #000 88%, transparent 100%);
+    mask-image:linear-gradient(to bottom, transparent 0%, #000 12%, #000 88%, transparent 100%);
+  }
+  .trades-word{
+    position:absolute;
+    top:0;
+    left:0;
+    height:100%;
+    width:max-content;
+    display:flex;
+    align-items:center;
+    white-space:nowrap;
+    background:linear-gradient(90deg,#E44B87 0%,#EB7DB6 32%,#7E9FE0 68%,#4998EF 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    -webkit-text-fill-color:transparent;
+  }
+  .trades-word:nth-child(1){--i:0}
+  .trades-word:nth-child(2){--i:1}
+  .trades-word:nth-child(3){--i:2}
+  .trades-word:nth-child(4){--i:3}
+  .trades-word:nth-child(5){--i:4}
+  .trades-word:nth-child(6){--i:5}
+  .trades-word:not(:first-child){visibility:hidden}
+
+  @media (prefers-reduced-motion:no-preference){
+    .trades-word:nth-child(n){
+      visibility:visible;
+      animation:trade-slot 14.4s linear infinite both;
+      animation-delay:calc(var(--i) * 2.4s - .48s);
+    }
+  }
+  @keyframes trade-slot{
+    0%{
+      transform:translate3d(0,100%,0);
+      animation-timing-function:cubic-bezier(.33,0,.2,1);
+    }
+    3.333%{
+      transform:translate3d(0,0,0);
+      animation-timing-function:linear;
+    }
+    16.667%{
+      transform:translate3d(0,0,0);
+      animation-timing-function:cubic-bezier(.33,0,.2,1);
+    }
+    20%{
+      transform:translate3d(0,-100%,0);
+      animation-timing-function:linear;
+    }
+    100%{transform:translate3d(0,-100%,0)}
+  }
+
   .subline{
     max-width:44ch;
     margin:14px auto 0;
@@ -390,6 +487,15 @@
     .beam .in, .beam .out g{animation:none;opacity:.85}
     .mark{animation:none;opacity:1}
     .cta, .field{transition:none}
+    .trades-viewport{-webkit-mask-image:none;mask-image:none}
+    .trades-word{animation:none;transform:none}
+  }
+  @media (forced-colors:active){
+    .trades-word{
+      background:none;
+      color:CanvasText;
+      -webkit-text-fill-color:CanvasText;
+    }
   }
 </style>
 </head>
@@ -436,10 +542,34 @@
     </div>
   </div>
 
-  <h1 class="headline">
+  <h1 class="trades">
+    <span class="sr">Prism: software for Power Wash, Lighting, Junk Removal, Handyman, Plumbing, and Window Cleaning businesses</span>
+    <span class="trades-row" aria-hidden="true">
+      <span class="trades-label">Prism:</span>
+      <span class="trades-wheel">
+        <span class="trades-sizers">
+          <span>Power Wash</span>
+          <span>Lighting</span>
+          <span>Junk Removal</span>
+          <span>Handyman</span>
+          <span>Plumbing</span>
+          <span>Window Cleaning</span>
+        </span>
+        <span class="trades-viewport">
+          <span class="trades-word">Power Wash</span>
+          <span class="trades-word">Lighting</span>
+          <span class="trades-word">Junk Removal</span>
+          <span class="trades-word">Handyman</span>
+          <span class="trades-word">Plumbing</span>
+          <span class="trades-word">Window Cleaning</span>
+        </span>
+      </span>
+    </span>
+  </h1>
+  <p class="headline">
     <span class="run">Run the business you have.</span>
     <span class="build">Build the business you want.</span>
-  </h1>
+  </p>
   <p class="subline">Quoting, scheduling, dispatch, and invoicing in one system. Today's jobs stay on track, so you can build what's next.</p>
 
   <section class="countdown" aria-label="Time until launch">
