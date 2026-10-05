@@ -75,14 +75,14 @@
     font-weight:400;
     -webkit-font-smoothing:antialiased;
     display:flex;
-    flex-direction:column;
+    align-items:center;
+    justify-content:center;
     padding:clamp(16px,4vw,56px);
   }
 
   .frame{
     width:100%;
-    max-width:1040px;
-    margin:auto;
+    max-width:900px;
     background:linear-gradient(180deg, rgba(255,255,255,.022), rgba(255,255,255,0) 42%), var(--panel);
     border:1px solid var(--line);
     border-radius:22px;
@@ -119,8 +119,28 @@
     position:relative;
     display:grid;
     place-items:center;
-    padding:clamp(2px,1vw,8px) 0 0;
+    min-height:clamp(78px,12vw,128px);
+    padding:clamp(2px,1vw,8px) 0 clamp(4px,1vw,10px);
   }
+
+  /* light entering left, spectrum leaving right */
+  .beam{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    overflow:visible;
+  }
+  .beam .in{opacity:0;animation:beam-in .9s ease-out .15s forwards}
+  .beam .out g{opacity:0;animation:fan .8s ease-out forwards}
+  .beam .out g:nth-child(1){animation-delay:.85s}
+  .beam .out g:nth-child(2){animation-delay:.92s}
+  .beam .out g:nth-child(3){animation-delay:.99s}
+  .beam .out g:nth-child(4){animation-delay:1.06s}
+  .beam .out g:nth-child(5){animation-delay:1.13s}
+  @keyframes beam-in{from{opacity:0;transform:translateX(-24px)}to{opacity:1;transform:none}}
+  @keyframes fan{from{opacity:0;transform:translateX(-18px)}to{opacity:.85;transform:none}}
 
   .lockup{
     position:relative;
@@ -277,313 +297,18 @@
   }
 
   .subline{
-    max-width:42ch;
+    max-width:44ch;
     margin:14px auto 0;
     text-align:center;
     font-size:15.5px;
     line-height:1.55;
     color:var(--ink-mid);
-    text-wrap:balance;
-  }
-
-  /* ---------- shop board (product in use) ---------- */
-
-  .board{
-    margin:clamp(28px,4.5vw,44px) auto 0;
-    max-width:860px;
-  }
-  .devices{
-    position:relative;
-    padding-bottom:6px;
-  }
-  .laptop{
-    position:relative;
-    z-index:1;
-    width:100%;
-    filter:drop-shadow(0 28px 36px rgba(0,0,0,.5));
-  }
-  .bezel{
-    background:linear-gradient(180deg, #3C4158 0%, #1A1C2C 100%);
-    border:1px solid rgba(255,255,255,.14);
-    border-radius:18px 18px 12px 12px;
-    padding:16px 12px 12px;
-  }
-  .cam{
-    display:block;
-    width:7px;
-    height:7px;
-    margin:-8px auto 8px;
-    border-radius:50%;
-    background:#0C0D16;
-    box-shadow:inset 0 0 0 1px rgba(255,255,255,.28);
-  }
-  .screen{
-    background:#F4F6FB;
-    color:#0B0C18;
-    border-radius:8px;
-    overflow:hidden;
-    padding:12px 12px 14px;
-  }
-  .screen-top{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px 14px;
-    flex-wrap:wrap;
-  }
-  .shop{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    min-width:0;
-    font-size:13px;
-    font-weight:700;
-    letter-spacing:-.02em;
-  }
-  .shop img{
-    height:22px;
-    width:auto;
-    display:block;
-  }
-  .shop small{
-    display:block;
-    margin-top:1px;
-    font-size:11px;
-    font-weight:500;
-    letter-spacing:0;
-    color:#6C7285;
-  }
-  .flow{
-    display:flex;
-    flex-wrap:wrap;
-    gap:4px;
-  }
-  .flow span{
-    padding:4px 8px;
-    border-radius:999px;
-    font-size:11px;
-    font-weight:650;
-    color:#5C6578;
-    background:transparent;
-  }
-  .flow .on{
-    background:#265BA4;
-    color:#fff;
-  }
-  .stats{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:8px;
-    margin-top:12px;
-  }
-  .stat{
-    background:#fff;
-    border:1px solid rgba(11,12,24,.06);
-    border-top:3px solid var(--c);
-    border-radius:10px;
-    padding:8px 10px 9px;
-    min-width:0;
-  }
-  .stat b{
-    display:block;
-    font-size:10.5px;
-    font-weight:650;
-    letter-spacing:.06em;
-    text-transform:uppercase;
-    color:#6C7285;
-  }
-  .stat strong{
-    display:block;
-    margin-top:3px;
-    font-size:clamp(16px,2vw,20px);
-    font-weight:750;
-    letter-spacing:-.03em;
-    line-height:1;
-    font-variant-numeric:tabular-nums;
-  }
-  .stat em{
-    display:block;
-    margin-top:4px;
-    font-style:normal;
-    font-size:11px;
-    font-weight:550;
-    color:#5C6578;
-  }
-  .split{
-    display:grid;
-    grid-template-columns:168px 1fr;
-    gap:8px;
-    margin-top:8px;
-  }
-  .panel{
-    background:#fff;
-    border:1px solid rgba(11,12,24,.06);
-    border-radius:12px;
-    padding:10px 10px 6px;
-    min-width:0;
-  }
-  .panel h2{
-    margin:0 0 8px;
-    font-size:12px;
-    font-weight:700;
-    letter-spacing:-.01em;
-    color:#0B0C18;
-  }
-  .map{
-    display:block;
-    width:100%;
-    height:148px;
-    border-radius:8px;
-    background:#E6EEF7;
-  }
-  .job{
-    display:grid;
-    grid-template-columns:46px minmax(0,1fr) auto auto;
-    gap:8px;
-    align-items:center;
-    padding:7px 2px;
-    border-top:1px solid rgba(11,12,24,.06);
-  }
-  .job:first-of-type{border-top:0}
-  .job time{
-    font-size:12px;
-    font-weight:700;
-    font-variant-numeric:tabular-nums;
-    color:#265BA4;
-  }
-  .job b{
-    display:block;
-    font-size:12.5px;
-    font-weight:700;
-    letter-spacing:-.01em;
-  }
-  .job i{
-    display:block;
-    margin-top:1px;
-    font-style:normal;
-    font-size:11px;
-    color:#6C7285;
-  }
-  .pay{
-    font-size:12.5px;
-    font-weight:700;
-    font-variant-numeric:tabular-nums;
-    white-space:nowrap;
-  }
-  .pill{
-    font-size:10px;
-    font-weight:700;
-    letter-spacing:.01em;
-    padding:3px 7px;
-    border-radius:999px;
-    white-space:nowrap;
-  }
-  .pill.on{background:rgba(228,75,135,.12);color:#C4336E}
-  .pill.go{background:rgba(73,152,239,.16);color:#265BA4}
-  .pill.wait{background:rgba(11,12,24,.06);color:#5C6578}
-  .base{
-    height:14px;
-    margin:0 9%;
-    background:linear-gradient(180deg, #4A4F66, #222436);
-    border-radius:0 0 12px 12px;
-    position:relative;
-  }
-  .base span{
-    display:block;
-    width:16%;
-    height:5px;
-    margin:0 auto;
-    background:#12131C;
-    border-radius:0 0 6px 6px;
-  }
-  .phone{
-    position:absolute;
-    z-index:2;
-    left:18px;
-    bottom:16px;
-    width:168px;
-    background:#12131C;
-    border-radius:26px;
-    padding:8px;
-    box-shadow:0 14px 24px rgba(0,0,0,.38), 0 0 0 1px rgba(255,255,255,.08);
-  }
-  .phone-screen{
-    background:#F7F8FC;
-    color:#0B0C18;
-    border-radius:20px;
-    overflow:hidden;
-    padding:10px 10px 8px;
-  }
-  .island{
-    width:48px;
-    height:7px;
-    margin:-2px auto 8px;
-    border-radius:999px;
-    background:#12131C;
-  }
-  .phone-kicker{
-    margin:0;
-    font-size:10px;
-    font-weight:700;
-    letter-spacing:.08em;
-    text-transform:uppercase;
-    color:#6C7285;
-  }
-  .phone-screen h2{
-    margin:3px 0 0;
-    font-size:14px;
-    font-weight:750;
-    letter-spacing:-.02em;
-    color:#0B0C18;
-  }
-  .phone-meta{
-    margin:2px 0 8px;
-    font-size:11px;
-    color:#5C6578;
-  }
-  .stop{
-    display:grid;
-    grid-template-columns:8px 1fr auto;
-    gap:6px;
-    align-items:center;
-    padding:8px 0 0;
-  }
-  .dot{
-    width:8px;
-    height:8px;
-    border-radius:50%;
-    background:var(--c);
-  }
-  .stop b{
-    display:block;
-    font-size:11.5px;
-    font-weight:700;
-  }
-  .stop i{
-    display:block;
-    font-style:normal;
-    font-size:10px;
-    color:#6C7285;
-  }
-  .stop time{
-    font-size:10.5px;
-    font-weight:700;
-    font-variant-numeric:tabular-nums;
-    color:#265BA4;
-  }
-  .board figcaption{
-    margin:12px 0 0;
-    text-align:center;
-    font-size:12.5px;
-    line-height:1.45;
-    color:var(--ink-dim);
   }
 
   /* ---------- countdown ---------- */
 
   .countdown{
-    max-width:720px;
-    margin:clamp(28px,4.5vw,42px) auto 0;
+    margin:clamp(34px,6vw,56px) 0 0;
   }
   .blocks{
     display:grid;
@@ -744,32 +469,18 @@
 
   [hidden]{display:none !important}
 
-  @media (max-width:760px){
-    .split{grid-template-columns:1fr}
-    .route-card{display:none}
-    .stats{grid-template-columns:repeat(2,1fr)}
-    .phone{
-      position:relative;
-      left:auto;
-      bottom:auto;
-      width:min(240px, 72%);
-      margin:14px auto 0;
-    }
-    .job{grid-template-columns:38px minmax(0,1fr) auto}
-    .pill{display:none}
-  }
   @media (max-width:560px){
     .blocks{grid-template-columns:repeat(2,1fr)}
     .wordmark{letter-spacing:-.03em}
     body{padding:12px 10px}
     .frame{padding:22px 12px 26px}
-    .flow{display:none}
   }
   @media (min-width:900px){
     .headline{font-stretch:108%}
   }
 
   @media (prefers-reduced-motion:reduce){
+    .beam .in, .beam .out g{animation:none;opacity:.85}
     .mark{animation:none;opacity:1}
     .cta, .field{transition:none}
     .pro-viewport{-webkit-mask-image:none;mask-image:none}
@@ -786,6 +497,34 @@
   <img class="mark" src="logo.png" width="444" height="560" alt="Prism" fetchpriority="high">
 
   <div class="hero">
+    <svg class="beam" viewBox="0 0 1000 220" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <linearGradient id="pin" x1="0" x2="1">
+          <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+          <stop offset="1" stop-color="#fff" stop-opacity=".5"/>
+        </linearGradient>
+        <linearGradient id="p1" x1="0" x2="1"><stop offset="0" stop-color="var(--r1)" stop-opacity=".75"/><stop offset="1" stop-color="var(--r1)" stop-opacity="0"/></linearGradient>
+        <linearGradient id="p2" x1="0" x2="1"><stop offset="0" stop-color="var(--r2)" stop-opacity=".75"/><stop offset="1" stop-color="var(--r2)" stop-opacity="0"/></linearGradient>
+        <linearGradient id="p3" x1="0" x2="1"><stop offset="0" stop-color="var(--r3)" stop-opacity=".8"/><stop offset="1" stop-color="var(--r3)" stop-opacity="0"/></linearGradient>
+        <linearGradient id="p4" x1="0" x2="1"><stop offset="0" stop-color="var(--r4)" stop-opacity=".75"/><stop offset="1" stop-color="var(--r4)" stop-opacity="0"/></linearGradient>
+        <linearGradient id="p5" x1="0" x2="1"><stop offset="0" stop-color="var(--r5)" stop-opacity=".7"/><stop offset="1" stop-color="var(--r5)" stop-opacity="0"/></linearGradient>
+      </defs>
+
+      <!-- white light in -->
+      <g class="in">
+        <line x1="-40" y1="110" x2="255" y2="110" stroke="url(#pin)" stroke-width="1.5"/>
+      </g>
+
+      <!-- spectrum out -->
+      <g class="out">
+        <g><line x1="745" y1="110" x2="1050" y2="52"  stroke="url(#p1)" stroke-width="1.5"/></g>
+        <g><line x1="745" y1="110" x2="1050" y2="81"  stroke="url(#p2)" stroke-width="1.5"/></g>
+        <g><line x1="745" y1="110" x2="1050" y2="110" stroke="url(#p3)" stroke-width="1.5"/></g>
+        <g><line x1="745" y1="110" x2="1050" y2="139" stroke="url(#p4)" stroke-width="1.5"/></g>
+        <g><line x1="745" y1="110" x2="1050" y2="168" stroke="url(#p5)" stroke-width="1.5"/></g>
+      </g>
+    </svg>
+
     <div class="lockup">
       <p class="wordmark"><span class="sr">Prism Pro: software for Power Wash, Lighting, Junk Removal, Handyman, Plumbing, and Window Cleaning businesses</span><span class="wordmark-name" aria-hidden="true">PRISM</span></p>
       <div class="pro" aria-hidden="true">
@@ -816,76 +555,7 @@
     <span class="run">Run the business you have.</span>
     <span class="build">Build the business you want.</span>
   </h1>
-  <p class="subline">Quotes out, crews on the route, invoices still owed.</p>
-
-  <figure class="board">
-    <div class="devices" aria-hidden="true">
-      <div class="laptop">
-        <div class="bezel">
-          <span class="cam"></span>
-          <div class="screen">
-            <div class="screen-top">
-              <div class="shop">
-                <img src="logo.png" alt="">
-                <span>Northline Lighting<small>Monday · Nov 3</small></span>
-              </div>
-              <div class="flow">
-                <span>Requests</span>
-                <span>Quotes</span>
-                <span class="on">Jobs</span>
-                <span>Invoices</span>
-              </div>
-            </div>
-            <div class="stats">
-              <div class="stat" style="--c:#E44B87"><b>Quotes</b><strong>8</strong><em>$14,280 out</em></div>
-              <div class="stat" style="--c:#4998EF"><b>Jobs</b><strong>6</strong><em>2 crews out</em></div>
-              <div class="stat" style="--c:#265BA4"><b>Invoices</b><strong>$18,640</strong><em>still owed</em></div>
-              <div class="stat" style="--c:#EB7DB6"><b>Requests</b><strong>2</strong><em>since Friday</em></div>
-            </div>
-            <div class="split">
-              <div class="panel route-card">
-                <h2>Today’s route</h2>
-                <svg class="map" viewBox="0 0 160 148" preserveAspectRatio="xMidYMid slice">
-                  <rect width="160" height="148" fill="#E6EEF7"/>
-                  <g stroke="#D3DCEA" stroke-width="8" fill="none">
-                    <path d="M0 36 H160"/><path d="M0 78 H160"/><path d="M0 118 H160"/>
-                    <path d="M36 0 V148"/><path d="M92 0 V148"/><path d="M128 0 V148"/>
-                  </g>
-                  <g stroke="#F8FBFE" stroke-width="1.5" fill="none">
-                    <path d="M0 36 H160"/><path d="M0 78 H160"/><path d="M0 118 H160"/>
-                    <path d="M36 0 V148"/><path d="M92 0 V148"/><path d="M128 0 V148"/>
-                  </g>
-                  <path d="M44 104 C62 104 70 52 98 46" fill="none" stroke="#4998EF" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="3 3"/>
-                  <g fill="#E44B87" transform="translate(44 100)"><path d="M0 2 C-7 -8 -7 -18 0 -18 C7 -18 7 -8 0 2Z"/><circle cy="-12" r="2.4" fill="#fff"/></g>
-                  <g fill="#4998EF" transform="translate(98 42)"><path d="M0 2 C-7 -8 -7 -18 0 -18 C7 -18 7 -8 0 2Z"/><circle cy="-12" r="2.4" fill="#fff"/></g>
-                  <g fill="#265BA4" transform="translate(124 108)"><path d="M0 2 C-7 -8 -7 -18 0 -18 C7 -18 7 -8 0 2Z"/><circle cy="-12" r="2.4" fill="#fff"/></g>
-                </svg>
-              </div>
-              <div class="panel">
-                <h2>Today’s jobs</h2>
-                <div class="job"><time>8:00</time><span><b>Ridge House</b><i>C9 roofline · Crew A</i></span><span class="pay">$1,840</span><span class="pill on">On site</span></div>
-                <div class="job"><time>10:30</time><span><b>Oak Street</b><i>Takedown · Crew B</i></span><span class="pay">$640</span><span class="pill go">En route</span></div>
-                <div class="job"><time>1:15</time><span><b>Harbor Court</b><i>Repair · Crew A</i></span><span class="pay">$280</span><span class="pill wait">Scheduled</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="base"><span></span></div>
-      </div>
-      <div class="phone">
-        <div class="phone-screen">
-          <div class="island"></div>
-          <p class="phone-kicker">Dispatch</p>
-          <h2>Crew A · 3 stops</h2>
-          <p class="phone-meta">Northline Lighting</p>
-          <div class="stop"><span class="dot" style="--c:#E44B87"></span><span><b>Ridge House</b><i>On site · C9</i></span><time>8:00</time></div>
-          <div class="stop"><span class="dot" style="--c:#4998EF"></span><span><b>Oak Street</b><i>En route</i></span><time>10:30</time></div>
-          <div class="stop"><span class="dot" style="--c:#265BA4"></span><span><b>Harbor Court</b><i>Scheduled</i></span><time>1:15</time></div>
-        </div>
-      </div>
-    </div>
-    <figcaption>A lighting crew’s Monday — quotes out, who’s on the route, what’s still owed.</figcaption>
-  </figure>
+  <p class="subline">Quoting, scheduling, dispatch, and invoicing in one system. Today's jobs stay on track, so you can build what's next.</p>
 
   <section class="countdown" aria-label="Time until launch">
     <div class="blocks">
