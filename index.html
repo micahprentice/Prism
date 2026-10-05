@@ -193,47 +193,47 @@
   .pro-word:nth-child(6){--i:5}
   .pro-word:not(:last-child){visibility:hidden}
 
-  /* one pass: 1.05s per trade, then PRO stays */
+  /* one pass: 1.5s per trade, then PRO stays */
   @media (prefers-reduced-motion:no-preference){
     .pro-word:nth-child(n){visibility:visible}
     .pro-word:first-child{
-      animation:pro-first 1.05s linear forwards;
+      animation:pro-first 1.5s linear forwards;
     }
     .pro-word:not(:first-child):not(:last-child){
-      animation:pro-mid 1.33s linear both;
-      animation-delay:calc(var(--i) * 1.05s - .28s);
+      animation:pro-mid 1.92s linear both;
+      animation-delay:calc(var(--i) * 1.5s - .42s);
     }
     .pro-word:last-child{
-      animation:pro-last .28s linear both;
-      animation-delay:6.02s;
+      animation:pro-last .42s linear both;
+      animation-delay:8.58s;
     }
   }
   @keyframes pro-first{
-    0%, 73.333%{
+    0%, 72%{
       transform:translate3d(0,0,0);
-      animation-timing-function:cubic-bezier(.33,0,.2,1);
+      animation-timing-function:cubic-bezier(.4,.12,.18,1);
     }
     100%{transform:translate3d(0,-100%,0)}
   }
   @keyframes pro-mid{
     0%{
       transform:translate3d(0,100%,0);
-      animation-timing-function:cubic-bezier(.33,0,.2,1);
+      animation-timing-function:cubic-bezier(.4,.12,.18,1);
     }
-    21.053%{
+    21.875%{
       transform:translate3d(0,0,0);
       animation-timing-function:linear;
     }
-    78.947%{
+    78.125%{
       transform:translate3d(0,0,0);
-      animation-timing-function:cubic-bezier(.33,0,.2,1);
+      animation-timing-function:cubic-bezier(.4,.12,.18,1);
     }
     100%{transform:translate3d(0,-100%,0)}
   }
   @keyframes pro-last{
     0%{
       transform:translate3d(0,100%,0);
-      animation-timing-function:cubic-bezier(.33,0,.2,1);
+      animation-timing-function:cubic-bezier(.4,.12,.18,1);
     }
     100%{transform:translate3d(0,0,0)}
   }
