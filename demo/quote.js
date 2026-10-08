@@ -467,11 +467,14 @@
     $$("[data-booked-total]").forEach((el) => (el.textContent = money(t.price)));
     $$("[data-booked-balance]").forEach((el) => (el.textContent = money(t.price - Q.deposit)));
     document.body.dataset.state = "booked";
+    /* The pipeline screen reads this so the Whitfield card moves to Scheduled. Demo only. */
+    try { sessionStorage.setItem("prism-demo-booking", JSON.stringify({ quote: Q.id, tier: t.id, tierName: t.name, price: t.price, deposit: Q.deposit, window: w.id, day: w.day, time: w.time, at: Date.now() })); } catch (e) {}
     announce(`Booked. ${t.name} lighting, ${w.day}, ${w.time}. Deposit paid.`);
     window.scrollTo({ top: 0, behavior: reduced ? "auto" : "smooth" });
     $("[data-booked-focus]")?.focus();
     $$("[data-reset]").forEach((b) => b.addEventListener("click", () => {
       delete document.body.dataset.state;
+      try { sessionStorage.removeItem("prism-demo-booking"); } catch (e) {}
       $("[data-approve]")?.focus();
     }, { once: true }));
   }
