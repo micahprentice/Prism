@@ -411,7 +411,7 @@
         <form class="pay" novalidate>
           <div class="pay-wallet">
             <button type="button" class="wallet" data-wallet>
-              <svg width="38" height="16" viewBox="0 0 38 16" aria-hidden="true"><path fill="currentColor" d="M7.4 2.1c.5-.6.8-1.4.7-2.1-.7 0-1.5.5-2 1-.4.5-.8 1.3-.7 2.1.8.1 1.5-.4 2-1zm.7 1.2c-1.1-.1-2 .6-2.6.6-.5 0-1.3-.6-2.2-.6C2.2 3.3 1.1 4 .5 5c-1.2 2.1-.3 5.2.9 6.9.6.8 1.3 1.8 2.2 1.7.9 0 1.2-.6 2.3-.6s1.4.6 2.3.6c1 0 1.6-.8 2.1-1.7.7-1 1-1.9 1-2-.1 0-1.9-.7-1.9-2.9 0-1.8 1.5-2.6 1.5-2.7-.8-1.2-2.1-1.3-2.5-1.3zM15 1v12.3h1.9V9.1h2.7c2.4 0 4.1-1.7 4.1-4.1S22.1 1 19.7 1H15zm1.9 1.6h2.2c1.7 0 2.6.9 2.6 2.4S20.8 7.5 19.1 7.5h-2.2V2.6zM28 13.4c1.2 0 2.3-.6 2.8-1.6h.1v1.5h1.8V7.1c0-1.8-1.4-2.9-3.6-2.9-2 0-3.5 1.2-3.6 2.7h1.7c.1-.8.9-1.3 1.8-1.3 1.2 0 1.8.5 1.8 1.5v.7l-2.4.1c-2.2.1-3.4 1-3.4 2.6.1 1.7 1.3 2.9 3 2.9zm.5-1.5c-1 0-1.7-.5-1.7-1.3 0-.8.6-1.2 1.8-1.3l2.1-.1v.7c.1 1.1-.9 2-2.2 2zM34.4 16.5c1.9 0 2.7-.7 3.5-2.9L38 4.3h-2l-2.3 7.5-2.3-7.5h-2l3.3 9.2-.2.6c-.3.9-.8 1.3-1.7 1.3h-.6v1.5c.1 0 .5.1.9.1z" transform="translate(0 -.5) scale(.95)"/></svg>
+              <svg width="15" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg><span class="wallet-word" aria-hidden="true">Pay</span>
               <span class="sr">Pay with Apple Pay</span>
             </button>
             <span class="pay-or"><span>or pay with card</span></span>
@@ -420,7 +420,7 @@
           <label class="field"><span>Card number</span>
             <span class="field-card">
               <input name="card" inputmode="numeric" autocomplete="cc-number" value="4242 4242 4242 4242">
-              <svg width="28" height="18" viewBox="0 0 28 18" aria-hidden="true"><rect x=".5" y=".5" width="27" height="17" rx="2" fill="none" stroke="currentColor" opacity=".35"/><circle cx="11" cy="9" r="4.5" fill="#EB001B" opacity=".9"/><circle cx="17" cy="9" r="4.5" fill="#F79E1B" opacity=".9"/></svg>
+              <svg width="28" height="18" viewBox="0 0 28 18" aria-hidden="true"><rect x=".5" y=".5" width="27" height="17" rx="2.5" fill="none" stroke="currentColor" opacity=".4"/><rect x="4" y="6" width="6" height="4.5" rx="1" fill="currentColor" opacity=".55"/><rect x="4" y="12.5" width="10" height="1.5" rx=".75" fill="currentColor" opacity=".3"/></svg>
             </span>
           </label>
           <div class="field-row">
@@ -435,7 +435,7 @@
           </button>
           <p class="sheet-fine">
             <svg width="11" height="13" viewBox="0 0 11 13" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><rect x=".65" y="5.65" width="9.7" height="6.7" rx="1.2"/><path d="M3 5.5V3.6a2.5 2.5 0 0 1 5 0v1.9"/></svg>
-            Card details are never seen by Falls City. Payments by Stripe. <strong>This is a demo in test mode; no card is charged.</strong>
+            <span>Card details are never seen by Falls City. Payments by Stripe. <strong>This is a demo in test mode; no card is charged.</strong></span>
           </p>
           <button type="button" class="sheet-back" data-back>Back to install windows</button>
         </form>`;
