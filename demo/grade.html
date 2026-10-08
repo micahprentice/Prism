@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>180-point inspection · Falls City Light Co. · Prism demo</title>
+<meta name="description" content="Prism demo: the owner's business grade. Eight categories, three fixes, projected revenue. Sample data.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#070A14">
+<link rel="icon" href="../favicon.png" type="image/png">
+<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="demo.css">
+<link rel="stylesheet" href="owner.css">
+<style>
+.wrap{max-width:1180px;margin:0 auto;padding:0 var(--pad) 96px}
+
+/* grade hero */
+.hero{display:grid;grid-template-columns:1fr;gap:28px;padding:40px 0 36px;border-bottom:1px solid var(--rule)}
+.grade{display:flex;align-items:flex-end;gap:22px}
+.grade-letter{font-family:var(--serif);font-size:clamp(120px,16vw,188px);line-height:.8;letter-spacing:-.04em;color:var(--lamp)}
+.grade-pts{padding-bottom:10px}
+.grade-pts .num{font-size:clamp(28px,3vw,36px)}
+.grade-pts .num small{font-size:.5em;font-weight:500;color:var(--ink-3);letter-spacing:0;margin-left:4px}
+.grade-pts p{margin-top:8px;font-size:13px;color:var(--ink-3);line-height:1.4}
+.verdict .h1{font-size:clamp(24px,2.6vw,32px)}
+.verdict .h1 b{font-weight:400;color:var(--lamp)}
+
+/* ruler: the only chart on the page */
+.ruler{margin-top:26px}
+.ruler-track{position:relative;height:10px;border-radius:5px;background:var(--night-3);overflow:visible}
+.ruler-fill{position:absolute;left:0;top:0;bottom:0;border-radius:5px;background:var(--lamp);width:0;transition:width 1.2s var(--ease)}
+.ruler-proj{position:absolute;left:0;top:0;bottom:0;border-radius:5px;border:1px solid var(--lamp);width:0;opacity:.75;transition:width 1.2s var(--ease) .3s}
+.ruler-bands{position:relative;display:flex;margin-top:8px;font-size:11.5px;color:var(--ink-3);font-weight:600;letter-spacing:.06em}
+.ruler-bands span{position:absolute;top:0;transform:translateX(-50%)}
+.ruler-bands span::before{content:"";position:absolute;left:50%;top:-14px;width:1px;height:6px;background:var(--rule)}
+.ruler-marks{position:relative;height:40px;margin-top:4px;font-size:13px}
+.ruler-mark{position:absolute;top:8px;transform:translateX(-50%);white-space:nowrap;text-align:center;line-height:1.2}
+.ruler-mark b{display:block;font-weight:600;color:var(--ink)}
+.ruler-mark small{color:var(--ink-3);font-size:12px}
+.ruler-mark.is-proj b{color:var(--lamp)}
+.rev{margin-top:14px;font-size:15px;color:var(--ink-2)}
+.rev b{color:var(--ink);font-weight:600}
+
+/* categories */
+.cats{padding:36px 0 8px}
+.cats-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding-bottom:14px;border-bottom:1px solid var(--rule)}
+.cats-head h2{font-family:var(--serif);font-weight:400;font-size:24px;letter-spacing:-.01em}
+.cat{
+  display:grid;grid-template-columns:200px 92px 1fr;gap:6px 24px;align-items:center;
+  padding:16px 0;border-bottom:1px solid var(--rule-soft);
+}
+.cat-name{font-weight:600;font-size:15px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.cat-fix{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--lamp-ink);background:var(--lamp);border-radius:4px;padding:2px 6px}
+.cat-score{font-size:15px;font-weight:600;letter-spacing:-.01em;white-space:nowrap}
+.cat-score small{font-weight:500;color:var(--ink-3);font-size:13px}
+.cells{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:3px;height:14px;align-items:stretch}
+.cell{border-radius:2px;background:var(--night-3);border:1px solid transparent;transition:background .35s var(--ease),border-color .35s,box-shadow .35s;transition-delay:calc(var(--i) * 18ms + var(--row) * 90ms)}
+.is-on .cell.is-lit{background:var(--lamp);box-shadow:0 0 6px rgba(255,217,143,.35)}
+.is-on .cell.is-gain{border-color:var(--lamp);background:rgba(255,217,143,.08)}
+.cat-finding{grid-column:1 / -1;font-size:14px;color:var(--ink-2);max-width:78ch;line-height:1.5}
+
+/* fixes */
+.fixes{margin-top:48px}
+.fixes-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding-bottom:14px;border-bottom:1px solid var(--rule)}
+.fixes-head h2{font-family:var(--serif);font-weight:400;font-size:24px;letter-spacing:-.01em}
+.fix{display:grid;grid-template-columns:56px 1fr auto;gap:8px 24px;padding:26px 0;border-bottom:1px solid var(--rule-soft);align-items:start}
+.fix-n{font-weight:600;font-size:32px;letter-spacing:-.03em;color:var(--ink-3);line-height:1}
+.fix-title{font-family:var(--serif);font-size:clamp(22px,2.4vw,28px);letter-spacing:-.01em;line-height:1.15}
+.fix-how{margin-top:8px;color:var(--ink-2);max-width:62ch;font-size:15px}
+.fix-delta{margin-top:12px;display:flex;gap:10px;align-items:center;font-size:13.5px;color:var(--ink-3)}
+.fix-delta b{color:var(--ink);font-weight:600}
+.fix-delta svg{width:14px;height:14px;color:var(--ink-3)}
+.fix-impact{text-align:right;min-width:150px}
+.fix-impact .num{font-size:clamp(26px,2.6vw,34px);color:var(--lamp)}
+.fix-impact p{margin-top:4px;font-size:12.5px;color:var(--ink-3);line-height:1.35}
+.fix-impact .pts{display:inline-block;margin-top:8px;font-size:12.5px;font-weight:600;color:var(--ink-2);border:1px solid var(--rule);border-radius:4px;padding:3px 8px}
+
+/* ladder */
+.ladder{margin-top:40px;padding-top:28px;border-top:1px solid var(--rule)}
+.ladder h2{font-family:var(--serif);font-weight:400;font-size:24px;letter-spacing:-.01em}
+.ladder-bar{display:flex;height:40px;margin-top:20px;border-radius:6px;overflow:hidden;gap:2px}
+.seg{position:relative;height:100%;display:flex;align-items:center;padding:0 12px;font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;min-width:0;transform-origin:left;transition:flex-grow 1s var(--ease)}
+.seg-now{background:var(--night-4);color:var(--ink)}
+.seg-fix{background:var(--lamp);color:var(--lamp-ink)}
+.seg-fix:nth-child(3){background:#F7CC77}
+.seg-fix:nth-child(4){background:#EFBF60}
+.ladder-ends{display:flex;justify-content:space-between;margin-top:10px;font-size:13px;color:var(--ink-3)}
+.ladder-ends b{display:block;font-size:22px;font-weight:600;letter-spacing:-.02em;color:var(--ink)}
+.ladder-ends .to b{color:var(--lamp)}
+.ladder-ends .to{text-align:right}
+.fine{margin-top:40px;font-size:12.5px;color:var(--ink-3);line-height:1.5;max-width:80ch}
+
+@media (min-width:980px){
+  .hero{grid-template-columns:minmax(380px,.9fr) 1.1fr;gap:56px;align-items:end}
+}
+@media (max-width:760px){
+  .cats-head,.fixes-head{flex-direction:column;align-items:flex-start;gap:6px}
+  .cats-head h2,.fixes-head h2{font-size:22px}
+  .cat{grid-template-columns:1fr auto}
+  .cells{grid-column:1 / -1}
+  .fix{grid-template-columns:1fr}
+  .fix-n{font-size:22px}
+  .fix-impact{text-align:left;display:grid;grid-template-columns:auto 1fr;gap:4px 14px;align-items:baseline;margin-top:6px}
+  .fix-impact .pts{grid-column:1;justify-self:start}
+  .fix-impact p{grid-column:2;grid-row:1}
+  .grade{gap:14px}
+  .seg{padding:0 8px;font-size:11.5px}
+  .seg span{display:none}
+}
+</style>
+</head>
+<body>
+<header class="demo-strip">
+  <a class="brand" href="index.html"><img src="../logo.png" alt="" width="14" height="18">PRISM <small>DEMO</small></a>
+  <nav aria-label="Demo screens">
+    <a href="quote.html">1 Quote</a>
+    <a href="grade.html" aria-current="page">2 Grade</a>
+    <a href="pipeline.html">3 Pipeline</a>
+    <a class="next" href="pipeline.html"><span>Next</span><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 5h6M5 2l3 3-3 3"/></svg></a>
+  </nav>
+</header>
+
+<header class="top">
+  <div class="top-co">
+    <span class="co-name" id="biz"></span>
+    <span class="co-sub">180-point inspection · <span id="period"></span> · graded <span id="graded"></span></span>
+  </div>
+  <div class="top-actions">
+    <a class="ghost" href="pipeline.html">Pipeline<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4"/></svg></a>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero" aria-labelledby="verdict">
+    <div class="grade">
+      <p class="grade-letter" id="letter" aria-label="Grade"></p>
+      <div class="grade-pts">
+        <p class="num"><span id="earned"></span><small>of <span id="total"></span></small></p>
+        <p><b class="mid" id="proj-grade"></b> projected after the three fixes below.</p>
+      </div>
+    </div>
+    <div class="verdict">
+      <h1 class="h1" id="verdict"></h1>
+      <div class="ruler" role="img" aria-labelledby="ruler-desc">
+        <p class="sr" id="ruler-desc"></p>
+        <div class="ruler-track"><div class="ruler-proj" id="ruler-proj"></div><div class="ruler-fill" id="ruler-fill"></div></div>
+        <div class="ruler-bands" id="bands" aria-hidden="true"></div>
+        <div class="ruler-marks" id="marks" aria-hidden="true"></div>
+      </div>
+      <p class="rev"><b id="rev-now"></b> this season. <b class="mid" id="rev-proj"></b> with the three fixes.</p>
+    </div>
+  </section>
+
+  <section class="cats" aria-labelledby="cats-h">
+    <header class="cats-head"><h2 id="cats-h">Eight categories, 180 points</h2><span class="label">Lit cells are points earned · outlined cells are the fixes</span></header>
+    <ol id="cats"></ol>
+  </section>
+
+  <section class="fixes" aria-labelledby="fixes-h">
+    <header class="fixes-head"><h2 id="fixes-h">The three fixes with the most leverage</h2><span class="label">Ordered by revenue per hour of Dale's time</span></header>
+    <ol id="fixes"></ol>
+  </section>
+
+  <section class="ladder" aria-labelledby="ladder-h">
+    <h2 id="ladder-h">What the fixes are worth</h2>
+    <div class="ladder-bar" id="ladder" role="img" aria-label="Revenue ladder"></div>
+    <div class="ladder-ends">
+      <div><b id="l-now"></b>2025 season, as run</div>
+      <div class="to"><b id="l-proj"></b>projected with fixes 1–3</div>
+    </div>
+    <p class="fine">Projection holds 2025 lead volume and crew capacity constant. Each fix is modeled independently from Prism's grading data for Louisville holiday lighting; combined effects are not compounded. Sample data for a fictional business.</p>
+  </section>
+</main>
+
+<script src="data.js"></script>
+<script>
+(function(){
+  const G = window.PRISM_GRADE;
+  const $ = (s) => document.querySelector(s);
+  const money = (n) => "$" + n.toLocaleString("en-US");
+  const k = (n) => "$" + Math.round(n / 1000) + "k";
+  const fmt = (iso) => new Date(iso + "T12:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric" });
+
+  $("#biz").textContent = G.business; $("#period").textContent = G.period; $("#graded").textContent = fmt(G.gradedOn);
+  $("#letter").textContent = G.grade; $("#earned").textContent = G.earned; $("#total").textContent = G.total;
+  $("#proj-grade").textContent = G.projectedGrade;
+  $("#verdict").innerHTML = G.verdict.replace("The crews", "<b>The crews</b>");
+  $("#rev-now").textContent = money(G.revenue.current); $("#rev-proj").textContent = money(G.revenue.projected);
+  $("#ruler-desc").textContent = `${G.earned} of ${G.total} points, grade ${G.grade}. Projected ${G.projected}, grade ${G.projectedGrade}.`;
+
+  const pct = (n) => (n / G.total * 100).toFixed(1) + "%";
+  G.bands.forEach(([letter, from], i) => {
+    const to = i === 0 ? G.total : G.bands[i - 1][1];
+    const s = document.createElement("span");
+    s.textContent = letter; s.style.left = pct((from + to) / 2);
+    $("#bands").appendChild(s);
+  });
+  const mk = (n, label, cls) => { const d = document.createElement("div"); d.className = "ruler-mark " + (cls || ""); d.style.left = pct(n); d.innerHTML = `<b>${n}</b><small>${label}</small>`; $("#marks").appendChild(d); };
+  mk(G.earned, "today"); mk(G.projected, "projected", "is-proj");
+
+  const fixByCat = Object.fromEntries(G.fixes.map((f) => [f.category, f.n]));
+  G.categories.forEach((c, row) => {
+    const li = document.createElement("li"); li.className = "cat"; li.style.setProperty("--row", row);
+    const cells = Array.from({ length: c.possible }, (_, i) => {
+      const lit = i < c.earned, gain = !lit && i < c.earned + c.gain;
+      return `<i class="cell ${lit ? "is-lit" : gain ? "is-gain" : ""}" style="--i:${i}"></i>`;
+    }).join("");
+    li.innerHTML = `
+      <span class="cat-name">${c.name}${fixByCat[c.id] ? `<span class="cat-fix">Fix ${fixByCat[c.id]}</span>` : ""}</span>
+      <span class="cat-score">${c.earned}<small> / ${c.possible}</small></span>
+      <span class="cells" role="img" aria-label="${c.earned} of ${c.possible} points${c.gain ? `, ${c.gain} more projected` : ""}">${cells}</span>
+      <p class="cat-finding">${c.finding}</p>`;
+    $("#cats").appendChild(li);
+  });
+
+  G.fixes.forEach((f) => {
+    const li = document.createElement("li"); li.className = "fix";
+    li.innerHTML = `
+      <span class="fix-n">${f.n}</span>
+      <div>
+        <h3 class="fix-title">${f.title}</h3>
+        <p class="fix-how">${f.how}</p>
+        <p class="fix-delta"><span>${f.from}</span><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4"/></svg><b>${f.to}</b></p>
+      </div>
+      <div class="fix-impact">
+        <p class="num">+${money(f.revenue)}</p>
+        <p>per season · ${f.basis}</p>
+        <span class="pts">+${f.points} points</span>
+      </div>`;
+    $("#fixes").appendChild(li);
+  });
+
+  const total = G.revenue.projected;
+  const seg = (cls, n, label) => { const d = document.createElement("div"); d.className = "seg " + cls; d.style.flexGrow = n; d.title = `${label} ${money(n)}`; d.innerHTML = `${k(n)}<span>&nbsp;${label}</span>`; return d; };
+  $("#ladder").appendChild(seg("seg-now", G.revenue.current, "today"));
+  G.fixes.forEach((f) => $("#ladder").appendChild(seg("seg-fix", f.revenue, "fix " + f.n)));
+  $("#l-now").textContent = money(G.revenue.current); $("#l-proj").textContent = money(total);
+
+  /* one orchestrated entrance: the ruler fills, then every earned cell lights in sequence */
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    $("#ruler-fill").style.width = pct(G.earned);
+    $("#ruler-proj").style.width = pct(G.projected);
+    document.body.classList.add("is-on");
+  }));
+})();
+</script>
+</body>
+</html>

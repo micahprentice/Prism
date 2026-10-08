@@ -1,0 +1,53 @@
+/* Prism demo · owner screens (grade, pipeline). Same night world as the quote,
+   in a tool register: Archivo for every number and label, Gambetta for the one
+   headline per screen, lamp-white for anything that is on. */
+:root{
+  --night:#070A14;--night-2:#0C1020;--night-3:#121729;--night-4:#1A2036;
+  --ink:#EEF1F8;--ink-2:#A6AEC2;--ink-3:#6E778E;
+  --rule:rgba(238,241,248,.12);--rule-soft:rgba(238,241,248,.07);
+  --lamp:#FFD98F;--lamp-deep:#F2BE5C;--lamp-ink:#1A1304;--lamp-glow:rgba(255,217,143,.22);
+  --warn:#FF8A7A;--pink:#E44B87;--blue:#4998EF;
+  --serif:"Gambetta","Iowan Old Style",Georgia,serif;
+  --sans:"Archivo","Helvetica Neue",Arial,system-ui,sans-serif;
+  --ease:cubic-bezier(.2,.8,.2,1);
+  --pad:clamp(16px,2.6vw,40px);
+}
+*{box-sizing:border-box}
+html{background:var(--night);color-scheme:dark}
+body{margin:0;min-height:100vh;background:var(--night);color:var(--ink);font-family:var(--sans);font-size:14.5px;line-height:1.5;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+::selection{background:var(--lamp);color:var(--lamp-ink)}
+:focus-visible{outline:2px solid var(--lamp);outline-offset:3px;border-radius:2px}
+h1,h2,h3,p,dl,dd,ol,ul{margin:0}ol,ul{padding:0;list-style:none}
+button{font:inherit;color:inherit}
+a{color:inherit}
+
+.top{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  min-height:64px;padding:12px var(--pad);border-bottom:1px solid var(--rule-soft);
+}
+.top-co{display:flex;flex-direction:column;gap:2px;min-width:0}
+.co-name{font-weight:600;font-size:15px}
+.co-sub{font-size:12.5px;color:var(--ink-3)}
+.co-name,.co-sub{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@media (max-width:640px){.top .hide-m{display:none}}
+.top-actions{display:flex;gap:8px;flex:none}
+.ghost{
+  display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 14px;
+  border:1px solid var(--rule);border-radius:8px;background:none;color:var(--ink-2);
+  font-size:13px;font-weight:500;text-decoration:none;cursor:pointer;transition:border-color .2s,color .2s;
+}
+.ghost:hover{border-color:var(--ink-3);color:var(--ink)}
+.ghost svg{width:14px;height:14px}
+.solid{background:var(--lamp);color:var(--lamp-ink);border-color:var(--lamp)}
+.solid:hover{background:#FFE3A8;color:var(--lamp-ink);border-color:#FFE3A8}
+
+.h1{font-family:var(--serif);font-weight:400;letter-spacing:-.012em;line-height:1.05;text-wrap:balance}
+.label{font-size:11.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.num{font-weight:600;letter-spacing:-.03em;line-height:1}
+.dim{color:var(--ink-3)}
+.mid{color:var(--ink-2)}
+.lamp-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--lamp);box-shadow:0 0 0 3px var(--lamp-glow)}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition-duration:.01ms !important;animation-duration:.01ms !important;transition-delay:0ms !important;animation-delay:0ms !important}
+}
