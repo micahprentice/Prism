@@ -558,7 +558,11 @@
     const mainApprove = $(".actions .approve");
     if (mainApprove && "IntersectionObserver" in window) {
       const topH = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--top")) || 64;
-      new IntersectionObserver(([e]) => document.body.classList.toggle("cta-away", !e.isIntersecting && e.boundingClientRect.top < topH), { threshold: 0, rootMargin: `-${topH}px 0px 0px 0px` }).observe(mainApprove);
+      new IntersectionObserver(([e]) => {
+        document.body.classList.toggle("cta-away", !e.isIntersecting && e.boundingClientRect.top < topH);
+        /* mobile: the bottom bar steps aside while the real button is on screen */
+        document.body.classList.toggle("cta-seen", e.isIntersecting);
+      }, { threshold: 0.6, rootMargin: `-${topH}px 0px -${($(".bar") || {}).offsetHeight || 0}px 0px` }).observe(mainApprove);
     }
     $$("[data-compare]").forEach((b) => {
       b.setAttribute("aria-pressed", "false");
