@@ -17,12 +17,12 @@
 .demo-strip nav{display:flex;align-items:center;gap:2px;margin-left:auto}
 .demo-strip nav a{position:relative;padding:0 10px;height:40px;display:inline-flex;align-items:center;color:var(--strip-dim)}
 .demo-strip nav a[aria-current]{color:#F2F4F9}
-.demo-strip nav a[aria-current]::after{content:"";position:absolute;left:10px;right:10px;bottom:-1px;height:2px;background:#E44B87}
+.demo-strip nav a[aria-current]::after{content:"";position:absolute;left:10px;right:10px;bottom:-1px;height:2px;background:currentColor}
 .demo-strip nav a:hover{color:#F2F4F9}
 .demo-strip .next{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px 0 12px;border:1px solid var(--strip-line);border-radius:4px;color:#F2F4F9;margin-left:8px}
 .demo-strip .next:hover{border-color:rgba(255,255,255,.3)}
 .demo-strip .next svg{width:10px;height:10px}
-.demo-strip a:focus-visible{outline:2px solid #4998EF;outline-offset:-2px}
+.demo-strip a:focus-visible{outline:2px solid #FFD98F;outline-offset:-2px}
 @media (max-width:640px){
   .demo-strip{gap:10px;padding:0 12px}
   .demo-strip .brand small{display:none}

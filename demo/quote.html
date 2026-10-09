@@ -37,13 +37,13 @@
   <header class="top">
     <div class="top-co">
       <span class="co-name" data-company-name></span>
-      <span class="co-sub">Prepared for <span data-customer-names></span> · Quote <span data-quote-id></span></span>
+      <span class="co-sub">Prepared for <span data-customer-names></span><span class="co-quote"> · Quote <span data-quote-id></span></span></span>
     </div>
     <button type="button" class="top-buy" data-approve aria-label="Approve and pay the deposit">
       <span class="top-buy-sum"><b data-tier-name></b> · <span data-price-static></span></span>
       <span class="top-buy-cta">Approve</span>
     </button>
-    <a class="top-text" data-phone-link href="#"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" aria-hidden="true"><path d="M1.5 2.5h11v7h-6l-3 2.5v-2.5h-2z"/></svg>Text <span data-company-owner></span></a>
+    <a class="top-text" data-phone-link href="#"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" aria-hidden="true"><path d="M1.5 2.5h11v7h-6l-3 2.5v-2.5h-2z"/></svg>Text <span class="top-text-who" data-company-owner></span></a>
   </header>
 
   <main class="stage">
@@ -101,6 +101,7 @@
           <div><dt>Install</dt><dd>Your pick of three windows, Nov&nbsp;17–21</dd></div>
           <div><dt>Takedown</dt><dd data-takedown></dd></div>
           <div><dt>Storage</dt><dd data-storage></dd></div>
+          <div><dt>Quote</dt><dd><span data-quote-id></span> · prepared by <span data-company-owner></span></dd></div>
           <div><dt>Quote valid</dt><dd>Through <span data-valid-through></span> · prices hold for the season once booked</dd></div>
         </dl>
         <div class="trust">
@@ -113,16 +114,12 @@
     </section>
 
     <section class="panel booked" data-panel="booked" aria-live="polite">
-      <p class="booked-kicker">
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="9" r="8"/><path d="M5.5 9.2l2.4 2.4 4.6-5"/></svg>
-        Deposit received
-      </p>
       <h1 class="h1" tabindex="-1" data-booked-focus>You're booked, <span data-customer-first></span>.</h1>
       <p class="booked-date"><span data-booked-day></span><span class="booked-time" data-booked-time></span></p>
       <p class="lede"><span data-company-owner></span>'s crew will text you the morning of. The lights come on that night.</p>
       <dl class="receipt">
         <div><dt><span data-booked-tier></span> lighting</dt><dd data-booked-total></dd></div>
-        <div><dt>Deposit paid today</dt><dd data-deposit></dd></div>
+        <div class="receipt-paid"><dt><svg width="14" height="14" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="9" r="8"/><path d="M5.5 9.2l2.4 2.4 4.6-5"/></svg>Deposit received today</dt><dd data-deposit></dd></div>
         <div><dt>Balance after install</dt><dd data-booked-balance></dd></div>
         <div><dt>Takedown</dt><dd data-takedown></dd></div>
         <div><dt>Storage</dt><dd>Included</dd></div>

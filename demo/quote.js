@@ -12,6 +12,7 @@
   let tierIndex = Q.tiers.findIndex((t) => t.id === params.get("tier"));
   if (tierIndex < 0) tierIndex = Math.max(0, Q.tiers.findIndex((t) => t.recommended));
   let previewIndex = null;
+  let arriving = false;
   let chosenWindow = Q.windows[0].id;
 
   const tier = () => Q.tiers[tierIndex];
@@ -151,10 +152,18 @@
     $$("[data-house]").forEach((stage) => {
       $$(".house-layer", stage).forEach((img) => {
         const id = img.dataset.layer;
+        const previewing = !arriving && previewIndex !== null && previewIndex !== tierIndex;
         let o = 0;
         if (id === "base") o = 1;
-        if (id === tier().id) o = 1;
-        if (previewIndex !== null && Q.tiers[previewIndex].id === id && previewIndex !== tierIndex) o = 0.55;
+        if (arriving) {
+          img.style.opacity = o;
+          img.setAttribute("aria-hidden", o === 0 ? "true" : "false");
+          return;
+        }
+        /* while previewing, the previewed tier shows fully and the selected one steps back,
+           so a lower tier reads too (its layer sits under the selected one in the stack) */
+        if (id === tier().id) o = previewing ? 0.2 : 1;
+        if (previewing && Q.tiers[previewIndex].id === id) o = 1;
         img.style.opacity = o;
         img.setAttribute("aria-hidden", o === 0 ? "true" : "false");
       });
@@ -278,7 +287,7 @@
 
   function paintScope(animate) {
     $$("[data-scope]").forEach((list) => {
-      const n = tier().lit;
+      const n = arriving ? 0 : tier().lit;
       const prev = +list.dataset.lit || 0;
       $$(".scope-item", list).forEach((li, i) => {
         const lit = i < n;
@@ -299,9 +308,9 @@
       $$(".scope-group", list).forEach((g) => {
         const gi = Q.tiers.findIndex((t) => t.id === g.dataset.group);
         const sw = $(".scope-switch", g);
-        g.classList.toggle("is-lit", gi <= tierIndex);
+        g.classList.toggle("is-lit", !arriving && gi <= tierIndex);
         if (sw) {
-          sw.hidden = gi <= tierIndex;
+          sw.hidden = arriving || gi <= tierIndex;
           sw.textContent = `Switch to ${Q.tiers[gi].name} · +${money(Q.tiers[gi].price - tier().price)}`;
         }
       });
@@ -380,8 +389,8 @@
     s.innerHTML = `
       <div class="sheet-backdrop" data-close></div>
       <section class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+        <p class="sheet-test" title="Payments are a mock. Nothing is charged.">Test mode · no card is charged</p>
         <header class="sheet-head">
-          <span class="sheet-test" title="Payments are a mock. Nothing is charged.">Test mode</span>
           <h2 id="sheet-title" class="sheet-title">Pick your install window</h2>
           <button type="button" class="sheet-close" data-close aria-label="Close">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 3l10 10M13 3L3 13"/></svg>
@@ -552,6 +561,9 @@
     buildDial();
     buildScope();
     paintStatic();
+    /* First light: dusk house, then Signature crossfades in and the lamps sequence.
+       Skip for reduced motion, a ?tier= deep link, or a booked session. */
+    arriving = !reduced && !params.has("tier") && document.body.dataset.state !== "booked";
     paintAll(false);
     $$("[data-approve]").forEach((b) => b.addEventListener("click", openSheet));
     /* desktop: when the main Approve scrolls away, a compact one appears in the top bar */
@@ -560,8 +572,9 @@
       const topH = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--top")) || 64;
       new IntersectionObserver(([e]) => {
         document.body.classList.toggle("cta-away", !e.isIntersecting && e.boundingClientRect.top < topH);
-        /* mobile: the bottom bar steps aside while the real button is on screen */
+        /* mobile: the bottom bar stays away while the real button is on screen */
         document.body.classList.toggle("cta-seen", e.isIntersecting);
+        document.body.classList.add("bar-ready");
       }, { threshold: 0.6, rootMargin: `-${topH}px 0px -${($(".bar") || {}).offsetHeight || 0}px 0px` }).observe(mainApprove);
     }
     $$("[data-compare]").forEach((b) => {
@@ -569,6 +582,13 @@
       b.addEventListener("click", () => setCompare(!compare));
     });
     document.body.classList.add("is-ready");
+    if (arriving) {
+      const go = () => { if (!arriving) return; arriving = false; paintAll(true); };
+      const img = $(`.house-layer[data-layer="${tier().id}"]`);
+      const ready = img && img.decode ? img.decode().catch(() => {}) : Promise.resolve();
+      ready.then(() => setTimeout(go, 280));
+      setTimeout(go, 1800);
+    }
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
   else boot();

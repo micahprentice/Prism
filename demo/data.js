@@ -53,16 +53,16 @@ window.PRISM_QUOTE = {
     { id: "wreath",    name: "Front door wreath",          measure: '30" · lit',          detail: "Centered on the door, hung from a padded hook. No holes.", spot: { x: 50, y: 67, w: 9, h: 11 } },
 
     { id: "ridge",     name: "Full roof outline",          measure: "Ridge & rakes · 74 ft of C9", detail: "The ridge line and every roof edge, so the whole silhouette is drawn at night.", spot: { x: 50, y: 17, w: 74, h: 15 } },
-    { id: "tree",      name: "Maple trunk & limb wrap",    measure: "≈1,200 ft of minis", detail: "Trunk and every major limb wrapped tight, so the tree glows instead of twinkling.", spot: { x: 86, y: 42, w: 30, h: 86 } },
+    { id: "tree",      name: "Maple and the last evergreen", measure: "≈1,200 ft of minis", detail: "The maple's trunk and every major limb, plus the last evergreen behind it. Every tree and shrub on the lot is lit.", spot: { x: 86, y: 42, w: 30, h: 86 } },
     { id: "windows",   name: "Window wreaths",             measure: '10 × 24" · lit',     detail: "One in every front window, centered on the upper sash and lit from the inside.", spot: { x: 50, y: 52, w: 76, h: 42 } },
     { id: "path",      name: "Path lights along the walk", measure: "12 lights",          detail: "Low warm lanterns on both sides of the front walk, timer-fed from the porch.", spot: { x: 45, y: 90, w: 92, h: 14 } },
     { id: "service",   name: "Mid-season service visit",   measure: "Included",           detail: "We come back once in December to check every bulb. If one is out, we fix it the same visit.", spot: null },
   ],
 
   tiers: [
-    { id: "classic",   name: "Classic",   line: "The roofline, done right.",          price: 1500, monthly: 125, lit: 6,  image: "img/classic.webp",   crew: "Crew of 2 · about 3 hours" },
-    { id: "signature", name: "Signature", line: "The whole front of the house.",     price: 2450, monthly: 204, lit: 10, image: "img/signature.webp", crew: "Crew of 2 · about 4 hours", recommended: true },
-    { id: "showcase",  name: "Showcase",  line: "The house the street remembers.",   price: 4200, monthly: 350, lit: 15, image: "img/showcase.webp",  crew: "Crew of 3 · about 5 hours" },
+    { id: "classic",   name: "Classic",   line: "The house only.",                    price: 1500, monthly: 125, lit: 6,  image: "img/classic.webp",   crew: "Crew of 2 · about 3 hours" },
+    { id: "signature", name: "Signature", line: "The economical middle.",            price: 2450, monthly: 204, lit: 10, image: "img/signature.webp", crew: "Crew of 2 · about 4 hours", recommended: true },
+    { id: "showcase",  name: "Showcase",  line: "Every tree and shrub.",             price: 4200, monthly: 350, lit: 15, image: "img/showcase.webp",  crew: "Crew of 3 · about 5 hours" },
   ],
   /* Blue-hour relight of the homeowner's photo, unlit. Always the bottom layer. */
   baseImage: "img/dusk.webp",

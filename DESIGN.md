@@ -194,7 +194,7 @@ Motion is one orchestrated entrance per screen and one signature interaction. On
 
 ## Typography
 
-- **Gambetta** (self-hosted 400, 500, 400 italic): the headline, the tier line ("Signature. The whole front of the house."), section heads, the grade letter, the booked greeting. One headline per screen; its italic turn (`.h1 i`, set in ink-2) is the only italic on the page.
+- **Gambetta** (self-hosted 400, 500, 400 italic): the headline, the tier line ("Signature. The economical middle."), section heads, the grade letter, the booked greeting. One headline per screen; its italic turn (`.h1 i`, set in ink-2) is the only italic on the page.
 - **Archivo** (variable, self-hosted): everything else, with `font-variant-numeric: tabular-nums` on `body` so columns of footage and dollars align without effort.
 
 ### Hierarchy
@@ -209,13 +209,13 @@ Motion is one orchestrated entrance per screen and one signature interaction. On
 ### Named Rules
 
 - **Quantities are data, states are words.** In any measure column, footage and counts ("112 ft of C9", "12 lights") are tabular Archivo; "Included" is the same size at weight 400 in ink-3.
-- **The name survives.** When a header truncates, the person's name comes before the ID ("Prepared for Sarah & Tom Whitfield · Quote FCL-2041").
+- **The name survives.** When a header truncates, the person's name comes before the ID. At ≤420px the quote ID moves into the facts list so "Sarah & Tom Whitfield" stays whole.
 
 ## Layout
 
 - Horizontal padding `clamp(16px, 2.4vw, 40px)`; owner screens cap content at 1180–1320px.
-- Quote at ≥1024px: two columns, `minmax(0, 1.5fr) minmax(420px, 560px)`; the house column is sticky and full height, the render centered in it at a fixed 3:2. The right column scrolls; a compact "Signature · $2,450 · Approve" appears in the sticky top bar once the main button leaves the viewport.
-- Quote below 1024px: house and tier dial are one sticky block at the top; the approve bar is fixed at the bottom. Below 1024px and above phone width, the house is capped at `min(100%, 40vh × 1.5)` so the list keeps room to read.
+- Quote at ≥1024px: two columns, `minmax(0, 1.5fr) minmax(420px, 560px)`; the house column is sticky and full height. The render stays a fixed 3:2 (the production slot is 2528×1696), centered in the column — empty night bands on a tall desktop are accepted so the slot stays honest. The right column scrolls; a compact "Signature · $2,450 · Approve" appears in the sticky top bar once the main button leaves the viewport.
+- Quote below 1024px: house and tier dial are one sticky block at the top. One Approve in the first viewport; the compact bottom bar appears only after that button has scrolled off. Below 1024px and above phone width, the house is capped at `min(100%, 40vh × 1.5)` so the list keeps room to read.
 - The render slot is always `aspect-ratio: 3 / 2` with absolutely positioned layers; tier changes are opacity only. Zero layout shift is a rule, not a goal.
 - Owner screens: the pipeline board is four equal columns separated by soft rules at ≥900px and a snap-scrolling row below; the grade's categories are a three-column grid (name, score, cells) collapsing to two.
 
@@ -250,7 +250,7 @@ Radii are small and specific: 2px cells, 4px badges, 7px dial segments and calen
 ### Chips
 
 - **Fix badge** — lamp fill, lamp-ink, 11px label type, 4px radius: "FIX 1".
-- **Test mode** — ink-3 label type in a 1px rule outline; quiet by design, never accent-colored.
+- **Test mode** — a full-width ink-3 hairline banner at the top of the sheet ("Test mode · no card is charged"); quiet by design, never a chip above the title.
 
 ### Cards / Containers
 
@@ -265,21 +265,21 @@ Radii are small and specific: 2px cells, 4px badges, 7px dial segments and calen
 ### Navigation
 
 - **Top bar** — 64px, company name 600/15px over a 12.5px ink-3 subline, action on the right, soft rule beneath. Sticky on the quote at desktop widths with a blurred night backdrop.
-- **Demo strip** — 40px, brand mark, numbered screens, "Next". Demo chrome only; it is the one place pink appears.
+- **Demo strip** — 40px, brand mark, numbered screens, "Next". Demo chrome only. Pink lives on the brand mark; the current-screen underline is ink (`currentColor`), and the focus ring is lamp.
 
 ### Tier dial
 
-A 3-column radiogroup on a night-2 track with a 1px rule and 10px radius. The indicator is a lamp wash with a lamp hairline that slides (`transform` over 450ms) under the selected segment; the selected label turns lamp. Hover or focus previews that tier on the house at 55% before commit. Arrow keys move the selection.
+A 3-column radiogroup on a night-2 track with a 1px rule and 10px radius. The indicator is a lamp wash with a lamp hairline that slides (`transform` over 450ms) under the selected segment; the selected label turns lamp. Hover or focus previews that tier on the house by showing it fully and stepping the selected layer back, so a lower tier reads through the stack. Arrow keys move the selection.
 
 ### Render stage
 
-`aspect-ratio: 3 / 2`, sky-frame background, five stacked `<img>` layers (dusk, three tiers, daytime photo), 700ms opacity crossfades. A compare pill toggles a clip-path divider that reveals the homeowner's daytime photo, with a 40px ink grip and two label tags ("Your photo" / tier name); the divider drags and takes arrow keys. A radial spotlight (`.house-spot`) dims everything but the region of the scope line under the pointer.
+`aspect-ratio: 3 / 2`, sky-frame background, five stacked `<img>` layers (dusk, three tiers, daytime photo), 700ms opacity crossfades. On first open (no `?tier=`, no reduced motion) the dusk layer is alone, then Signature crossfades in and the scope lamps sequence. A compare pill toggles a clip-path divider that reveals the homeowner's daytime photo, with a 40px ink grip and two label tags ("Your photo" / tier name); the divider drags and takes arrow keys. A radial spotlight (`.house-spot`) dims everything but the region of the scope line under the pointer.
 
 ## Do's and Don'ts
 
 ### Do:
 
-- Light things that are on; leave everything else dark.
+- Light things that are on; leave everything else dark. Classic is the house only, Signature is the economical middle, Showcase lights every tree and shrub.
 - Put footage, counts, and dates next to every claim. "96 ft of C9", "Week of Jan 5", "41 lost leads a season".
 - Use the serif for one line of voice per screen and the sans for every number.
 - Crossfade; never reflow. The render slot is 3:2 forever.
