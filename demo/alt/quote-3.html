@@ -15,7 +15,7 @@
    type, a pill picker under the product, a buy bar. The category canon played straight. */
 :root{
   --black:#000;--black-2:#0A0A0C;--black-3:#161618;
-  --ink:#F5F5F7;--ink-2:#A1A1A6;--ink-3:#6E6E73;
+  --ink:#F5F5F7;--ink-2:#A1A1A6;--ink-3:#8E8E93;
   --rule:rgba(245,245,247,.14);--rule-soft:rgba(245,245,247,.08);
   --blue:#2997FF;--blue-deep:#0071E3;
   --display:"Supreme","Helvetica Neue",Arial,system-ui,sans-serif;--sans:"Archivo","Helvetica Neue",Arial,system-ui,sans-serif;
@@ -90,7 +90,7 @@ h1,h2,p,dl,dd,ol{margin:0}ol{padding:0;list-style:none}button{font:inherit;color
 .scope-head{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:14px;border-bottom:1px solid var(--rule)}
 .scope-head h2{font-family:var(--display);font-weight:500;font-size:clamp(24px,2.6vw,32px);letter-spacing:-.02em}
 .scope-count{font-size:13px;color:var(--ink-3)}
-.scope{display:grid;grid-template-columns:1fr 1fr;column-gap:48px}
+.scope{display:grid;grid-template-columns:1fr;max-width:720px}
 .scope-item{position:relative;display:grid;grid-template-columns:1fr auto;column-gap:12px;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--rule-soft);color:var(--ink-3);transition:color .4s var(--ease);transition-delay:calc(var(--seq,0) * 60ms)}
 .scope-lamp{display:none}
 .scope-item[data-tier-start]{margin-top:34px}
@@ -101,6 +101,7 @@ h1,h2,p,dl,dd,ol{margin:0}ol{padding:0;list-style:none}button{font:inherit;color
 .scope-measure{font-size:13px;color:var(--ink-3);white-space:nowrap}
 .scope-item.is-lit .scope-measure{color:var(--ink-2)}
 .scope-state{display:none}
+.scope-group,.scope-up{display:none}
 .scope-detail{grid-column:1 / -1;font-size:13.5px;color:var(--ink-2);margin-top:2px;max-height:0;opacity:0;overflow:hidden;transition:max-height .5s var(--ease),opacity .4s;transition-delay:calc(var(--seq,0) * 60ms)}
 .scope-item.is-lit .scope-detail{max-height:5em;opacity:1}
 .scope-item:not(.is-lit) .scope-name{text-decoration:line-through;text-decoration-color:rgba(110,110,115,.5)}

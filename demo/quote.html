@@ -37,8 +37,12 @@
   <header class="top">
     <div class="top-co">
       <span class="co-name" data-company-name></span>
-      <span class="co-sub">Quote <span data-quote-id></span> · prepared for <span data-customer-names></span></span>
+      <span class="co-sub">Prepared for <span data-customer-names></span> · Quote <span data-quote-id></span></span>
     </div>
+    <button type="button" class="top-buy" data-approve aria-label="Approve and pay the deposit">
+      <span class="top-buy-sum"><b data-tier-name></b> · <span data-price-static></span></span>
+      <span class="top-buy-cta">Approve</span>
+    </button>
     <a class="top-text" data-phone-link href="#"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" aria-hidden="true"><path d="M1.5 2.5h11v7h-6l-3 2.5v-2.5h-2z"/></svg>Text <span data-company-owner></span></a>
   </header>
 
@@ -60,8 +64,8 @@
     </figure>
 
     <section class="panel" data-panel="quote">
-      <h1 class="h1">Your home, lit for the season.</h1>
-      <p class="lede"><span data-company-owner></span> measured every run on <span data-address1></span>. Pick a level and watch the house. The list below lights up with it.</p>
+      <h1 class="h1"><span class="h1-addr"><span data-address1></span>,</span> <i>lit for the season.</i></h1>
+      <p class="lede"><span data-company-owner></span> measured every run on <span data-sent-on></span>. Pick a level; the house and the list light up together.</p>
 
       <div class="dial-wrap">
         <div class="dial" data-dial></div>
@@ -79,7 +83,8 @@
           <span>Approve <span data-tier-name></span></span>
           <span class="approve-sub">pay <span data-deposit></span> deposit · pick your install day</span>
         </button>
-        <p class="actions-fine">Nothing else is due until the lights are up. Balance of <span data-balance></span> after install.</p>
+        <p class="actions-fine">Nothing else is due until the lights are up. Balance of <span data-balance></span> after install. <span data-deposit-policy></span></p>
+        <p class="actions-trust"><span data-company-license></span> · Insured to $2M · <svg width="11" height="11" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.7l-6.1 3.4 1.4-6.8L2.2 9.6l6.9-.8z"/></svg> <span data-company-rating></span> from <span data-company-review-count></span> reviews</p>
       </div>
 
       <section class="scope-sec" aria-labelledby="scope-h">
@@ -92,8 +97,8 @@
 
       <section class="facts" aria-label="Dates, color, and company">
         <dl>
-          <div><dt>Color</dt><dd data-color></dd></div>
-          <div><dt>Install</dt><dd>Your pick of three windows, Nov 17–21</dd></div>
+          <div><dt>Color</dt><dd><span data-color></span> · <a class="quiet" data-phone-link href="#">ask <span data-company-owner></span> about other colors</a></dd></div>
+          <div><dt>Install</dt><dd>Your pick of three windows, Nov&nbsp;17–21</dd></div>
           <div><dt>Takedown</dt><dd data-takedown></dd></div>
           <div><dt>Storage</dt><dd data-storage></dd></div>
           <div><dt>Quote valid</dt><dd>Through <span data-valid-through></span> · prices hold for the season once booked</dd></div>

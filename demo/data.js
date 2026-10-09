@@ -24,6 +24,7 @@ window.PRISM_QUOTE = {
   color: "Warm white (2700K)",
   colorOptions: ["Warm white (2700K)", "Pure white", "Red & warm white", "Multi"],
   deposit: 500,
+  depositPolicy: "Deposit refundable until 48 hours before install.",
   financing: { months: 12, apr: 0, provider: "Prism Financing" },
   dates: {
     takedown: "Week of Jan 5",

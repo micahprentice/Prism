@@ -156,6 +156,7 @@
         if (id === tier().id) o = 1;
         if (previewIndex !== null && Q.tiers[previewIndex].id === id && previewIndex !== tierIndex) o = 0.55;
         img.style.opacity = o;
+        img.setAttribute("aria-hidden", o === 0 ? "true" : "false");
       });
       $$("[data-handle-tier]", stage).forEach((el) => { el.textContent = tier().name; });
     });
@@ -220,28 +221,59 @@
     $$("[data-scope]").forEach((list) => {
       list.innerHTML = "";
       Q.scope.forEach((s, i) => {
+        const startOf = Q.tiers.findIndex((t, k) => i === (k === 0 ? 0 : Q.tiers[k - 1].lit));
+        if (startOf >= 0) {
+          const g = document.createElement("li");
+          g.className = "scope-group";
+          g.dataset.group = Q.tiers[startOf].id;
+          g.setAttribute("aria-label", `${Q.tiers[startOf].name} ${startOf === 0 ? "" : "adds"}`.trim());
+          g.innerHTML = `<span class="scope-group-name">${Q.tiers[startOf].name}${startOf === 0 ? "" : " adds"}</span>` +
+            (startOf === 0 ? "" : `<button type="button" class="scope-switch"></button>`);
+          const sw = $(".scope-switch", g);
+          if (sw) {
+            sw.addEventListener("click", () => setTier(startOf, true));
+            sw.addEventListener("pointerenter", () => preview(startOf));
+            sw.addEventListener("pointerleave", () => preview(null));
+            sw.addEventListener("focus", () => preview(startOf));
+            sw.addEventListener("blur", () => preview(null));
+          }
+          list.appendChild(g);
+        }
         const li = document.createElement("li");
         li.className = "scope-item";
         li.dataset.index = i;
+        const isState = /^(Included|Dusk)/.test(s.measure);
         li.innerHTML = `
           <span class="scope-lamp" aria-hidden="true"></span>
           <span class="scope-name">${s.name}</span>
-          <span class="scope-measure">${s.measure}</span>
-          <span class="scope-state"></span>
-          <p class="scope-detail">${s.detail}</p>`;
-        if (s.spot) {
-          li.addEventListener("pointerenter", () => spotlight(s.spot));
-          li.addEventListener("pointerleave", () => spotlight(null));
-        }
+          <span class="scope-measure${isState ? " is-state" : ""}">${s.measure}</span>
+          <span class="scope-state sr"></span>
+          <p class="scope-detail">${s.detail}</p>
+          <button type="button" class="scope-up"></button>`;
+        /* An unlit line is the upsell: hover previews the tier that adds it, tap switches to it. */
+        const up = $(".scope-up", li);
+        up.addEventListener("click", () => setTier(tierFor(i), true));
+        li.addEventListener("pointerenter", () => {
+          if (s.spot) spotlight(s.spot);
+          if (!li.classList.contains("is-lit")) preview(tierFor(i));
+        });
+        li.addEventListener("pointerleave", () => { spotlight(null); preview(null); });
+        up.addEventListener("focus", () => preview(tierFor(i)));
+        up.addEventListener("blur", () => preview(null));
         list.appendChild(li);
       });
-      /* tier boundaries, for directions that draw them */
+      /* tier boundaries, for the alternate directions that draw them with CSS */
+      const items = $$(".scope-item", list);
       Q.tiers.forEach((t, ti) => {
         const from = ti === 0 ? 0 : Q.tiers[ti - 1].lit;
-        const item = list.children[from];
+        const item = items[from];
         if (item) { item.dataset.tierStart = t.id; item.dataset.tierStartName = t.name; }
       });
     });
+  }
+
+  function tierFor(i) {
+    return Math.max(0, Q.tiers.findIndex((t) => t.lit > i));
   }
 
   function paintScope(animate) {
@@ -258,7 +290,20 @@
         /* Secession's growth: newly lit lines come on in sequence from the roofline outward. */
         const seq = lit && i >= prev ? i - prev : 0;
         li.style.setProperty("--seq", animate && !reduced ? seq : 0);
-        $(".scope-state", li).textContent = lit ? (inherited ? "Included" : tier().name) : "Not in " + tier().name;
+        $(".scope-state", li).textContent = lit ? (inherited ? "Included" : "Added by " + tier().name) : "Not in " + tier().name;
+        if (!lit) {
+          const t = Q.tiers[tierFor(i)];
+          $(".scope-up", li).textContent = `Add with ${t.name} · +${money(t.price - tier().price)}`;
+        }
+      });
+      $$(".scope-group", list).forEach((g) => {
+        const gi = Q.tiers.findIndex((t) => t.id === g.dataset.group);
+        const sw = $(".scope-switch", g);
+        g.classList.toggle("is-lit", gi <= tierIndex);
+        if (sw) {
+          sw.hidden = gi <= tierIndex;
+          sw.textContent = `Switch to ${Q.tiers[gi].name} · +${money(Q.tiers[gi].price - tier().price)}`;
+        }
       });
       list.dataset.lit = n;
       list.dataset.tier = tier().id;
@@ -269,6 +314,7 @@
   function paintText() {
     const t = tier();
     $$("[data-price]").forEach((el) => odometer(el, money(t.price)));
+    $$("[data-price-static]").forEach((el) => (el.textContent = money(t.price)));
     $$("[data-monthly]").forEach((el) => odometer(el, money(t.monthly)));
     $$("[data-tier-name]").forEach((el) => (el.textContent = t.name));
     $$("[data-tier-line]").forEach((el) => (el.textContent = t.line));
@@ -282,11 +328,11 @@
   }
 
   function setTier(i, focus) {
-    if (i === tierIndex) return;
+    if (i === tierIndex || document.body.dataset.state === "booked") return;
     tierIndex = i;
     previewIndex = null;
     paintAll(true);
-    if (focus) $(`[data-dial] .dial-opt[data-index="${i}"]`)?.focus();
+    if (focus) $$(`[data-dial] .dial-opt[data-index="${i}"]`).find((b) => b.offsetParent !== null)?.focus({ preventScroll: true });
     const u = new URL(location.href);
     u.searchParams.set("tier", tier().id);
     history.replaceState(null, "", u);
@@ -359,7 +405,7 @@
     document.body.classList.remove("sheet-open");
     document.removeEventListener("keydown", escClose);
     setTimeout(() => { s.hidden = true; s.innerHTML = ""; }, reduced ? 0 : 320);
-    $("[data-approve]")?.focus();
+    $(".actions .approve")?.focus();
   }
 
   function summary() {
@@ -435,7 +481,7 @@
           </button>
           <p class="sheet-fine">
             <svg width="11" height="13" viewBox="0 0 11 13" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><rect x=".65" y="5.65" width="9.7" height="6.7" rx="1.2"/><path d="M3 5.5V3.6a2.5 2.5 0 0 1 5 0v1.9"/></svg>
-            <span>Card details are never seen by Falls City. Payments by Stripe. <strong>This is a demo in test mode; no card is charged.</strong></span>
+            <span>${Q.depositPolicy} Card details are never seen by ${Q.company.name.split(" ")[0]} ${Q.company.name.split(" ")[1]}. Payments by Stripe. <strong>This is a demo in test mode; no card is charged.</strong></span>
           </p>
           <button type="button" class="sheet-back" data-back>Back to install windows</button>
         </form>`;
@@ -475,7 +521,7 @@
     $$("[data-reset]").forEach((b) => b.addEventListener("click", () => {
       delete document.body.dataset.state;
       try { sessionStorage.removeItem("prism-demo-booking"); } catch (e) {}
-      $("[data-approve]")?.focus();
+      $(".actions .approve")?.focus();
     }, { once: true }));
   }
 
@@ -490,6 +536,7 @@
       "quote-id": Q.id, "valid-through": fmtDate(Q.validThrough), "sent-on": fmtDate(Q.sentOn),
       "color": Q.color, "takedown": Q.dates.takedown, "storage": Q.dates.storage,
       "apr": Q.financing.apr + "%", "fin-provider": Q.financing.provider,
+      "deposit-policy": Q.depositPolicy || "",
     };
     for (const k in map) $$(`[data-${k}]`).forEach((el) => (el.textContent = map[k]));
     $$("[data-phone-link]").forEach((a) => (a.href = "sms:" + Q.company.phone.replace(/\D/g, "")));
@@ -507,6 +554,12 @@
     paintStatic();
     paintAll(false);
     $$("[data-approve]").forEach((b) => b.addEventListener("click", openSheet));
+    /* desktop: when the main Approve scrolls away, a compact one appears in the top bar */
+    const mainApprove = $(".actions .approve");
+    if (mainApprove && "IntersectionObserver" in window) {
+      const topH = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--top")) || 64;
+      new IntersectionObserver(([e]) => document.body.classList.toggle("cta-away", !e.isIntersecting && e.boundingClientRect.top < topH), { threshold: 0, rootMargin: `-${topH}px 0px 0px 0px` }).observe(mainApprove);
+    }
     $$("[data-compare]").forEach((b) => {
       b.setAttribute("aria-pressed", "false");
       b.addEventListener("click", () => setCompare(!compare));

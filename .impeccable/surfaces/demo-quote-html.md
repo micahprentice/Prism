@@ -2,7 +2,7 @@
 version: 1
 slug: "demo-quote-html"
 primary_target: "demo/quote.html"
-related_targets: ["demo/index.html","demo/grade.html","demo/pipeline.html"]
+related_targets: ["demo/index.html","demo/grade.html","demo/pipeline.html","demo/alt/quote-1.html","demo/alt/quote-3.html"]
 ---
 
 # Surface brief: /demo/quote (customer good/better/best quote)
@@ -38,7 +38,11 @@ Challenger verdicts (all declined on both axes; each donates one discipline, wri
 - Pickling brine calendar → declined. Raise "Brine calendar's dates": install, takedown, and storage are real dates on the page.
 - Memory quilt atlas → declined. Raise "Quilt's provenance": every scope line carries its measurement (feet, count).
 
-## Direction contract (dir=2, night elevation; the expected build, confirmed or replaced by the critique)
+## Critique verdict (2026-10-09)
+
+Dual-agent critique (`.impeccable/critique/2026-10-09T15-00-37Z__demo-quote-html.md`): direction 2 confirmed, 24/32. Adopted from the losers: direction 1's address-as-headline with the italic turn; direction 3's compact top-bar approve on desktop. Retired: strikethrough on unlit lines (now the upsell, grouped under "Signature adds / Showcase adds" headers with a switch), solid lamp fill on the selected dial segment (now a lamp wash so the Approve is the only fully lit object). Render set replaced by the fictional Colonial (day, dusk, Classic, Signature, Showcase; same camera), cropped to the 3:2 slot; the compare slider now reveals the homeowner's daytime photo.
+
+## Direction contract (dir=2, night elevation; confirmed by the critique)
 
 THESIS: Your house, relit in front of you. The page refuses the three-equal-cards pricing grid: there is one house, one price, one button, and the tier is a dial that changes what the house looks like.
 

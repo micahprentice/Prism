@@ -1,7 +1,7 @@
 /* Prism demo · approval sheet (mock Stripe). Shared by every quote direction.
    Directions set the --sheet-* tokens; this file owns structure. */
 :root{
-  --sheet-bg:#0C1020;--sheet-field:#070A14;--sheet-ink:#EEF1F8;--sheet-ink-2:#A6AEC2;--sheet-ink-3:#6E778E;
+  --sheet-bg:#0C1020;--sheet-field:#070A14;--sheet-ink:#EEF1F8;--sheet-ink-2:#A6AEC2;--sheet-ink-3:#78829B;
   --sheet-rule:rgba(238,241,248,.12);--sheet-rule-soft:rgba(238,241,248,.07);
   --sheet-accent:#FFD98F;--sheet-accent-hover:#FFE3A8;--sheet-accent-ink:#1A1304;--sheet-accent-glow:rgba(255,217,143,.22);
   --sheet-accent-line:rgba(255,217,143,.45);--sheet-accent-wash:rgba(255,217,143,.06);--sheet-backdrop:rgba(3,5,12,.6);
@@ -18,7 +18,7 @@
 .is-open .sheet-backdrop{opacity:1}
 .is-open .sheet{transform:none;opacity:1}
 .sheet-head{position:sticky;top:0;display:grid;grid-template-columns:1fr auto;align-items:center;gap:8px 12px;padding:18px 20px 12px;background:var(--sheet-bg);z-index:1}
-.sheet-test{grid-column:1;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--sheet-accent);border:1px solid var(--sheet-accent-line);border-radius:4px;padding:3px 7px;justify-self:start}
+.sheet-test{grid-column:1;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--sheet-ink-3);border:1px solid var(--sheet-rule);border-radius:4px;padding:3px 7px;justify-self:start}
 .sheet-title{grid-column:1;font-family:var(--serif);font-weight:400;font-size:26px;letter-spacing:-.01em;line-height:1.1;margin-top:8px}
 .sheet-close{grid-column:2;grid-row:1 / span 2;align-self:start;appearance:none;border:1px solid var(--sheet-rule);background:none;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;cursor:pointer;color:var(--sheet-ink-2)}
 .sheet-close:hover{color:var(--sheet-ink);border-color:var(--sheet-ink-3)}

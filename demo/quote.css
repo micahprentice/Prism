@@ -8,7 +8,7 @@
   --night-3:#121729;
   --ink:#EEF1F8;
   --ink-2:#A6AEC2;
-  --ink-3:#6E778E;
+  --ink-3:#78829B;
   --rule:rgba(238,241,248,.12);
   --rule-soft:rgba(238,241,248,.07);
   --lamp:#FFD98F;
@@ -49,6 +49,8 @@ button{font:inherit;color:inherit}
 .top-co{display:flex;flex-direction:column;gap:2px;min-width:0}
 .co-name{font-weight:600;font-size:15px;letter-spacing:-.005em}
 .co-sub{font-size:12.5px;color:var(--ink-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.top-buy{display:none}
+.top-buy-sum b{font-weight:600}
 .top-text{
   display:inline-flex;align-items:center;gap:8px;flex:none;
   height:36px;padding:0 14px;border:1px solid var(--rule);border-radius:999px;
@@ -63,7 +65,7 @@ button{font:inherit;color:inherit}
 .house{margin:0;position:relative;background:var(--night)}
 .house-stage{position:relative}
 .house-frame{
-  position:relative;aspect-ratio:3/2;overflow:hidden;background:#05070F;
+  position:relative;aspect-ratio:3/2;overflow:hidden;background:#0A1226;
   --cx:50%;
 }
 .house-layer{
@@ -136,9 +138,10 @@ body[data-state="booked"] .dial-m{display:none}
 .panel{padding:28px clamp(16px,2.4vw,40px) 120px}
 .h1{
   font-family:var(--serif);font-weight:400;
-  font-size:clamp(34px,4.6vw,46px);line-height:1.04;letter-spacing:-.012em;
-  text-wrap:balance;
+  font-size:clamp(31px,4.2vw,40px);line-height:1.06;letter-spacing:-.012em;
 }
+.h1-addr{display:block;white-space:nowrap}
+.h1 i{font-style:italic;color:var(--ink-2)}
 .lede{margin-top:14px;max-width:46ch;color:var(--ink-2);font-size:15.5px;line-height:1.55}
 
 /* dial */
@@ -152,10 +155,9 @@ body[data-state="booked"] .dial-m{display:none}
 .dial-ind{
   position:absolute;top:3px;bottom:3px;left:3px;
   width:calc((100% - 6px) / 3);
-  background:var(--lamp);border-radius:7px;
+  background:rgba(255,217,143,.13);border:1px solid rgba(255,217,143,.6);border-radius:7px;
   transform:translateX(calc(var(--dial-i) * 100%));
   transition:transform .45s var(--ease);
-  box-shadow:0 2px 14px -4px rgba(255,217,143,.55);
 }
 .dial-opt{
   position:relative;z-index:1;appearance:none;border:0;background:none;cursor:pointer;
@@ -164,7 +166,7 @@ body[data-state="booked"] .dial-m{display:none}
   color:var(--ink-2);transition:color .3s var(--ease);
 }
 .dial-opt:hover{color:var(--ink)}
-.dial-opt.is-on{color:var(--lamp-ink)}
+.dial-opt.is-on{color:var(--lamp)}
 .dial-opt:focus-visible{outline-offset:-3px}
 .dial-name{font-weight:600;font-size:15px;letter-spacing:-.005em}
 .dial-price{font-size:12.5px;opacity:.78}
@@ -211,6 +213,8 @@ body[data-state="booked"] .dial-m{display:none}
 .approve:active{transform:translateY(1px) scale(.995);background:var(--lamp-deep)}
 .approve-sub{font-weight:500;font-size:12.5px;opacity:.72}
 .actions-fine{margin-top:12px;font-size:12.5px;color:var(--ink-3);text-align:center;line-height:1.45}
+.actions-trust{margin-top:8px;font-size:12.5px;color:var(--ink-3);text-align:center;line-height:1.45}
+.actions-trust svg{color:var(--lamp);vertical-align:-1px}
 .approve-ghost{background:transparent;color:var(--ink);border:1px solid var(--rule);box-shadow:none}
 .approve-ghost:hover{background:var(--night-3);box-shadow:none}
 
@@ -228,13 +232,19 @@ body[data-state="booked"] .dial-m{display:none}
   transition:color .4s var(--ease);
   transition-delay:calc(var(--seq,0) * 70ms);
 }
-.scope-item[data-tier-start]{margin-top:26px}
-.scope-item[data-tier-start]::before{
-  content:attr(data-tier-start-name) " adds";
-  position:absolute;top:-22px;left:30px;
+.scope-group{
+  display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+  padding:26px 0 6px 30px;
   font-size:11.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);
 }
-.scope-item[data-tier-start="classic"]::before{content:"Classic"}
+.scope-group:first-child{padding-top:14px}
+.scope-switch{
+  appearance:none;border:0;background:none;padding:0;cursor:pointer;
+  font:inherit;letter-spacing:.04em;text-transform:none;font-size:12.5px;font-weight:500;
+  color:var(--ink-2);text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(120,130,155,.45);
+  transition:color .2s;
+}
+.scope-switch:hover,.scope-switch:focus-visible{color:var(--lamp);text-decoration-color:var(--lamp)}
 .scope-lamp{
   width:8px;height:8px;border-radius:50%;justify-self:center;align-self:center;
   background:var(--night-3);border:1px solid var(--rule);
@@ -256,8 +266,24 @@ body[data-state="booked"] .dial-m{display:none}
   transition-delay:calc(var(--seq,0) * 70ms);
 }
 .scope-item.is-lit .scope-detail{max-height:5em;opacity:1}
-.scope-item:not(.is-lit) .scope-name{text-decoration:line-through;text-decoration-color:rgba(110,119,142,.5);text-decoration-thickness:1px}
-.scope-item[data-tier-start]:not(.is-lit)::before{color:var(--ink-3);opacity:.7}
+/* unlit lines are the upsell, not deletions: no strikethrough, a quiet "add with" affordance */
+.scope-measure.is-state{font-weight:400}
+.scope-item.is-lit .scope-measure.is-state{color:var(--ink-3)}
+.scope-up{
+  grid-column:2 / -1;justify-self:start;margin-top:4px;
+  appearance:none;border:0;background:none;padding:0;cursor:pointer;
+  font-size:12.5px;font-weight:500;color:var(--ink-3);text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(120,130,155,.45);
+  transition:color .2s;
+}
+.scope-item.is-lit .scope-up{display:none}
+.scope-item:not(.is-lit){cursor:pointer}
+.scope-item:not(.is-lit):hover{color:var(--ink-2)}
+/* per-line "add with" shows on hover or focus; the group header carries the switch everywhere */
+.scope-item:not(.is-lit) .scope-up{position:absolute;right:0;top:13px;margin:0;opacity:0;pointer-events:none;transition:opacity .2s}
+.scope-item:not(.is-lit):hover .scope-up,.scope-item:not(.is-lit):focus-within .scope-up{opacity:1;pointer-events:auto;color:var(--lamp);text-decoration-color:var(--lamp)}
+.scope-item:not(.is-lit):hover .scope-measure,.scope-item:not(.is-lit):focus-within .scope-measure{opacity:0}
+.scope-measure{transition:opacity .2s}
+@media (hover:none){ .scope-item:not(.is-lit) .scope-up{display:none} }
 
 /* facts */
 .facts{margin-top:40px;padding-top:24px;border-top:1px solid var(--rule)}
@@ -265,6 +291,8 @@ body[data-state="booked"] .dial-m{display:none}
 .facts dl div{display:contents}
 .facts dt{color:var(--ink-3)}
 .facts dd{color:var(--ink-2)}
+.facts .quiet{color:var(--ink-3);text-decoration:underline;text-underline-offset:3px}
+.facts .quiet:hover{color:var(--ink)}
 .trust{margin-top:26px;padding-top:18px;border-top:1px solid var(--rule-soft);font-size:13px;color:var(--ink-3);display:grid;gap:4px}
 .trust-co{color:var(--ink-2);font-weight:600}
 .trust-stars{display:inline-flex;align-items:center;gap:6px}
@@ -322,6 +350,18 @@ body[data-state="booked"] .bar{display:none}
   .house-cap{padding:14px clamp(16px,2.4vw,40px) 0}
   .panel{padding:40px clamp(24px,3vw,56px) 80px;border-left:1px solid var(--rule-soft);min-height:calc(100vh - var(--strip) - var(--top))}
   .bar{display:none}
+  /* compact approve in the top bar once the main button has scrolled away */
+  .top{position:sticky;top:0;z-index:25;background:rgba(7,10,20,.92);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+  .top-buy{
+    display:inline-flex;align-items:center;gap:14px;margin-left:auto;
+    appearance:none;border:0;cursor:pointer;height:36px;padding:0 4px 0 14px;border-radius:999px;
+    background:none;color:var(--ink-2);font-size:13px;
+    opacity:0;transform:translateY(-6px);pointer-events:none;transition:opacity .3s var(--ease),transform .3s var(--ease);
+  }
+  .top-buy-cta{display:inline-flex;align-items:center;height:30px;padding:0 14px;border-radius:999px;background:var(--lamp);color:var(--lamp-ink);font-weight:600}
+  body.cta-away:not([data-state="booked"]) .top-buy{opacity:1;transform:none;pointer-events:auto}
+  .house{top:var(--top)}
+  .house{height:calc(100vh - var(--strip) - var(--top))}
 }
 
 @media (max-width:1023.98px){
@@ -331,9 +371,11 @@ body[data-state="booked"] .bar{display:none}
   }
   .house-cap{display:none}
   .trust-render{display:block}
+  /* tablets: keep the pinned house under ~40% of the viewport so the list has room to read */
+  .house-stage{max-width:min(100%, 40vh * 1.5);margin:0 auto}
   .panel{padding-top:22px}
   /* on phones the dial lives with the house so a tap relights it without scrolling */
-  .dial-m{display:grid;margin:10px 16px 0;border-radius:12px}
+  .dial-m{display:grid;margin:10px auto 0;width:calc(100% - 32px);max-width:min(100% - 32px, 40vh * 1.5);border-radius:12px}
   .dial-m .dial-ind{border-radius:9px}
   .house{padding-bottom:12px}
   .panel .dial{display:none}
