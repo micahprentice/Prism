@@ -1,0 +1,92 @@
+/* Prism demo · approval sheet (mock Stripe). Shared by every quote direction.
+   Directions set the --sheet-* tokens; this file owns structure. */
+:root{
+  --sheet-bg:#0C1020;--sheet-field:#070A14;--sheet-ink:#EEF1F8;--sheet-ink-2:#A6AEC2;--sheet-ink-3:#78829B;
+  --sheet-rule:rgba(238,241,248,.12);--sheet-rule-soft:rgba(238,241,248,.07);
+  --sheet-accent:#FFD98F;--sheet-accent-hover:#FFE3A8;--sheet-accent-ink:#1A1304;--sheet-accent-glow:rgba(255,217,143,.22);
+  --sheet-accent-line:rgba(255,217,143,.45);--sheet-accent-wash:rgba(255,217,143,.06);--sheet-backdrop:rgba(3,5,12,.6);
+  --sheet-radius:10px;
+}
+[data-sheet]{position:fixed;inset:0;z-index:60}
+.sheet-backdrop{position:absolute;inset:0;background:var(--sheet-backdrop);opacity:0;transition:opacity .3s}
+.sheet{
+  position:absolute;left:0;right:0;bottom:0;max-height:92vh;overflow:auto;
+  background:var(--sheet-bg);border-top:1px solid var(--sheet-rule);border-radius:16px 16px 0 0;
+  transform:translateY(24px);opacity:0;transition:transform .36s var(--ease),opacity .3s;
+  padding-bottom:env(safe-area-inset-bottom);
+}
+.is-open .sheet-backdrop{opacity:1}
+.is-open .sheet{transform:none;opacity:1}
+.sheet-test{text-align:center;font-size:12px;color:var(--sheet-ink-3);padding:7px 20px;border-bottom:1px solid var(--sheet-rule);border-radius:16px 16px 0 0}
+.sheet-head{position:sticky;top:0;display:grid;grid-template-columns:1fr auto;align-items:start;gap:8px 12px;padding:18px 20px 12px;background:var(--sheet-bg);z-index:1}
+.sheet-title{grid-column:1;font-family:var(--serif);font-weight:400;font-size:26px;letter-spacing:-.01em;line-height:1.1;margin-top:2px}
+.sheet-close{grid-column:2;align-self:start;appearance:none;border:1px solid var(--sheet-rule);background:none;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;cursor:pointer;color:var(--sheet-ink-2)}
+.sheet-close:hover{color:var(--sheet-ink);border-color:var(--sheet-ink-3)}
+.sheet-body{padding:4px 20px 24px}
+.sheet-lede{color:var(--sheet-ink-2);font-size:14.5px;line-height:1.5}
+.slots{margin-top:16px;display:grid;gap:8px}
+.slot{
+  position:relative;display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:baseline;
+  padding:14px 16px;border:1px solid var(--sheet-rule);border-radius:var(--sheet-radius);cursor:pointer;
+  transition:border-color .2s,background .2s;
+}
+.slot:hover{border-color:var(--sheet-ink-3)}
+.slot.is-on{border-color:var(--sheet-accent);background:var(--sheet-accent-wash)}
+.slot input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.slot:has(input:focus-visible){outline:2px solid var(--sheet-accent);outline-offset:2px}
+.slot-day{font-weight:600;font-size:15.5px}
+.slot-time{font-size:14px;color:var(--sheet-ink);justify-self:end}
+.slot-note{grid-column:1 / -1;font-size:12.5px;color:var(--sheet-ink-3)}
+.sum{margin-top:20px;border-top:1px solid var(--sheet-rule)}
+.sum div{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-bottom:1px solid var(--sheet-rule-soft);font-size:14px}
+.sum dt{color:var(--sheet-ink-2)}
+.sum dd{font-weight:600;text-align:right}
+.sum-or{display:block;font-weight:400;font-size:12.5px;color:var(--sheet-ink-3)}
+.sheet-cta{
+  margin-top:18px;width:100%;min-height:54px;border:0;border-radius:var(--sheet-radius);cursor:pointer;
+  background:var(--sheet-accent);color:var(--sheet-accent-ink);font-weight:600;font-size:16px;
+  position:relative;display:grid;place-items:center;
+  transition:background .2s,transform .18s var(--ease);
+}
+.sheet-cta:hover{background:var(--sheet-accent-hover)}
+.sheet-cta:active{transform:translateY(1px)}
+.sheet-cta:disabled{cursor:default}
+.cta-busy{position:absolute;inset:0;display:none;place-items:center;gap:5px;grid-auto-flow:column}
+.cta-busy i{width:6px;height:6px;border-radius:50%;background:var(--sheet-accent-ink);animation:pulse 1s infinite var(--ease)}
+.cta-busy i:nth-child(2){animation-delay:.15s}.cta-busy i:nth-child(3){animation-delay:.3s}
+@keyframes pulse{0%,100%{opacity:.25;transform:translateY(0)}50%{opacity:1;transform:translateY(-3px)}}
+.sheet-cta.is-busy .cta-label{opacity:0}
+.sheet-cta.is-busy .cta-busy{display:grid}
+.sheet-fine{margin-top:12px;font-size:12.5px;color:var(--sheet-ink-3);line-height:1.5;display:flex;gap:8px;align-items:flex-start}
+.sheet-fine svg{flex:none;margin-top:3px}
+.sheet-fine strong{color:var(--sheet-ink-2);font-weight:500}
+.sheet-back{margin-top:14px;appearance:none;border:0;background:none;padding:8px 0;color:var(--sheet-ink-2);text-decoration:underline;text-underline-offset:3px;cursor:pointer;font-size:14px}
+.pay-wallet{margin-top:10px}
+.wallet{width:100%;height:48px;border:0;border-radius:var(--sheet-radius);background:#fff;color:#000;display:inline-flex;align-items:center;justify-content:center;gap:3px;cursor:pointer}
+.wallet-word{font-family:-apple-system,"SF Pro Text","Helvetica Neue",Helvetica,Arial,sans-serif;font-size:18px;font-weight:500;letter-spacing:-.01em;line-height:1}
+.wallet:disabled{opacity:.6}
+.pay-or{display:flex;align-items:center;gap:12px;margin:14px 0 4px;color:var(--sheet-ink-3);font-size:12.5px}
+.pay-or::before,.pay-or::after{content:"";flex:1;height:1px;background:var(--sheet-rule-soft)}
+.field{display:grid;gap:6px;margin-top:12px;font-size:12.5px;color:var(--sheet-ink-2)}
+.field input{
+  width:100%;height:46px;padding:0 14px;border:1px solid var(--sheet-rule);border-radius:8px;
+  background:var(--sheet-field);color:var(--sheet-ink);font:inherit;font-size:15px;letter-spacing:.01em;
+  transition:border-color .2s,box-shadow .2s;
+}
+.field input:focus{outline:none;border-color:var(--sheet-accent);box-shadow:0 0 0 3px var(--sheet-accent-glow)}
+.field-card{position:relative;display:block}
+.field-card svg{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--sheet-ink-2)}
+.field-row{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:10px}
+body.sheet-open{overflow:hidden}
+
+
+@media (min-width:1024px){
+  .sheet{left:auto;top:0;bottom:0;width:460px;max-height:none;border-radius:0;border-top:0;border-left:1px solid var(--sheet-rule);transform:translateX(24px)}
+  .is-open .sheet{transform:none}
+  .sheet-head{padding:24px 28px 12px}
+  .sheet-body{padding:4px 28px 32px}
+}
+@media (prefers-reduced-motion:reduce){
+  .sheet,.sheet-backdrop,.sheet-cta,.slot,.field input{transition:none}
+  .cta-busy i{animation:none;opacity:.7}
+}

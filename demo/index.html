@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Prism demo · three screens, two minutes</title>
+<meta name="description" content="A clickable demo of Prism: the homeowner quote, the business grade, and the owner pipeline. Sample data.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#070A14">
+<link rel="icon" href="../favicon.png" type="image/png">
+<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="demo.css">
+<style>
+:root{
+  --night:#070A14;--night-2:#0C1020;--ink:#EEF1F8;--ink-2:#A6AEC2;--ink-3:#78829B;
+  --rule:rgba(238,241,248,.12);--rule-soft:rgba(238,241,248,.07);--lamp:#FFD98F;--lamp-ink:#1A1304;
+  --pink:#E44B87;--blue:#4998EF;
+  --serif:"Gambetta",Georgia,serif;--sans:"Archivo","Helvetica Neue",Arial,system-ui,sans-serif;
+  --ease:cubic-bezier(.2,.8,.2,1);
+}
+*{box-sizing:border-box}
+html{background:var(--night);color-scheme:dark}
+body{margin:0;min-height:100vh;background:var(--night);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+::selection{background:var(--lamp);color:var(--lamp-ink)}
+:focus-visible{outline:2px solid var(--lamp);outline-offset:3px}
+h1,h2,p,ol{margin:0}ol{padding:0;list-style:none}
+
+.wrap{max-width:1120px;margin:0 auto;padding:clamp(40px,8vh,96px) clamp(20px,4vw,48px) 80px}
+.head{display:grid;grid-template-columns:1fr;gap:28px;align-items:end}
+.mark{display:flex;align-items:center;gap:14px}
+.mark img{height:44px;width:auto}
+.mark span{font-weight:800;font-stretch:125%;letter-spacing:.2em;font-size:14px}
+.h1{margin-top:28px;font-family:var(--serif);font-weight:400;font-size:clamp(38px,6vw,72px);line-height:1;letter-spacing:-.02em;text-wrap:balance;max-width:16ch}
+.h1 em{font-style:italic;color:var(--ink-2)}
+.thesis{margin-top:22px;max-width:56ch;font-size:17px;line-height:1.55;color:var(--ink-2)}
+.thesis b{color:var(--ink);font-weight:500}
+
+.screens{margin-top:56px;border-top:1px solid var(--rule)}
+.screen{
+  display:grid;grid-template-columns:56px 1fr auto;gap:0 24px;align-items:center;
+  padding:26px 0;border-bottom:1px solid var(--rule);text-decoration:none;color:inherit;
+  transition:background .25s;
+}
+.screen:hover{background:var(--night-2)}
+.screen:hover .go{transform:translateX(4px)}
+.n{font-weight:600;font-size:13px;color:var(--ink-3);letter-spacing:.06em}
+.t{display:block;font-family:var(--serif);font-size:clamp(24px,3vw,32px);letter-spacing:-.01em;line-height:1.1}
+.d{display:block;margin-top:6px;color:var(--ink-2);font-size:15px;max-width:60ch}
+.who{display:block;margin-top:10px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.go{width:40px;height:40px;border-radius:50%;border:1px solid var(--rule);display:grid;place-items:center;color:var(--ink);transition:transform .3s var(--ease)}
+.go svg{width:14px;height:14px}
+
+.start{margin-top:36px;display:flex;flex-wrap:wrap;gap:14px 24px;align-items:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding:0 26px;border-radius:12px;background:var(--lamp);color:var(--lamp-ink);font-weight:600;font-size:16px;text-decoration:none;transition:background .2s,transform .18s var(--ease)}
+.btn:hover{background:#FFE3A8}.btn:active{transform:translateY(1px)}
+.alts{font-size:13.5px;color:var(--ink-3)}
+.alts a{color:var(--ink-2);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--rule)}
+.alts a:hover{color:var(--ink)}
+
+.fine{margin-top:64px;padding-top:20px;border-top:1px solid var(--rule-soft);font-size:12.5px;color:var(--ink-3);display:flex;flex-wrap:wrap;gap:8px 24px}
+
+@media (min-width:900px){
+  .head{grid-template-columns:1.1fr .9fr}
+  .thesis{margin-top:0;justify-self:end;max-width:44ch}
+}
+@media (max-width:600px){
+  .screen{grid-template-columns:1fr auto;gap:0 16px}
+  .n{grid-column:1 / -1;margin-bottom:6px}
+}
+</style>
+</head>
+<body>
+<header class="demo-strip">
+  <a class="brand" href="index.html" aria-current="page"><img src="../logo.png" alt="" width="14" height="18">PRISM <small>DEMO</small></a>
+  <nav aria-label="Demo screens">
+    <a href="quote.html">1 Quote</a>
+    <a href="grade.html">2 Grade</a>
+    <a href="pipeline.html">3 Pipeline</a>
+    <a class="next" href="quote.html"><span>Start</span><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 5h6M5 2l3 3-3 3"/></svg></a>
+  </nav>
+</header>
+
+<main class="wrap">
+  <div class="head">
+    <div>
+      <p class="mark"><img src="../logo.png" alt="Prism" width="35" height="44"><span>PRISM</span></p>
+      <h1 class="h1">Run the business you have. <em>Build the business you want.</em></h1>
+    </div>
+    <p class="thesis">Software for home-service businesses is commoditizing. The moat is the playbook that takes a shop from zero to $4M: <b>a 180-point grade</b> of the business, <b>productized good/better/best offers</b> that look like this instead of a Canva quote, agentic marketing, and financing on every quote. Three screens, two minutes.</p>
+  </div>
+
+  <ol class="screens">
+    <li><a class="screen" href="quote.html">
+      <span class="n">01</span>
+      <span><span class="t">The quote a homeowner gets by text</span><span class="d">Their own house, three lighting tiers, a price that rolls, financing per month, and a deposit that books the install day. Mock Stripe, test mode.</span><span class="who">Customer-facing · mobile first</span></span>
+      <span class="go" aria-hidden="true"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 7h10M8 3l4 4-4 4"/></svg></span>
+    </a></li>
+    <li><a class="screen" href="grade.html">
+      <span class="n">02</span>
+      <span><span class="t">The 180-point business grade</span><span class="d">An overall grade, eight category scores, the three fixes with the most leverage, and what they are worth in revenue.</span><span class="who">Owner-facing · the playbook</span></span>
+      <span class="go" aria-hidden="true"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 7h10M8 3l4 4-4 4"/></svg></span>
+    </a></li>
+    <li><a class="screen" href="pipeline.html">
+      <span class="n">03</span>
+      <span><span class="t">The owner's pipeline</span><span class="d">Leads to quoted to approved to scheduled, with every quote's viewed and approved status and the install slot on the calendar.</span><span class="who">Owner-facing · operations</span></span>
+      <span class="go" aria-hidden="true"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 7h10M8 3l4 4-4 4"/></svg></span>
+    </a></li>
+  </ol>
+
+  <div class="start">
+    <a class="btn" href="quote.html">Start with the quote<svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4"/></svg></a>
+    <p class="alts">Quote design alternates from the exploration round: <a href="quote.html?dir=1">direction 1</a> · <a href="quote.html?dir=3">direction 3</a></p>
+  </div>
+
+  <p class="fine"><span>Sample data. Falls City Light Co. and the Whitfields are fictional.</span><span>No real payments, no real customers.</span><span>Illustrative render of a fictional home.</span></p>
+</main>
+</body>
+</html>

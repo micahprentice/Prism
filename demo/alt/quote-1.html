@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Your lighting quote · direction 1 (twilight listing) · Prism demo</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#EEF0F3">
+<link rel="icon" href="../../favicon.png" type="image/png">
+<link rel="stylesheet" href="../fonts/fonts.css">
+<link rel="stylesheet" href="../demo.css">
+<link rel="stylesheet" href="../sheet.css">
+<style>
+/* Direction 1: the twilight listing. Real-estate twilight photography on a cool
+   paper ground; the price set like a listing price; scope as the spec table. */
+:root{
+  --paper:#EEF0F3;--paper-2:#FFFFFF;--paper-3:#E3E6EC;
+  --ink:#14161D;--ink-2:#4B5160;--ink-3:#646B7C;
+  --rule:rgba(20,22,29,.14);--rule-soft:rgba(20,22,29,.08);
+  --navy:#1F4F94;--navy-deep:#183D73;--navy-wash:rgba(31,79,148,.08);
+  --lamp:#E0A93A;
+  --serif:"Zodiak",Georgia,serif;--sans:"Archivo","Helvetica Neue",Arial,system-ui,sans-serif;
+  --ease:cubic-bezier(.2,.8,.2,1);
+  --sheet-bg:#fff;--sheet-field:#F6F7F9;--sheet-ink:#14161D;--sheet-ink-2:#4B5160;--sheet-ink-3:#7B8192;
+  --sheet-rule:rgba(20,22,29,.14);--sheet-rule-soft:rgba(20,22,29,.08);
+  --sheet-accent:#1F4F94;--sheet-accent-hover:#2A5FAC;--sheet-accent-ink:#fff;--sheet-accent-glow:rgba(31,79,148,.2);
+  --sheet-accent-line:rgba(31,79,148,.5);--sheet-accent-wash:rgba(31,79,148,.06);--sheet-backdrop:rgba(20,22,29,.45);--sheet-radius:6px;
+}
+*{box-sizing:border-box}
+html{background:var(--paper)}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+::selection{background:var(--navy);color:#fff}
+:focus-visible{outline:2px solid var(--navy);outline-offset:3px}
+h1,h2,p,dl,dd,ol{margin:0}ol{padding:0;list-style:none}button{font:inherit;color:inherit}
+.sheet-title{font-family:var(--serif)}
+.wallet{background:#000;color:#fff}
+
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(16px,3vw,40px)}
+.top{display:flex;align-items:center;justify-content:space-between;gap:16px;height:68px}
+.co-name{font-weight:600;font-size:15px}
+.co-sub{display:block;font-size:12.5px;color:var(--ink-3)}
+.top-text{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 14px;border:1px solid var(--rule);border-radius:4px;font-size:13px;font-weight:500;text-decoration:none;color:var(--ink);background:var(--paper-2)}
+
+/* hero photo like a listing's twilight shot */
+.house{margin:0;position:relative}
+.house-frame{position:relative;aspect-ratio:3/2;overflow:hidden;background:#05070F;border-radius:6px}
+.house-layer{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 62%;display:block;opacity:0;transition:opacity .7s var(--ease)}
+.house-spot{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .35s var(--ease);--sx:50%;--sy:50%;--sw:30%;--sh:10%;
+  background:radial-gradient(ellipse calc(var(--sw) * .78) calc(var(--sh) * 1.6) at var(--sx) calc(var(--sy) * 1.1 - 8%),rgba(5,7,15,0) 55%,rgba(5,7,15,.62) 100%)}
+.house-cap{display:flex;justify-content:space-between;gap:16px;padding:10px 2px 0;font-size:12.5px;color:var(--ink-3)}
+
+/* tier tabs as a spec strip under the photo */
+.dial{position:relative;display:grid;grid-template-columns:repeat(3,1fr);margin-top:22px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);--dial-i:0}
+.dial-ind{position:absolute;left:0;top:-1px;height:2px;width:calc(100% / 3);background:var(--navy);transform:translateX(calc(var(--dial-i) * 100%));transition:transform .45s var(--ease)}
+.dial-opt{appearance:none;border:0;background:none;cursor:pointer;display:flex;align-items:baseline;justify-content:center;gap:10px;min-height:56px;padding:12px 8px;color:var(--ink-3);transition:color .3s}
+.dial-opt + .dial-opt{border-left:1px solid var(--rule-soft)}
+.dial-opt:hover{color:var(--ink)}
+.dial-opt.is-on{color:var(--ink)}
+.dial-name{font-family:var(--serif);font-size:20px;letter-spacing:-.01em}
+.dial-price{font-size:13px}
+.dial-m{display:none}
+
+.body{display:grid;grid-template-columns:1fr;gap:32px;margin-top:28px;padding-bottom:120px}
+.h1{font-family:var(--serif);font-weight:400;font-size:clamp(34px,4.4vw,50px);line-height:1.02;letter-spacing:-.015em;text-wrap:balance}
+.h1 i{font-style:italic}
+.lede{margin-top:14px;max-width:58ch;color:var(--ink-2);font-size:15.5px}
+.tier-line{margin-top:28px;font-family:var(--serif);font-size:22px;color:var(--ink-2)}
+.tier-line b{font-weight:400;color:var(--ink)}
+
+.scope-sec{margin-top:18px}
+.scope-head{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:10px;border-bottom:1px solid var(--ink)}
+.scope-head h2{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+.scope-count{font-size:12.5px;color:var(--ink-3)}
+.scope{display:grid;grid-template-columns:1fr;max-width:720px}
+.scope-item{position:relative;display:grid;grid-template-columns:1fr auto;column-gap:12px;align-items:baseline;padding:11px 0;border-bottom:1px solid var(--rule-soft);color:var(--ink-3);transition:color .4s var(--ease);transition-delay:calc(var(--seq,0) * 60ms)}
+.scope-lamp{display:none}
+.scope-item[data-tier-start]{margin-top:30px}
+.scope-item[data-tier-start]::before{content:attr(data-tier-start-name) " adds";position:absolute;top:-24px;left:0;font-size:11.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.scope-item[data-tier-start="classic"]::before{content:"Classic"}
+.scope-item.is-lit{color:var(--ink)}
+.scope-name{font-weight:500;font-size:15px}
+.scope-measure{font-size:13px;color:var(--ink-3);white-space:nowrap}
+.scope-item.is-lit .scope-measure{color:var(--ink-2)}
+.scope-state{display:none}
+.scope-group,.scope-up{display:none}
+.scope-detail{grid-column:1 / -1;font-size:13.5px;color:var(--ink-2);margin-top:2px;max-height:0;opacity:0;overflow:hidden;transition:max-height .5s var(--ease),opacity .4s;transition-delay:calc(var(--seq,0) * 60ms)}
+.scope-item.is-lit .scope-detail{max-height:5em;opacity:1}
+.scope-item:not(.is-lit) .scope-name{text-decoration:line-through;text-decoration-color:rgba(123,129,146,.5)}
+
+/* listing card */
+.card{background:var(--paper-2);border:1px solid var(--rule);border-radius:6px;padding:24px;box-shadow:0 14px 40px -24px rgba(20,22,29,.25)}
+.price{font-family:var(--serif);font-size:54px;line-height:1;letter-spacing:-.02em;display:inline-flex;white-space:nowrap}
+.od{display:inline-block;position:relative;height:1em;overflow:hidden;vertical-align:top;width:.56em}
+.od-reel{position:absolute;left:0;top:0;display:flex;flex-direction:column;transition:transform .7s var(--ease)}
+.od-reel span{height:1em;line-height:1;text-align:center;width:.56em;display:block}
+.od-static{display:inline-block;height:1em;line-height:1}
+.monthly{margin-top:8px;color:var(--ink-2);font-size:14px}
+.mo{display:inline-flex;font-weight:600;color:var(--ink);font-size:16px}
+.mo .od,.mo .od-reel span{width:.6em}
+.mo-fine{display:block;font-size:12.5px;color:var(--ink-3)}
+.approve{appearance:none;border:0;cursor:pointer;width:100%;margin-top:20px;min-height:56px;padding:10px 20px;border-radius:6px;background:var(--navy);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-weight:600;font-size:16px;text-decoration:none;transition:background .2s,transform .18s var(--ease)}
+.approve:hover{background:#2A5FAC}.approve:active{transform:translateY(1px);background:var(--navy-deep)}
+.approve-sub{font-weight:500;font-size:12.5px;opacity:.78}
+.approve-ghost{background:transparent;color:var(--ink);border:1px solid var(--rule)}
+.approve-ghost:hover{background:var(--paper)}
+.actions-fine{margin-top:12px;font-size:12.5px;color:var(--ink-3);text-align:center}
+.facts{margin-top:22px;padding-top:18px;border-top:1px solid var(--rule-soft)}
+.facts dl{display:grid;grid-template-columns:96px 1fr;row-gap:8px;column-gap:12px;font-size:13.5px}
+.facts dl div{display:contents}.facts dt{color:var(--ink-3)}.facts dd{color:var(--ink-2)}
+.trust{margin-top:18px;padding-top:14px;border-top:1px solid var(--rule-soft);font-size:12.5px;color:var(--ink-3);display:grid;gap:3px}
+.trust-co{font-weight:600;color:var(--ink-2)}
+.trust-stars{display:inline-flex;align-items:center;gap:6px}.trust-stars svg{color:var(--lamp)}
+
+.booked{display:none}
+body[data-state="booked"] [data-panel="quote"]{display:none}
+body[data-state="booked"] .booked{display:block}
+.booked-kicker{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--navy)}
+.booked .h1{margin-top:12px}
+.booked-date{margin-top:20px;font-family:var(--serif);font-size:38px;letter-spacing:-.02em;line-height:1.05}
+.booked-time{display:block;font-family:var(--sans);font-size:17px;color:var(--ink-2);margin-top:4px}
+.receipt{margin-top:24px;border-top:1px solid var(--rule)}
+.receipt div{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--rule-soft);font-size:14.5px}
+.receipt dt{color:var(--ink-2)}.receipt dd{font-weight:600}
+.booked-actions{margin-top:20px;display:grid;gap:8px}
+.textlink{display:block;text-align:center;padding:12px;font-weight:500;color:var(--ink-2);text-decoration:none}
+.reset{appearance:none;border:0;background:none;padding:0;color:var(--ink-3);text-decoration:underline;cursor:pointer}
+
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.94);border-top:1px solid var(--rule);backdrop-filter:blur(10px)}
+.bar-sum{display:flex;flex-direction:column;line-height:1.15}
+.bar-tier{font-size:12.5px;color:var(--ink-3)}
+.bar-price{font-weight:600;font-size:19px;letter-spacing:-.02em;display:flex;align-items:baseline;gap:6px}
+.bar-price .od,.bar-price .od-reel span{width:.62em}
+.bar-mo{font-size:12.5px;color:var(--ink-2);font-weight:500}
+.bar-mo .od,.bar-mo .od-reel span{width:.6em}
+.approve-bar{width:auto;margin:0;min-height:48px;padding:0 26px;font-size:15.5px}
+body[data-state="booked"] .bar{display:none}
+body.sheet-open{overflow:hidden}
+
+@media (min-width:1024px){
+  .body{grid-template-columns:minmax(0,1fr) 400px;gap:56px}
+  .card{position:sticky;top:24px}
+  .bar{display:none}
+}
+@media (max-width:1023.98px){
+  .wrap{padding:0 16px}
+  .house-frame{aspect-ratio:3/2;border-radius:0}
+  .house-layer{object-position:50% 50%}
+  .scope{grid-template-columns:1fr}
+  .card{padding:20px}
+  .dial-opt{flex-direction:column;gap:2px;min-width:0;padding:10px 4px}
+  .dial-name{font-size:17px}
+  .top-text{white-space:nowrap;flex:none}
+  .co-sub{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms !important;transition-delay:0ms !important}}
+</style>
+</head>
+<body>
+<header class="demo-strip">
+  <a class="brand" href="../index.html"><img src="../../logo.png" alt="" width="14" height="18">PRISM <small>DEMO · QUOTE DIRECTION 1</small></a>
+  <nav aria-label="Demo screens">
+    <a href="../quote.html?dir=2">Dir 2</a>
+    <a href="quote-3.html">Dir 3</a>
+    <a class="next" href="../quote.html"><span>Chosen direction</span><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 5h6M5 2l3 3-3 3"/></svg></a>
+  </nav>
+</header>
+
+<div class="wrap">
+  <header class="top">
+    <div><span class="co-name" data-company-name></span><span class="co-sub">Quote <span data-quote-id></span> · prepared for <span data-customer-names></span></span></div>
+    <a class="top-text" data-phone-link href="#">Text <span data-company-owner></span></a>
+  </header>
+
+  <figure class="house">
+    <div class="house-frame" data-house></div>
+    <figcaption class="house-cap"><span><span data-address1></span>, <span data-address2></span></span><span>Illustrative render of a fictional home.</span></figcaption>
+  </figure>
+
+  <div class="dial" data-dial></div>
+
+  <main class="body">
+    <section data-panel="quote">
+      <h1 class="h1"><span data-address1></span>, <i>lit for the season.</i></h1>
+      <p class="lede"><span data-company-owner></span> measured every run on site. Choose a level above; the photo and the list below change with it.</p>
+      <p class="tier-line"><b data-tier-name></b> · <span data-tier-line></span></p>
+      <section class="scope-sec" aria-labelledby="scope-h">
+        <header class="scope-head"><h2 id="scope-h">Scope of work</h2><span class="scope-count"><span data-lit-count></span> of <span data-scope-count></span> items</span></header>
+        <ol class="scope" data-scope></ol>
+      </section>
+    </section>
+
+    <aside>
+      <div class="card" data-panel="quote">
+        <p class="price" data-price></p>
+        <p class="monthly">or <span class="mo" data-monthly></span>/mo <span class="mo-fine"><span data-months></span> payments · <span data-apr></span> APR · <span data-fin-provider></span></span></p>
+        <button type="button" class="approve" data-approve><span>Approve <span data-tier-name></span></span><span class="approve-sub">pay <span data-deposit></span> deposit · pick your install day</span></button>
+        <p class="actions-fine">Balance of <span data-balance></span> due after install.</p>
+        <section class="facts">
+          <dl>
+            <div><dt>Color</dt><dd data-color></dd></div>
+            <div><dt>Install</dt><dd>Your pick of three windows, Nov 17–21</dd></div>
+            <div><dt>Takedown</dt><dd data-takedown></dd></div>
+            <div><dt>Storage</dt><dd>Included</dd></div>
+            <div><dt>Valid</dt><dd>Through <span data-valid-through></span></dd></div>
+          </dl>
+          <div class="trust">
+            <p class="trust-co"><span data-company-name></span></p>
+            <p><span data-company-license></span> · <span data-company-insured></span></p>
+            <p class="trust-stars"><svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.7l-6.1 3.4 1.4-6.8L2.2 9.6l6.9-.8z"/></svg><span data-company-rating></span> · <span data-company-review-count></span> Google reviews</p>
+          </div>
+        </section>
+      </div>
+      <div class="card booked" data-panel="booked">
+        <p class="booked-kicker">Deposit received</p>
+        <h1 class="h1" tabindex="-1" data-booked-focus>You're booked, <span data-customer-first></span>.</h1>
+        <p class="booked-date"><span data-booked-day></span><span class="booked-time" data-booked-time></span></p>
+        <dl class="receipt">
+          <div><dt><span data-booked-tier></span> lighting</dt><dd data-booked-total></dd></div>
+          <div><dt>Deposit paid</dt><dd data-deposit></dd></div>
+          <div><dt>Balance after install</dt><dd data-booked-balance></dd></div>
+          <div><dt>Takedown</dt><dd data-takedown></dd></div>
+        </dl>
+        <div class="booked-actions"><a class="textlink" data-phone-link href="#">Text <span data-company-owner></span></a></div>
+        <p class="actions-fine"><button type="button" class="reset" data-reset>Start the demo over</button></p>
+      </div>
+    </aside>
+  </main>
+</div>
+
+<div class="bar" data-panel="quote">
+  <div class="bar-sum"><span class="bar-tier" data-tier-name></span><span class="bar-price"><span data-price></span><span class="bar-mo">or <span data-monthly></span>/mo</span></span></div>
+  <button type="button" class="approve approve-bar" data-approve>Approve</button>
+</div>
+<div data-sheet hidden></div>
+<script>
+  /* alt directions live one folder down; point image paths at ../img */
+</script>
+<script src="../data.js"></script>
+<script>(function(){var Q=window.PRISM_QUOTE;Q.baseImage="../"+Q.baseImage;Q.photoImage="../"+Q.photoImage;Q.tiers.forEach(function(t){t.image="../"+t.image})})();</script>
+<script src="../quote.js"></script>
+</body>
+</html>
