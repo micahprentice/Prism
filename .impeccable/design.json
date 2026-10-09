@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-09T15:20:00Z",
+  "title": "Design System: Prism product surfaces",
+  "extensions": {
+    "colorMeta": {
+      "night": { "role": "neutral", "displayName": "Night", "canonical": "oklch(13% 0.025 270)", "tonalRamp": ["#070A14", "#0C1020", "#121729", "#1A2036", "#2A3150", "#4A5370", "#78829B", "#A6AEC2"] },
+      "ink": { "role": "neutral", "displayName": "Cool Ink", "canonical": "oklch(95% 0.008 265)", "tonalRamp": ["#1A2036", "#2A3150", "#4A5370", "#78829B", "#A6AEC2", "#C9CFDD", "#EEF1F8", "#FFFFFF"] },
+      "lamp": { "role": "primary", "displayName": "Lamp White", "canonical": "oklch(89% 0.09 85)", "tonalRamp": ["#3A2A08", "#6B4E12", "#9C7320", "#C9962F", "#F2BE5C", "#FFD98F", "#FFE3A8", "#FFF3D6"] },
+      "warn": { "role": "tertiary", "displayName": "Callback Red", "canonical": "oklch(74% 0.14 28)", "tonalRamp": ["#4A1A14", "#7A2A20", "#A93B2E", "#D4563F", "#FF8A7A", "#FFA99C", "#FFC8BF", "#FFE6E1"] },
+      "pink": { "role": "brand", "displayName": "Prism Pink (brand mark only)", "canonical": "oklch(58% 0.2 355)", "tonalRamp": ["#4A1430", "#7A2250", "#A6336C", "#E44B87", "#EC6FA0", "#F293B8", "#F8B9D1", "#FCE0EA"] }
+    },
+    "typographyMeta": {
+      "headline": { "displayName": "Headline (Gambetta)", "purpose": "One line of voice per screen; the address, then the italic turn." },
+      "price": { "displayName": "Price (Archivo, odometer)", "purpose": "The tier price; digits roll on 0.62em reels." },
+      "label": { "displayName": "Label", "purpose": "Tier group names, legends, column captions. Never above a headline." },
+      "fine": { "displayName": "Fine print", "purpose": "Reassurance under the approve button; terms in the sheet. Floor color is ink-3." }
+    },
+    "shadows": [
+      { "name": "lamp-lift", "value": "0 10px 30px -14px rgba(255,217,143,.55)", "purpose": "Under the approve button; .7 alpha on hover." },
+      { "name": "lamp-halo", "value": "0 0 0 3px rgba(255,217,143,.22), 0 0 14px 2px rgba(255,217,143,.35)", "purpose": "Around a lit scope lamp or earned cell." },
+      { "name": "sheet", "value": "0 -20px 60px rgba(0,0,0,.5)", "purpose": "The mock-payment sheet." },
+      { "name": "sticky-house", "value": "0 18px 30px -22px rgba(0,0,0,.9)", "purpose": "Separates the pinned house block from scrolling content on phones." }
+    ],
+    "motion": [
+      { "name": "ease", "value": "cubic-bezier(.2,.8,.2,1)", "purpose": "Every transition." },
+      { "name": "crossfade", "value": "opacity .7s", "purpose": "Render layer switch; zero layout shift." },
+      { "name": "dial-slide", "value": "transform .45s", "purpose": "Dial indicator moving to the selected tier." },
+      { "name": "odometer", "value": "transform .7s", "purpose": "Price digits rolling between tiers." },
+      { "name": "lamp-sequence", "value": "calc(var(--seq) * 70ms) delay", "purpose": "Scope lines light from the roofline outward; grade cells light in order (18ms per cell, 90ms per row)." },
+      { "name": "reduced-motion", "value": "all transitions and delays to .01ms", "purpose": "prefers-reduced-motion collapses every orchestration to instant state." }
+    ],
+    "breakpoints": [
+      { "name": "phone-narrow", "value": "420px" },
+      { "name": "owner-stack", "value": "760px" },
+      { "name": "board-scroll", "value": "900px" },
+      { "name": "owner-two-col", "value": "980px" },
+      { "name": "quote-two-col", "value": "1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Approve",
+      "kind": "button",
+      "refersTo": "button-approve",
+      "description": "The one lit button on a screen: action line plus a 12.5px reassurance line.",
+      "html": "<button class=\"ds-approve\"><span>Approve Signature</span><span class=\"ds-approve-sub\">pay $500 deposit · pick your install day</span></button>",
+      "css": ".ds-approve{appearance:none;border:0;cursor:pointer;width:100%;min-height:60px;padding:10px 20px;border-radius:12px;background:#FFD98F;color:#1A1304;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-family:Archivo,Helvetica Neue,Arial,sans-serif;font-weight:600;font-size:16.5px;letter-spacing:-.01em;line-height:1.2;box-shadow:0 10px 30px -14px rgba(255,217,143,.55);transition:transform .18s cubic-bezier(.2,.8,.2,1),background .2s,box-shadow .25s}.ds-approve:hover{background:#FFE3A8;box-shadow:0 14px 36px -14px rgba(255,217,143,.7)}.ds-approve:active{transform:translateY(1px) scale(.995);background:#F2BE5C}.ds-approve:focus-visible{outline:2px solid #FFD98F;outline-offset:3px}.ds-approve-sub{font-weight:500;font-size:12.5px;opacity:.72}"
+    },
+    {
+      "name": "Ghost button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Secondary action on owner screens.",
+      "html": "<a class=\"ds-ghost\" href=\"#\">See what Sarah sees <svg width=\"14\" height=\"14\" viewBox=\"0 0 14 14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><path d=\"M2 7h10M8 3l4 4-4 4\"/></svg></a>",
+      "css": ".ds-ghost{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 14px;border:1px solid rgba(238,241,248,.12);border-radius:8px;background:none;color:#A6AEC2;font-family:Archivo,Helvetica Neue,Arial,sans-serif;font-size:13px;font-weight:500;text-decoration:none;cursor:pointer;transition:border-color .2s,color .2s}.ds-ghost:hover{border-color:#78829B;color:#EEF1F8}.ds-ghost:focus-visible{outline:2px solid #FFD98F;outline-offset:3px}"
+    },
+    {
+      "name": "Tier dial",
+      "kind": "custom",
+      "refersTo": "dial",
+      "description": "Three-segment radiogroup; a lamp-wash indicator slides under the selected tier.",
+      "html": "<div class=\"ds-dial\" role=\"radiogroup\" style=\"--dial-i:1\"><button class=\"ds-dial-opt\" role=\"radio\" aria-checked=\"false\"><span class=\"ds-dial-name\">Classic</span><span class=\"ds-dial-price\">$1,500</span></button><button class=\"ds-dial-opt is-on\" role=\"radio\" aria-checked=\"true\"><span class=\"ds-dial-name\">Signature</span><span class=\"ds-dial-price\">$2,450</span></button><button class=\"ds-dial-opt\" role=\"radio\" aria-checked=\"false\"><span class=\"ds-dial-name\">Showcase</span><span class=\"ds-dial-price\">$4,200</span></button><span class=\"ds-dial-ind\" aria-hidden=\"true\"></span></div>",
+      "css": ".ds-dial{position:relative;display:grid;grid-template-columns:repeat(3,1fr);border:1px solid rgba(238,241,248,.12);border-radius:10px;padding:3px;background:#0C1020;font-family:Archivo,Helvetica Neue,Arial,sans-serif}.ds-dial-ind{position:absolute;top:3px;bottom:3px;left:3px;width:calc((100% - 6px)/3);background:rgba(255,217,143,.13);border:1px solid rgba(255,217,143,.6);border-radius:7px;transform:translateX(calc(var(--dial-i) * 100%));transition:transform .45s cubic-bezier(.2,.8,.2,1)}.ds-dial-opt{position:relative;z-index:1;appearance:none;border:0;background:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:1px;min-height:54px;padding:8px 4px;border-radius:7px;color:#A6AEC2;transition:color .3s}.ds-dial-opt:hover{color:#EEF1F8}.ds-dial-opt.is-on{color:#FFD98F}.ds-dial-opt:focus-visible{outline:2px solid #FFD98F;outline-offset:-3px}.ds-dial-name{font-weight:600;font-size:15px}.ds-dial-price{font-size:12.5px;opacity:.78}"
+    },
+    {
+      "name": "Scope line",
+      "kind": "card",
+      "refersTo": "slot-booked",
+      "description": "One line of the quote's scope: lamp, name, measure; detail unfolds when lit.",
+      "html": "<ol class=\"ds-scope\"><li class=\"ds-scope-item is-lit\"><span class=\"ds-lamp\"></span><span class=\"ds-scope-name\">Front roofline</span><span class=\"ds-scope-measure\">112 ft of C9</span><p class=\"ds-scope-detail\">Commercial LED C9 bulbs on custom-cut wire, clipped to the eave. Nothing nailed, nothing stapled.</p></li><li class=\"ds-scope-item\"><span class=\"ds-lamp\"></span><span class=\"ds-scope-name\">Maple trunk &amp; limb wrap</span><span class=\"ds-scope-measure\">≈1,200 ft of minis</span><button class=\"ds-scope-up\">Add with Showcase · +$1,750</button></li></ol>",
+      "css": ".ds-scope{list-style:none;margin:0;padding:0;font-family:Archivo,Helvetica Neue,Arial,sans-serif;font-variant-numeric:tabular-nums}.ds-scope-item{position:relative;display:grid;grid-template-columns:18px 1fr auto;column-gap:12px;align-items:baseline;padding:12px 0;border-bottom:1px solid rgba(238,241,248,.07);color:#78829B;transition:color .4s}.ds-scope-item.is-lit{color:#EEF1F8}.ds-lamp{width:8px;height:8px;border-radius:50%;justify-self:center;align-self:center;background:#121729;border:1px solid rgba(238,241,248,.12)}.is-lit .ds-lamp{background:#FFD98F;border-color:#FFD98F;box-shadow:0 0 0 3px rgba(255,217,143,.22),0 0 14px 2px rgba(255,217,143,.35)}.ds-scope-name{font-weight:500;font-size:15px}.ds-scope-measure{font-size:13px;color:#78829B;white-space:nowrap}.is-lit .ds-scope-measure{color:#A6AEC2}.ds-scope-detail{grid-column:2/-1;margin:3px 0 0;font-size:13.5px;line-height:1.5;color:#A6AEC2}.ds-scope-up{position:absolute;right:0;top:13px;appearance:none;border:0;background:none;padding:0;cursor:pointer;font:inherit;font-size:12.5px;font-weight:500;color:#78829B;text-decoration:underline;text-underline-offset:3px;opacity:0;transition:opacity .2s}.ds-scope-item:not(.is-lit):hover .ds-scope-up,.ds-scope-up:focus-visible{opacity:1;color:#FFD98F}.ds-scope-item:not(.is-lit):hover .ds-scope-measure{opacity:0}"
+    },
+    {
+      "name": "Field",
+      "kind": "input",
+      "refersTo": "field",
+      "description": "Payment-sheet text field.",
+      "html": "<label class=\"ds-field\"><span>Name on card</span><input value=\"Sarah Whitfield\"></label>",
+      "css": ".ds-field{display:grid;gap:6px;font-family:Archivo,Helvetica Neue,Arial,sans-serif;font-size:13px;color:#A6AEC2}.ds-field input{height:48px;padding:0 14px;border-radius:10px;border:1px solid rgba(238,241,248,.12);background:#070A14;color:#EEF1F8;font:inherit;font-size:15px}.ds-field input:focus-visible{outline:2px solid #FFD98F;outline-offset:2px;border-color:#FFD98F}"
+    },
+    {
+      "name": "Calendar slot",
+      "kind": "chip",
+      "refersTo": "slot-hold",
+      "description": "An install window: booked, held for a quote, or booked in this session.",
+      "html": "<div class=\"ds-slots\"><div class=\"ds-slot is-booked\"><small>8:00 AM</small><span><b>Garza</b><span class=\"ds-crew\">Crew A</span></span></div><div class=\"ds-slot is-hold\"><small>12:30 PM</small><span>Held · Whitfield</span></div><div class=\"ds-slot is-new\"><small>8:00 AM</small><span><b>Whitfield</b> · Crew B</span></div></div>",
+      "css": ".ds-slots{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;font-family:Archivo,Helvetica Neue,Arial,sans-serif}.ds-slot{min-height:58px;border-radius:7px;padding:8px 9px;font-size:12.5px;line-height:1.3;border:1px solid rgba(238,241,248,.07);background:#0C1020;color:#78829B;display:flex;flex-direction:column;justify-content:space-between;gap:4px}.ds-slot small{font-size:11px;letter-spacing:.04em;text-transform:uppercase;font-weight:600}.ds-slot.is-booked{background:#1A2036;border-color:transparent;color:#EEF1F8}.ds-crew{display:block;font-size:11.5px;color:#78829B}.ds-slot.is-hold{border:1px dashed rgba(255,217,143,.55);background:rgba(255,217,143,.04);color:#FFD98F}.ds-slot.is-new{background:#FFD98F;border-color:#FFD98F;color:#1A1304}"
+    },
+    {
+      "name": "Top bar",
+      "kind": "nav",
+      "refersTo": "pill-text",
+      "description": "Company line with subline and a text-message pill.",
+      "html": "<header class=\"ds-top\"><div><div class=\"ds-co\">Falls City Light Co.</div><div class=\"ds-sub\">Prepared for Sarah &amp; Tom Whitfield · Quote FCL-2041</div></div><a class=\"ds-pill\" href=\"#\"><svg width=\"14\" height=\"14\" viewBox=\"0 0 14 14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.3\" stroke-linejoin=\"round\"><path d=\"M1.5 2.5h11v7h-6l-3 2.5v-2.5h-2z\"/></svg>Text Dale Whitaker</a></header>",
+      "css": ".ds-top{height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 24px;border-bottom:1px solid rgba(238,241,248,.07);background:#070A14;font-family:Archivo,Helvetica Neue,Arial,sans-serif;color:#EEF1F8}.ds-co{font-weight:600;font-size:15px}.ds-sub{font-size:12.5px;color:#78829B;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ds-pill{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 14px;border:1px solid rgba(238,241,248,.12);border-radius:999px;font-size:13px;font-weight:500;text-decoration:none;color:#A6AEC2;transition:border-color .2s,color .2s}.ds-pill:hover{border-color:#78829B;color:#EEF1F8}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Night Elevation",
+    "overview": "Prism's product surfaces live at night. The ground is the color of a blue-hour sky after the photo has been relit; text is cool ink; the only warm color is lamp-white, and lamp-white always means on. Gambetta speaks for the homeowner in one line per screen; Archivo carries every number. Motion is one orchestrated entrance per screen plus one signature interaction: the tier dial relights the house, rolls the price, and lights the scope in sequence.",
+    "keyCharacteristics": ["Lamp means on", "One lit button per screen", "Sky-tinted ground, two hairlines", "Serif voice, tabular sans for numbers", "Crossfade, never reflow"],
+    "rules": [
+      { "name": "Lamp means on", "body": "Lamp-white marks included, earned, selected, or ready to press. Never emphasis or ornament.", "section": "colors" },
+      { "name": "One lit button", "body": "The selected dial segment is a wash with a hairline so the approve button is the only fully lit object.", "section": "colors" },
+      { "name": "Quantities are data, states are words", "body": "Footage and counts are tabular Archivo; 'Included' is a quiet word in ink-3.", "section": "typography" },
+      { "name": "Glow only on lamp", "body": "A colored glow is permitted only around lamp-colored objects, as the lamp's own light.", "section": "elevation" }
+    ],
+    "dos": ["Light things that are on; leave everything else dark.", "Put footage, counts, and dates next to every claim.", "Crossfade; never reflow. The render slot is 3:2 forever.", "Write fine print as reassurance."],
+    "donts": ["Don't use a second warm color, a gradient sky, or lamp as decoration.", "Don't strike through what a tier excludes; show what the next tier adds.", "Don't stack equal cards in a grid; separate rows with hairlines.", "Don't set uppercase labels above headlines.", "Don't let a chart stand in for a sentence."]
+  }
+}

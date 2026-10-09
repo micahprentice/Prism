@@ -222,7 +222,7 @@ body[data-state="booked"] .dial-m{display:none}
 .scope-sec{margin-top:44px}
 .scope-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding-bottom:12px;border-bottom:1px solid var(--rule)}
 .scope-head h2{font-family:var(--serif);font-weight:400;font-size:22px;letter-spacing:-.01em}
-.scope-count{font-size:13px;color:var(--ink-3)}
+.scope-count{font-size:13px;color:var(--ink-3);white-space:nowrap}
 .scope{counter-reset:item}
 .scope-item{
   position:relative;
