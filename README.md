@@ -24,11 +24,10 @@ apple-touch-icon.png  iOS home-screen icon
 **1. Launch date** — near the top of the `<script>` block at the bottom:
 
 ```js
-const LAUNCH = new Date("2027-01-17T12:00:00-06:00");
+const LAUNCH = new Date("2027-03-24T12:00:00-05:00");
 ```
 
-Currently 134 days out (Central time). Note that lands on a Sunday — use
-`2027-01-18T09:00:00-06:00` if you want a Monday morning launch.
+Currently 162 days out from Oct 13, 2026 (noon Central, which is CDT in March).
 
 **2. Where signups go** — right below it:
 
