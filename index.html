@@ -3,24 +3,24 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Prism — Run the business you have. Build the business you want.</title>
-<meta name="description" content="Run the business you have. Build the business you want. Quoting, scheduling, dispatch, and invoicing in one system, so today's jobs stay on track. Request early access.">
+<title>Prism Pro — Field Service Software for Trade Businesses</title>
+<meta name="description" content="Prism Pro is field service software for trade businesses: quoting, scheduling, dispatch, and invoicing in one system. In private beta. Request early access.">
 
 <!-- Social preview. Points at getprismpro.com — the image only renders once the site is live there. -->
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Prism">
-<meta property="og:title" content="Run the business you have. Build the business you want.">
-<meta property="og:description" content="Prism helps owners run the business they have and build the one they want. Quoting, scheduling, dispatch, and invoicing in one system. Launching soon.">
+<meta property="og:site_name" content="Prism Pro">
+<meta property="og:title" content="Prism Pro — Field Service Software for Trade Businesses">
+<meta property="og:description" content="Run the business you have. Build the business you want. Prism Pro puts quoting, scheduling, dispatch, and invoicing in one system for trade businesses. Launching soon.">
 <meta property="og:url" content="https://getprismpro.com/">
 <meta property="og:image" content="https://getprismpro.com/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Prism. Run the business you have. Build the business you want.">
+<meta property="og:image:alt" content="Prism Pro. Run the business you have. Build the business you want.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Run the business you have. Build the business you want.">
-<meta name="twitter:description" content="Prism helps owners run the business they have and build the one they want. Quoting, scheduling, dispatch, and invoicing in one system. Launching soon.">
+<meta name="twitter:title" content="Prism Pro — Field Service Software for Trade Businesses">
+<meta name="twitter:description" content="Run the business you have. Build the business you want. Prism Pro puts quoting, scheduling, dispatch, and invoicing in one system for trade businesses. Launching soon.">
 <meta name="twitter:image" content="https://getprismpro.com/og-image.png">
-<meta name="twitter:image:alt" content="Prism. Run the business you have. Build the business you want.">
+<meta name="twitter:image:alt" content="Prism Pro. Run the business you have. Build the business you want.">
 <link rel="canonical" href="https://getprismpro.com/">
 <meta name="theme-color" content="#0B0C18">
 <link rel="icon" href="favicon.png" type="image/png" sizes="256x256">
@@ -34,7 +34,49 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900&display=swap" rel="stylesheet">
+<!-- Non-blocking font load: preload the stylesheet, swap it in once fetched. System fallbacks render in the meantime. -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900&display=swap"></noscript>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://getprismpro.com/#organization",
+      "name": "Prism Pro",
+      "url": "https://getprismpro.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://getprismpro.com/logo.png",
+        "width": 444,
+        "height": 560
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://getprismpro.com/#software",
+      "name": "Prism Pro",
+      "url": "https://getprismpro.com/",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "description": "Field service software for trade businesses. Quoting, scheduling, dispatch, and invoicing in one system, so today's jobs stay on track.",
+      "featureList": [
+        "Quoting",
+        "Scheduling",
+        "Dispatch",
+        "Invoicing"
+      ],
+      "audience": {
+        "@type": "BusinessAudience",
+        "audienceType": "Power washing, lighting, junk removal, handyman, plumbing, and window cleaning businesses"
+      },
+      "publisher": { "@id": "https://getprismpro.com/#organization" }
+    }
+  ]
+}
+</script>
 
 <style>
   :root{
@@ -261,8 +303,20 @@
     -webkit-text-fill-color:transparent;
   }
 
+  .category{
+    margin:clamp(14px,2.2vw,22px) auto 0;
+    text-align:center;
+    font-size:12.5px;
+    font-weight:600;
+    font-stretch:108%;
+    line-height:1.4;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--ink-dim);
+  }
+
   .headline{
-    margin:clamp(16px,2.6vw,26px) auto 0;
+    margin:clamp(10px,1.6vw,16px) auto 0;
     text-align:center;
     font-size:clamp(18.5px,5.7vw,48px);
     font-weight:800;
@@ -447,6 +501,96 @@
   .done p{margin:0;font-size:16.5px;font-weight:500;color:var(--ink)}
   .done span{display:block;margin-top:8px;font-size:14px;font-weight:400;color:var(--ink-mid)}
 
+  /* ---------- indexable copy below the fold ---------- */
+
+  .seo{
+    margin:clamp(40px,6vw,64px) auto 0;
+    max-width:640px;
+    padding-top:clamp(28px,4vw,40px);
+    border-top:1px solid var(--line-soft);
+  }
+  .seo + .seo{margin-top:clamp(32px,5vw,48px)}
+  .seo h2{
+    margin:0 0 6px;
+    text-align:center;
+    font-size:clamp(20px,3vw,26px);
+    font-weight:700;
+    font-stretch:105%;
+    letter-spacing:-.02em;
+    line-height:1.2;
+    color:var(--ink);
+  }
+  .seo .lede{
+    max-width:48ch;
+    margin:0 auto;
+    text-align:center;
+    font-size:14.5px;
+    line-height:1.55;
+    color:var(--ink-mid);
+  }
+  .seo h3{
+    margin:0 0 6px;
+    font-size:15.5px;
+    font-weight:600;
+    letter-spacing:-.01em;
+    color:var(--ink);
+  }
+  .seo p{
+    margin:0;
+    font-size:14.5px;
+    line-height:1.6;
+    color:var(--ink-mid);
+  }
+
+  .features{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin-top:22px;
+  }
+  .feature{
+    background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,0));
+    background-color:var(--bg-lift);
+    border:1px solid var(--line-soft);
+    border-radius:14px;
+    padding:18px 16px 20px;
+  }
+  .feature h3{
+    padding-bottom:10px;
+    margin-bottom:10px;
+    border-bottom:1px solid var(--line-soft);
+  }
+  .feature:nth-child(1) h3{color:var(--pink-soft)}
+  .feature:nth-child(2) h3{color:#B5AEE6}
+  .feature:nth-child(3) h3{color:var(--blue-soft)}
+
+  .trades{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:8px;
+    margin:20px 0 0;
+    padding:0;
+    list-style:none;
+  }
+  .trades li{
+    padding:9px 14px;
+    border:1px solid var(--line);
+    border-radius:999px;
+    background:var(--bg-lift);
+    font-size:13.5px;
+    font-weight:500;
+    letter-spacing:.01em;
+    color:var(--ink);
+  }
+
+  .faq{margin-top:22px}
+  .faq .qa{
+    padding:16px 0;
+    border-top:1px solid var(--line-soft);
+  }
+  .faq .qa:last-child{border-bottom:1px solid var(--line-soft)}
+
   .foot{
     margin:clamp(34px,5vw,52px) 0 0;
     padding-top:20px;
@@ -460,6 +604,7 @@
 
   @media (max-width:560px){
     .blocks{grid-template-columns:repeat(2,1fr)}
+    .features{grid-template-columns:1fr}
     .wordmark{letter-spacing:-.03em}
     body{padding:12px 10px}
     .frame{padding:22px 12px 26px}
@@ -483,7 +628,7 @@
 
   <p class="eyebrow"><b>Private beta</b> &nbsp;·&nbsp; onboarding a handful of shops first</p>
 
-  <img class="mark" src="logo.png" width="444" height="560" alt="Prism" fetchpriority="high">
+  <img class="mark" src="logo.png" width="444" height="560" alt="Prism Pro" fetchpriority="high">
 
   <div class="hero">
     <svg class="beam" viewBox="0 0 1000 220" preserveAspectRatio="none" aria-hidden="true">
@@ -539,11 +684,12 @@
     </div>
   </div>
 
-  <h1 class="headline">
+  <h1 class="category">Field service software for trade businesses</h1>
+  <p class="headline">
     <span class="run">Run the business you have.</span>
     <span class="build">Build the business you want.</span>
-  </h1>
-  <p class="subline">Quoting, scheduling, dispatch, and invoicing in one system. Today's jobs stay on track, so you can build what's next.</p>
+  </p>
+  <p class="subline">Prism Pro puts quoting, scheduling, dispatch, and invoicing in one system. Today's jobs stay on track, so you can build what's next.</p>
 
   <section class="countdown" aria-label="Time until launch">
     <div class="blocks">
@@ -555,7 +701,7 @@
     <p class="until" id="untilLabel">until launch</p>
   </section>
 
-  <section class="signup">
+  <section class="signup" id="signup">
     <div id="formWrap">
       <h2 id="formTitle">Get in before launch.</h2>
 
@@ -586,7 +732,65 @@
     </div>
   </section>
 
-  <p class="foot">Prism · built by operators who ran the trucks</p>
+  <section class="seo" aria-labelledby="whatTitle">
+    <h2 id="whatTitle">What Prism Pro does</h2>
+    <p class="lede">Quoting, scheduling, dispatch, and invoicing in one system, so today's jobs stay on track and you can build what's next.</p>
+    <div class="features">
+      <article class="feature">
+        <h3>Quoting</h3>
+        <p>Quote the job in Prism Pro and the details carry through to scheduling and invoicing. It's one system, not a handoff between tools.</p>
+      </article>
+      <article class="feature">
+        <h3>Scheduling &amp; dispatch</h3>
+        <p>Put jobs on the calendar and get the crew where they need to be. Scheduling and dispatch live alongside quoting and invoicing, so today's jobs stay on track.</p>
+      </article>
+      <article class="feature">
+        <h3>Invoicing</h3>
+        <p>Invoice from the same system the job was quoted and scheduled in, so billing follows the job instead of waiting on a separate tool.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="seo" aria-labelledby="builtTitle">
+    <h2 id="builtTitle">Built for the trades</h2>
+    <p class="lede">Prism Pro is built by operators who ran the trucks, for owner-run home-service and trade businesses.</p>
+    <ul class="trades">
+      <li>Power washing</li>
+      <li>Lighting</li>
+      <li>Junk removal</li>
+      <li>Handyman</li>
+      <li>Plumbing</li>
+      <li>Window cleaning</li>
+    </ul>
+  </section>
+
+  <section class="seo" aria-labelledby="faqTitle">
+    <h2 id="faqTitle">Frequently asked questions</h2>
+    <div class="faq">
+      <div class="qa">
+        <h3>What is Prism Pro?</h3>
+        <p>Prism Pro is field service software for trade businesses. It handles quoting, scheduling, dispatch, and invoicing in one system, so you can run the business you have while you build the business you want.</p>
+      </div>
+      <div class="qa">
+        <h3>Which trades is Prism Pro built for?</h3>
+        <p>Power washing, lighting, junk removal, handyman, plumbing, and window cleaning businesses. If you run a crew in another trade, tell us what you run when you <a class="link" href="#signup">request early access</a>.</p>
+      </div>
+      <div class="qa">
+        <h3>Is Prism Pro available today?</h3>
+        <p>Prism Pro is in private beta and onboarding a handful of shops first. <a class="link" href="#signup">Request early access</a> and we'll email you before launch, and sooner if a beta seat opens up.</p>
+      </div>
+      <div class="qa">
+        <h3>Who builds Prism Pro?</h3>
+        <p>Prism Pro is built by operators who ran the trucks. It is founded by Micah Prentice.</p>
+      </div>
+      <div class="qa">
+        <h3>Can investors get in touch?</h3>
+        <p>Yes. Use the "Request the deck" link in the form above, or open <a class="link" href="/?investor">getprismpro.com/?investor</a> to go straight to the deck request.</p>
+      </div>
+    </div>
+  </section>
+
+  <p class="foot">Prism Pro · built by operators who ran the trucks</p>
 
 </main>
 
@@ -613,7 +817,7 @@
     if (isNaN(diff)) return;
     if (diff <= 0){
       els.d.textContent = els.h.textContent = els.m.textContent = els.s.textContent = '00';
-      untilLabel.textContent = 'Prism is live.';
+      untilLabel.textContent = 'Prism Pro is live.';
       clearInterval(timer);
       return;
     }
@@ -646,7 +850,7 @@
       doneBody:    "We'll email you before launch — and sooner if a beta seat opens up."
     },
     investor: {
-      title:       'Request the Prism deck.',
+      title:       'Request the Prism Pro deck.',
       msgLabel:    'Your fund or firm',
       msgHint:     'Fund or angel, check size, and what draws you to home service.',
       cta:         'Request the deck',
